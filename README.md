@@ -87,13 +87,13 @@ Tüm veri tarayıcının `localStorage`'ında tutulur. İstersen ayrıca bir Git
 ```json
 {
   "app": "Leiden",
-  "version": 2,
+  "version": 3,
   "savedAt": "2026-10-15T12:00:00.000Z",
   "entries": { "2026-10-10": { "activities": { "P": 2, "CL": 1 }, "likit": null, "pkur": null } },
   "thistle": { "holders": [], "rates": {}, "expenses": [], "fixed": [] },
   "nivose":  { "plans": [] },
-  "map":     { "unirces": [], "companies": [] }
+  "map":     { "unirces": [], "companies": [], "tags": [] }
 }
 ```
 
-Unirce ve şirket resimleri 256 piksele küçültülüp bu dosyanın içinde saklanır.
+Unirce ve şirket resimleri 256 piksele küçültülüp bu dosyanın içinde saklanır. Haritadaki her blok isteğe bağlı olarak `color` (blok rengi) ve `tags` (etiket id listesi) alanlarını taşır. Eski sürümlerle (version 2) kaydedilmiş dosyalar olduğu gibi açılır.

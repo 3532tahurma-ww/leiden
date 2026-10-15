@@ -311,6 +311,77 @@
   .plan input[type="checkbox"]{width:18px;height:18px;accent-color:var(--lilac);flex:none;}
   .plan .txt{flex:1;font-size:.9rem;min-width:0;}
   .plan.done .txt{text-decoration:line-through;color:var(--muted-2);}
+
+  /* Nivose */
+  .nv-grid{grid-template-columns:1.25fr .75fr;align-items:start;}
+  .nv-side{display:flex;flex-direction:column;gap:20px;min-width:0;}
+  .card-head{display:flex;justify-content:space-between;align-items:center;gap:10px;}
+  .card-head h2{margin:0;}
+  .week-card{margin-bottom:20px;padding:16px 18px;}
+  .week-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px;}
+  input.date-sm{width:auto;padding:7px 10px;font-size:.84rem;}
+  .week-strip{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;}
+  .wday{
+    display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 4px;
+    background:#fff;border:1px solid var(--border);border-radius:14px;color:var(--text);font-weight:600;
+    transition:border-color .12s ease, transform .12s ease;
+  }
+  .wday:hover{border-color:var(--lilac-soft);transform:translateY(-1px);}
+  .wday.today{border-color:var(--gold);box-shadow:0 0 0 2px rgba(207,154,62,.2);}
+  .wday.sel{background:linear-gradient(135deg,#a585c6,var(--lilac));border-color:var(--lilac);color:#fff;}
+  .wday.full:not(.sel){background:color-mix(in srgb,var(--mint) 10%,#fff);}
+  .wd-name{font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;opacity:.75;font-weight:500;}
+  .wd-num{font-family:'Fraunces',serif;font-size:1.35rem;line-height:1;}
+  .wd-bar{width:70%;height:4px;border-radius:3px;background:#f0e4d2;overflow:hidden;}
+  .wd-bar span{display:block;height:100%;background:var(--mint);}
+  .wday.sel .wd-bar{background:rgba(255,255,255,.3);}
+  .wday.sel .wd-bar span{background:#fff;}
+  .wd-count{font-family:'IBM Plex Mono',monospace;font-size:.68rem;font-weight:500;opacity:.8;}
+  .wd-count.late{color:var(--rose);opacity:1;}
+  .wday.sel .wd-count.late{color:#fff;}
+  .day-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px;}
+  .day-title{font-family:'Fraunces',serif;font-weight:600;font-size:1.45rem;text-transform:capitalize;}
+  .day-sub{font-family:'IBM Plex Mono',monospace;font-size:.74rem;color:var(--muted);margin-top:2px;}
+  .ring{display:block;flex:none;}
+  .composer{
+    display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:6px;margin-bottom:6px;
+    background:var(--surface-2);border:1px solid var(--border);border-radius:14px;
+  }
+  .composer input[type="text"]{flex:1 1 200px;width:auto;}
+  .composer input[type="time"]{width:auto;flex:none;padding:9px 8px;background:#fff;border:1px solid var(--border);border-radius:12px;font-family:'IBM Plex Mono',monospace;color:var(--text);}
+  .composer select{flex:0 1 190px;width:auto;}
+  .star-toggle{background:#fff;border:1px solid var(--border);color:var(--muted-2);font-size:1.05rem;padding:8px 11px;line-height:1;}
+  .star-toggle.on{color:var(--gold);border-color:var(--gold);}
+  .plan{gap:8px;padding:6px 10px;border-left:3px solid var(--pc, var(--border));}
+  .plan.star:not(.done){background:color-mix(in srgb,var(--gold) 7%,#fff);}
+  .plan .pl-text{flex:1 1 auto;min-width:0;font-size:.9rem;}
+  .plan.done .pl-text{text-decoration:line-through;color:var(--muted-2);}
+  .pl-star{background:none;border:none;padding:2px 3px;font-size:1rem;color:var(--muted-2);line-height:1;flex:none;}
+  .plan.star .pl-star{color:var(--gold);}
+  .pl-time{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--lilac);background:rgba(149,115,184,.1);padding:2px 6px;border-radius:6px;flex:none;}
+  .tag.pl-link{display:inline-block;max-width:42%;overflow:hidden;text-overflow:ellipsis;flex:0 1 auto;}
+  .pl-link .dot{display:inline-block;vertical-align:middle;margin:-2px 5px 0 0;}
+  .plan .acts button.btn-ghost{padding:4px 9px;font-size:.74rem;}
+  @media (hover:hover){
+    .plan .acts{opacity:0;transition:opacity .12s ease;}
+    .plan:hover .acts,.plan:focus-within .acts{opacity:1;}
+  }
+  .mcal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;}
+  .mcal-dow{font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted-2);text-align:center;padding:2px 0;}
+  .mcal-day{
+    aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;
+    padding:0;background:#fff;border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:.8rem;font-weight:600;
+  }
+  .mcal-day small{font-family:'IBM Plex Mono',monospace;font-size:.56rem;font-weight:500;color:var(--muted);}
+  .mcal-day.out{opacity:.35;}
+  .mcal-day.today{border-color:var(--gold);}
+  .mcal-day.sel{outline:2px solid var(--lilac);outline-offset:-1px;}
+  @media (max-width:760px){
+    .nv-grid{grid-template-columns:1fr;}
+    .week-strip{gap:4px;}
+    .wday{padding:8px 2px;}
+    .wd-num{font-size:1.1rem;}
+  }
   .tag{font-family:'IBM Plex Mono',monospace;font-size:.7rem;padding:3px 8px;border-radius:999px;border:1px solid var(--border);color:var(--muted);white-space:nowrap;display:inline-flex;align-items:center;gap:5px;}
   .progress{height:8px;border-radius:5px;background:#f0e4d2;overflow:hidden;}
   .progress div{height:100%;border-radius:5px;}
@@ -328,12 +399,56 @@
   .perce-new{display:flex;flex-direction:column;gap:8px;justify-content:center;border-style:dashed;background:transparent;}
   .parce{display:flex;align-items:center;gap:6px;padding:2px 6px;margin-top:6px;border-radius:10px;background:#fff;border:1px solid var(--border);}
   .parce-new{background:transparent;border-style:dashed;}
-  .parce{flex-wrap:wrap;}
-  .parce .x-name{flex:1 1 0;width:auto;}
-  textarea.cell-input.x-desc{
-    flex-basis:100%;margin:-4px 0 2px 15px;width:calc(100% - 15px);
-    font-family:'Manrope',sans-serif;font-size:.76rem;color:var(--muted);line-height:1.45;resize:vertical;
+  .perce-grid{align-items:start;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));}
+  .perce-head{display:flex;gap:4px;align-items:center;}
+  .perce.colored{border-left:4px solid var(--bc);background:color-mix(in srgb,var(--bc) 9%,#fff);}
+  .parce-list{max-height:262px;overflow-y:auto;padding-right:2px;}
+  .parce{flex-wrap:nowrap;gap:3px;padding:1px 4px;margin-top:4px;}
+  .parce.colored{background:color-mix(in srgb,var(--bc) 13%,#fff);border-color:color-mix(in srgb,var(--bc) 35%,#fff);}
+  .parce input.cell-input{padding:4px 5px;text-overflow:ellipsis;}
+  .parce .x-name{flex:1 1 45%;width:auto;min-width:0;}
+  .parce input.cell-input.x-desc{flex:1 1 55%;width:auto;min-width:0;font-family:'Manrope',sans-serif;font-size:.74rem;color:var(--muted);}
+  .acts{display:inline-flex;align-items:center;flex:none;}
+  @media (hover:hover){
+    .parce .acts{opacity:0;transition:opacity .12s ease;}
+    .parce:hover .acts,.parce:focus-within .acts{opacity:1;}
   }
+  .fold-btn{background:none;border:none;color:var(--muted);font-size:1rem;padding:4px 6px;border-radius:8px;flex:none;}
+  .fold-btn:hover{background:var(--surface-2);color:var(--text);}
+  .unirce.folded{padding-top:12px;padding-bottom:12px;}
+  .chips-row{display:flex;flex-wrap:wrap;gap:4px;margin:4px 0 0 14px;}
+
+  /* tags & options popover */
+  .tchip{
+    display:inline-flex;align-items:center;gap:4px;flex:none;
+    font-family:'IBM Plex Mono',monospace;font-size:.64rem;font-weight:500;white-space:nowrap;
+    padding:2px 7px;border-radius:999px;
+    background:color-mix(in srgb,var(--tc) 16%,#fff);
+    color:color-mix(in srgb,var(--tc) 72%,#000);
+    border:1px solid color-mix(in srgb,var(--tc) 35%,#fff);
+  }
+  button.tchip{cursor:pointer;font-size:.74rem;padding:4px 10px;}
+  button.tchip.on{background:var(--tc);color:#fff;border-color:var(--tc);}
+  .opt-btn{background:none;border:none;color:var(--muted-2);font-size:1rem;font-weight:700;padding:0 6px;border-radius:6px;line-height:1.4;flex:none;}
+  .opt-btn:hover{color:var(--lilac);background:rgba(149,115,184,.1);}
+  #optPop{
+    position:absolute;z-index:50;width:280px;background:#fff;border:1px solid var(--border);
+    border-radius:16px;padding:14px;box-shadow:0 16px 40px -18px rgba(80,50,20,.45);
+  }
+  .pop-title{font-family:'Fraunces',serif;font-weight:600;margin-bottom:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .pop-label{font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-2);margin:12px 0 6px;}
+  .swatches{display:flex;flex-wrap:wrap;gap:6px;align-items:center;}
+  .swatch{width:24px;height:24px;border-radius:8px;padding:0;border:2px solid #fff;box-shadow:0 0 0 1px var(--border);}
+  .swatch.on{box-shadow:0 0 0 2px var(--text);}
+  .swatch.none{background:#fff;color:var(--muted);font-size:.8rem;font-weight:400;}
+  #optPop input[type="color"]{width:28px;height:28px;padding:2px;border-radius:8px;}
+  .pop-tags{display:flex;flex-wrap:wrap;gap:6px;}
+  #optPop .pop-newtag,#tagManager .tg-new{margin-top:10px;padding:8px 10px;font-size:.82rem;}
+  .tagbar{margin-bottom:16px;padding:14px 18px;}
+  .tagbar-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+  .tagbar-chips{display:flex;gap:6px;flex-wrap:wrap;flex:1;}
+  .tag-row{display:flex;gap:8px;align-items:center;margin-top:8px;max-width:520px;}
+  .tag-row input[type="color"]{width:32px;height:32px;}
   .avatar{
     width:42px;height:42px;border-radius:12px;flex:none;padding:0;
     border:1px dashed var(--muted-2);background:#fff center/cover no-repeat;
@@ -356,15 +471,114 @@
   .pdot{width:9px;height:9px;border-radius:50%;border:2px solid var(--muted-2);flex:none;}
 
   /* holders (banks & accounts) */
-  .holder-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;}
-  .holder{background:#fff;border:1px solid var(--border);border-radius:16px;padding:12px;}
-  .holder-head{display:flex;align-items:center;gap:6px;}
+  .holder-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px;align-items:start;}
+  .holder{
+    background:#fff;border:1px solid var(--border);border-top:4px solid var(--gc, var(--lilac));
+    border-radius:16px;padding:12px 12px 8px;box-shadow:0 6px 18px -16px rgba(120,80,40,.5);
+  }
+  .holder-head{display:flex;align-items:center;gap:8px;}
+  .holder-mono{
+    width:32px;height:32px;border-radius:10px;flex:none;display:flex;align-items:center;justify-content:center;
+    font-family:'Fraunces',serif;font-weight:700;color:#fff;background:var(--gc, var(--lilac));
+  }
   .holder-head .h-name{font-family:'Fraunces',serif;font-weight:600;font-size:1.05rem;}
-  .holder-total{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--lilac);font-size:1.15rem;padding:2px 8px 8px;}
-  .holding{display:grid;grid-template-columns:110px 1fr auto auto;gap:6px;align-items:center;padding:4px 0;border-top:1px solid var(--border);}
+  .holder-total{display:flex;align-items:baseline;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--text);font-size:1.2rem;padding:6px 6px 8px;}
+  .holder-total span{font-size:.7rem;font-weight:500;color:var(--muted);background:var(--surface-2);border-radius:999px;padding:2px 8px;}
+  .holding{display:grid;grid-template-columns:10px 74px 1fr auto auto;gap:6px;align-items:center;padding:3px 0;border-top:1px solid var(--border);}
   .holding input,.holding select{font-family:'IBM Plex Mono',monospace;font-size:.85rem;}
-  .hd-try{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--muted-2);white-space:nowrap;}
-  .holding-new{grid-template-columns:110px 1fr auto;border-top-style:dashed;}
+  .hd-try{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--muted-2);white-space:nowrap;}
+  .cur-dot{width:8px;height:8px;border-radius:50%;flex:none;background:var(--border);}
+  .holding-new{display:none;grid-template-columns:10px 74px 1fr auto;border-top-style:dashed;}
+  .holder.adding .holding-new{display:grid;}
+  .holder.adding .hd-open{display:none;}
+  .hd-open{
+    width:100%;margin-top:4px;padding:6px;border-radius:10px;background:transparent;
+    border:1px dashed transparent;color:var(--muted-2);font-size:.78rem;font-weight:600;
+  }
+  .hd-open:hover{border-color:var(--border);color:var(--lilac);}
+  .holding-new .hd-add{padding:5px 10px;font-size:.78rem;}
+  .group-head{display:flex;align-items:center;gap:8px;margin:20px 0 10px;font-family:'Fraunces',serif;font-weight:600;font-size:1.05rem;}
+  .group-head span:last-child{font-family:'IBM Plex Mono',monospace;font-size:.74rem;font-weight:500;color:var(--muted);margin-left:auto;}
+
+  /* Thistle hero & panels */
+  .th-hero{
+    display:grid;grid-template-columns:1fr 1.15fr;gap:28px;align-items:center;margin-bottom:18px;
+    background:linear-gradient(180deg,var(--surface) 0%,var(--surface-2) 100%);
+    border:1px solid var(--border);border-radius:24px;padding:24px 28px;
+    box-shadow:0 10px 30px -18px rgba(120,80,40,.35);
+  }
+  .th-total{
+    font-family:'Fraunces',serif;font-weight:600;font-size:2.8rem;line-height:1.1;margin-top:6px;
+    background:linear-gradient(135deg,#7a5aa0,var(--lilac) 50%,var(--gold));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .th-total small{font-size:1.4rem;margin-left:6px;}
+  .th-eq{font-family:'IBM Plex Mono',monospace;font-size:.8rem;color:var(--muted);margin-top:6px;}
+  .stack{display:flex;height:12px;border-radius:7px;overflow:hidden;background:#f0e4d2;gap:2px;}
+  .stack span{height:100%;}
+  .stack-legend{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:8px;font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--muted);}
+  .stack-legend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:middle;}
+  .stack-legend b{color:var(--text);font-weight:600;}
+  .stats.three{grid-template-columns:repeat(3,1fr);}
+  .stat-sub{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--muted);margin-top:6px;}
+  .st{font-family:'IBM Plex Mono',monospace;font-size:.68rem;font-weight:600;padding:2px 8px;border-radius:999px;white-space:nowrap;flex:none;}
+  .st-ok{background:rgba(79,148,112,.12);color:var(--mint);}
+  .st-late{background:rgba(201,96,111,.12);color:var(--rose);}
+  .st-soon{background:rgba(207,154,62,.15);color:#a8741f;}
+  .st-wait{background:var(--surface-2);color:var(--muted);}
+  .mini-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:4px 0 14px;}
+  .mini-kpi{background:#fff;border:1px solid var(--border);border-radius:14px;padding:10px 12px;display:flex;flex-direction:column;gap:2px;min-width:0;}
+  .mini-kpi b{font-family:'IBM Plex Mono',monospace;font-size:1rem;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .mini-kpi span{font-size:.7rem;color:var(--muted);}
+  .qcats{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 6px;}
+  .exp-layout{display:grid;grid-template-columns:1.6fr 1fr;gap:24px;margin-top:14px;align-items:start;}
+  .exp-side{background:var(--surface-2);border:1px solid var(--border);border-radius:16px;padding:14px;position:sticky;top:70px;}
+  .exp-day{margin-bottom:14px;}
+  .exp-day-head{display:flex;align-items:baseline;gap:10px;padding:0 4px 6px;border-bottom:1px solid var(--border);}
+  .exp-day-head b{font-family:'Fraunces',serif;font-weight:600;text-transform:capitalize;}
+  .exp-day-head span{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--muted-2);}
+  .exp-day-head .exp-day-sum{margin-left:auto;font-size:.8rem;color:var(--text);font-weight:600;}
+  .exp-row{display:flex;align-items:center;gap:8px;padding:5px 4px;border-bottom:1px dashed var(--border);}
+  .exp-row .exp-desc{flex:1;min-width:0;font-size:.84rem;color:var(--muted);}
+  .exp-amt{font-family:'IBM Plex Mono',monospace;font-size:.88rem;font-weight:600;white-space:nowrap;}
+  .fx-row{
+    display:grid;grid-template-columns:auto 1fr auto 130px auto auto;gap:8px;align-items:center;
+    padding:6px 8px;margin-top:6px;background:#fff;border:1px solid var(--border);border-radius:12px;
+  }
+  .fx-row.st-row-ok{background:color-mix(in srgb,var(--mint) 6%,#fff);}
+  .fx-row.st-row-late{border-color:rgba(201,96,111,.35);}
+  .fx-row .fx-name{font-weight:600;}
+  .fx-row .fx-amount{font-family:'IBM Plex Mono',monospace;text-align:right;}
+  .fx-check{
+    width:28px;height:28px;padding:0;border-radius:8px;border:1.5px solid var(--border);background:#fff;
+    color:transparent;font-size:.9rem;line-height:1;
+  }
+  .fx-check:hover{border-color:var(--mint);color:var(--mint);}
+  .fx-check.on{background:var(--mint);border-color:var(--mint);color:#fff;}
+  .fx-day-wrap{display:flex;align-items:center;gap:2px;font-size:.7rem;color:var(--muted-2);font-family:'IBM Plex Mono',monospace;}
+  .fx-day-wrap input{width:46px;text-align:center;}
+  .rate-row{
+    display:grid;grid-template-columns:10px 54px 90px minmax(170px,1fr) 1fr auto;gap:10px;align-items:center;
+    padding:10px 12px;margin-top:8px;background:#fff;border:1px solid var(--border);border-radius:14px;
+  }
+  .rate-code{font-family:'IBM Plex Mono',monospace;}
+  .rate-label{font-size:.82rem;color:var(--muted);}
+  .rate-input{display:flex;align-items:center;gap:6px;font-family:'IBM Plex Mono',monospace;font-size:.82rem;color:var(--muted);}
+  .rate-input input.cell-input{font-family:'IBM Plex Mono',monospace;font-weight:600;width:120px;flex:none;}
+  .rate-meta{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--muted-2);line-height:1.5;}
+  @media (max-width:760px){
+    .th-hero{grid-template-columns:1fr;padding:20px;}
+    .th-total{font-size:2.2rem;}
+    .stats.three{grid-template-columns:1fr;}
+    .mini-kpis{grid-template-columns:repeat(2,1fr);}
+    .exp-layout{grid-template-columns:1fr;}
+    .exp-side{position:static;}
+    .fx-row{grid-template-columns:auto 1fr auto auto;}
+    .fx-row .fx-day-wrap,.fx-row .fx-amount{grid-row:2;}
+    .rate-row{grid-template-columns:10px 54px 1fr auto;}
+    .rate-row .rate-label{display:none;}
+    .rate-row .rate-meta{grid-column:2 / -1;}
+  }
 
   /* sync status */
   .sync-status[data-kind="ok"]{color:var(--mint);}
@@ -581,11 +795,24 @@
     <h1>Thistle</h1>
     <p class="sub">Bankalardaki varlıklar, dövizler, diğer varlıklar, harcamalar ve aylık sabit giderler. Tüm değerler TL'ye çevrilerek toplanır.</p>
 
-    <div class="stats four">
-      <div class="stat"><div class="n" id="thTotal">0</div><div class="l">Toplam Varlık (₺)</div></div>
-      <div class="stat"><div class="n" id="thSpend">0</div><div class="l">Bu Ay Harcama (₺)</div></div>
-      <div class="stat"><div class="n" id="thFixed">0</div><div class="l">Aylık Sabit Gider (₺)</div></div>
-      <div class="stat"><div class="n" id="thOut">0</div><div class="l">Bu Ay Toplam Çıkış (₺)</div></div>
+    <div class="th-hero">
+      <div class="th-hero-main">
+        <div class="hazine-eyebrow">Toplam Varlık</div>
+        <div class="th-total"><span id="thTotal">0</span><small>₺</small></div>
+        <div class="th-eq" id="thTotalEq"></div>
+      </div>
+      <div class="th-hero-bars">
+        <div class="pop-label" style="margin-top:0;">Para birimine göre</div>
+        <div id="thCurBar"></div>
+        <div class="pop-label">Gruba göre</div>
+        <div id="thGroupBar"></div>
+      </div>
+    </div>
+
+    <div class="stats three">
+      <div class="stat"><div class="n" id="thSpend">0</div><div class="l">Bu Ay Harcama</div><div class="stat-sub" id="thSpendDelta"></div></div>
+      <div class="stat"><div class="n" id="thFixed">0</div><div class="l">Kalan Sabit Gider (bu ay)</div><div class="stat-sub" id="thFixedSub"></div></div>
+      <div class="stat"><div class="n" id="thNext">—</div><div class="l">Sonraki Ödeme</div><div class="stat-sub" id="thNextSub"></div></div>
     </div>
 
     <nav class="tabs">
@@ -597,14 +824,15 @@
 
     <section class="spanel" data-sub="varlik">
       <div class="tablecard">
-        <h2>Varlıklar</h2>
-        <p class="hint">Her banka ya da hesap birden fazla para birimi tutabilir (örn. aynı bankada TL + USD). Ad, birim ve tutarları kartın üzerinden düzenle. Döviz ve altın, Kurlar sekmesindeki değerlerle TL'ye çevrilir.</p>
+        <div class="card-head">
+          <h2>Varlıklar</h2>
+        </div>
+        <p class="hint">Her hesap birden fazla para birimi tutabilir (örn. aynı bankada TL + USD). Ad, birim ve tutarları kartın üzerinden düzenle.</p>
         <div class="warn" id="thRateWarn"></div>
-        <div class="legend" id="thCurSummary" style="margin-top:0;"></div>
         <div id="thHolders"></div>
-        <div class="frow" style="margin-top:22px;padding-top:16px;border-top:1px dashed var(--border);">
-          <div class="field" style="flex:0 1 150px;"><label for="thHolderGroup">Grup</label><select id="thHolderGroup"><option>Banka</option><option>Döviz</option><option>Diğer</option></select></div>
-          <div class="field" style="flex:2 1 200px;"><label for="thHolderName">Ad</label><input type="text" id="thHolderName" placeholder="örn. Ziraat Bankası"></div>
+        <div class="composer" style="margin-top:20px;">
+          <select id="thHolderGroup" style="flex:0 1 130px;"><option>Banka</option><option>Döviz</option><option>Diğer</option></select>
+          <input type="text" id="thHolderName" placeholder="Yeni hesap adı, örn. Ziraat Bankası (Enter)">
           <button class="btn-primary" id="thHolderAdd">Hesap Aç</button>
         </div>
       </div>
@@ -617,37 +845,44 @@
           <div class="nav-label" id="thMonLabel"></div>
           <button class="btn-ghost icon-btn" id="thMonNext">›</button>
         </div>
-        <div class="frow">
-          <div class="field"><label for="thExpDate">Tarih</label><input type="date" id="thExpDate"></div>
-          <div class="field"><label for="thExpCat">Kategori</label><input type="text" id="thExpCat" list="thCats" placeholder="örn. Market"></div>
-          <div class="field" style="flex:2 1 180px;"><label for="thExpDesc">Açıklama</label><input type="text" id="thExpDesc" placeholder="isteğe bağlı"></div>
-          <div class="field"><label for="thExpAmount">Tutar (₺)</label><input type="text" inputmode="decimal" id="thExpAmount" placeholder="0"></div>
+        <div class="mini-kpis" id="thExpSummary"></div>
+        <div class="composer">
+          <input type="date" id="thExpDate" class="date-sm">
+          <input type="text" id="thExpCat" list="thCats" placeholder="Kategori" style="flex:0 1 150px;">
+          <input type="text" id="thExpDesc" placeholder="Açıklama (isteğe bağlı)">
+          <input type="text" inputmode="decimal" id="thExpAmount" placeholder="Tutar ₺ (Enter)" style="flex:0 1 150px;">
           <button class="btn-primary" id="thExpAdd">Ekle</button>
         </div>
+        <div class="qcats" id="thQuickCats"></div>
         <datalist id="thCats"></datalist>
         <div class="warn" id="thExpWarn"></div>
-        <div id="thCatBars" style="margin-top:8px;"></div>
-        <table>
-          <thead><tr><th>Tarih</th><th>Edina</th><th>Kategori</th><th>Açıklama</th><th class="num">Tutar</th><th></th></tr></thead>
-          <tbody id="thExpBody"></tbody>
-        </table>
-        <div class="empty" id="thExpEmpty">Bu ay harcama yok.</div>
+        <div class="exp-layout">
+          <div>
+            <div id="thExpList"></div>
+            <div class="empty" id="thExpEmpty">Bu ay harcama yok.</div>
+          </div>
+          <div class="exp-side">
+            <div class="pop-label" style="margin-top:0;">Kategoriler</div>
+            <div id="thCatBars"></div>
+          </div>
+        </div>
       </div>
     </section>
 
     <section class="spanel" data-sub="sabit">
       <div class="tablecard">
-        <h2>Aylık Sabit Giderler</h2>
-        <p class="hint">Her ay tekrarlanan ödemeler. "Ödendi" işareti Harcamalar sekmesinde seçili aya göre tutulur: <b id="thFixMonth"></b></p>
-        <table>
-          <thead><tr><th>Ödendi</th><th>Ad</th><th>Tutar (₺)</th><th>Ödeme Günü</th><th></th></tr></thead>
-          <tbody id="thFixBody"></tbody>
-        </table>
-        <div class="preview" id="thFixSum"></div>
-        <div class="frow">
-          <div class="field" style="flex:2 1 180px;"><label for="thFixName">Ad</label><input type="text" id="thFixName" placeholder="örn. Kira"></div>
-          <div class="field"><label for="thFixAmount">Tutar (₺)</label><input type="text" inputmode="decimal" id="thFixAmount" placeholder="0"></div>
-          <div class="field"><label for="thFixDay">Ödeme Günü</label><input type="number" id="thFixDay" min="1" max="31" placeholder="1–31"></div>
+        <div class="nav-row">
+          <button class="btn-ghost icon-btn" id="thFixPrev">‹</button>
+          <div class="nav-label" id="thFixMonLabel"></div>
+          <button class="btn-ghost icon-btn" id="thFixNext">›</button>
+        </div>
+        <p class="hint">Her ay tekrarlanan ödemeler. ✓ ile seçili ay için ödendi olarak işaretle.</p>
+        <div id="thFixSum"></div>
+        <div id="thFixList"></div>
+        <div class="composer" style="margin-top:16px;">
+          <input type="text" id="thFixName" placeholder="Yeni gider, örn. Kira">
+          <input type="number" id="thFixDay" min="1" max="31" placeholder="Gün" style="flex:0 1 90px;">
+          <input type="text" inputmode="decimal" id="thFixAmount" placeholder="Tutar ₺ (Enter)" style="flex:0 1 150px;">
           <button class="btn-primary" id="thFixAdd">Ekle</button>
         </div>
       </div>
@@ -656,11 +891,11 @@
     <section class="spanel" data-sub="kur">
       <div class="tablecard">
         <h2>Kurlar</h2>
-        <p class="hint">1 birimin TL karşılığı. Altın gram başınadır.</p>
-        <table style="min-width:0;"><tbody id="thRateBody"></tbody></table>
-        <div class="frow">
-          <div class="field"><label for="thRateCode">Yeni birim kodu</label><input type="text" id="thRateCode" placeholder="örn. CHF"></div>
-          <div class="field"><label for="thRateVal">TL karşılığı</label><input type="text" inputmode="decimal" id="thRateVal" placeholder="0"></div>
+        <p class="hint">1 birimin TL karşılığı. Altın gram başınadır. Kur değiştirdiğinde güncelleme tarihi kaydedilir.</p>
+        <div id="thRateList"></div>
+        <div class="composer" style="margin-top:16px;">
+          <input type="text" id="thRateCode" placeholder="Yeni birim kodu, örn. CHF" style="flex:0 1 220px;">
+          <input type="text" inputmode="decimal" id="thRateVal" placeholder="TL karşılığı (Enter)">
           <button class="btn-primary" id="thRateAdd">Ekle</button>
         </div>
       </div>
@@ -671,7 +906,14 @@
   <div class="module" data-module="nivose" id="mod-nivose">
     <p class="eyebrow">Nivose · Planlama</p>
     <h1>Nivose</h1>
-    <p class="sub">Edina Haritasındaki Unirce ve Perce'lere bağlı günlük ve aylık planlar.</p>
+    <p class="sub">Edina Haritasına ve Linden Union şirketlerine bağlı günlük planlar ve aylık hedefler. Haftalar Cumartesi başlar.</p>
+
+    <div class="stats four">
+      <div class="stat"><div class="n" id="nvStatToday">0/0</div><div class="l">Bugün Tamamlanan</div></div>
+      <div class="stat"><div class="n" id="nvStatWeek">—</div><div class="l">Bu Hafta</div></div>
+      <div class="stat"><div class="n" id="nvStatStreak">0</div><div class="l">Seri (tam gün)</div></div>
+      <div class="stat"><div class="n" id="nvStatOverdue">0</div><div class="l">Geciken Plan</div></div>
+    </div>
 
     <nav class="tabs">
       <button class="stab" data-sub="gun">Günlük</button>
@@ -679,49 +921,89 @@
     </nav>
 
     <section class="spanel" data-sub="gun">
-      <div class="grid2">
-        <div class="card">
-          <div class="nav-row">
-            <button class="btn-ghost icon-btn" id="nvDayPrev">‹</button>
-            <input type="date" id="nvDayInput" style="max-width:170px;">
-            <button class="btn-ghost icon-btn" id="nvDayNext">›</button>
+      <div class="card week-card">
+        <div class="week-top">
+          <div class="nav-row" style="margin:0;">
+            <button class="btn-ghost icon-btn" id="nvWeekPrev" title="Önceki hafta">‹</button>
+            <div class="nav-label" id="nvWeekLabel"></div>
+            <button class="btn-ghost icon-btn" id="nvWeekNext" title="Sonraki hafta">›</button>
+          </div>
+          <div class="nav-row" style="margin:0;">
+            <input type="date" id="nvDayInput" class="date-sm">
             <button class="btn-ghost icon-btn" id="nvDayToday">Bugün</button>
           </div>
-          <div class="nav-label" id="nvDayLabel"></div>
-          <div class="frow">
-            <div class="field" style="flex:2 1 220px;"><label for="nvDayText">Plan</label><input type="text" id="nvDayText" placeholder="Ne yapılacak?"></div>
-            <div class="field"><label for="nvDayLink">Edina Haritası</label><select id="nvDayLink" class="link-select"></select></div>
+        </div>
+        <div class="week-strip" id="nvWeekStrip"></div>
+      </div>
+
+      <div class="grid2 nv-grid">
+        <div class="card">
+          <div class="day-head">
+            <div style="min-width:0;">
+              <div class="day-title" id="nvDayLabel"></div>
+              <div class="day-sub" id="nvDaySub"></div>
+            </div>
+            <div id="nvDayRing"></div>
+          </div>
+          <div class="composer">
+            <button class="star-toggle" id="nvDayStar" title="Önemli olarak işaretle">☆</button>
+            <input type="text" id="nvDayText" placeholder="Ne yapılacak? (Enter)">
+            <input type="time" id="nvDayTime" title="Saat (isteğe bağlı)">
+            <select id="nvDayLink" class="link-select" title="Edina Haritası bağlantısı"></select>
             <button class="btn-primary" id="nvDayAdd">Ekle</button>
           </div>
           <div id="nvDayList"></div>
         </div>
-        <div class="card">
-          <h2>Bu Ayın Hedefleri</h2>
-          <p class="hint" id="nvDayMonthHint"></p>
-          <div id="nvDayMonthList"></div>
+
+        <div class="nv-side">
+          <div class="card" id="nvOverdueCard">
+            <div class="card-head">
+              <h2>Geciken</h2>
+              <button class="btn-ghost icon-btn" id="nvOverdueAll">Hepsini bugüne taşı</button>
+            </div>
+            <p class="hint">Geçmiş günlerden kalan, tamamlanmamış planlar.</p>
+            <div id="nvOverdueList"></div>
+          </div>
+          <div class="card">
+            <h2>Bu Ayın Hedefleri</h2>
+            <p class="hint" id="nvDayMonthHint"></p>
+            <div id="nvDayMonthList"></div>
+          </div>
         </div>
       </div>
     </section>
 
     <section class="spanel" data-sub="ay">
-      <div class="grid2">
+      <div class="grid2 nv-grid">
         <div class="card">
-          <div class="nav-row">
-            <button class="btn-ghost icon-btn" id="nvMonPrev">‹</button>
-            <div class="nav-label" id="nvMonLabel"></div>
-            <button class="btn-ghost icon-btn" id="nvMonNext">›</button>
+          <div class="day-head">
+            <div class="nav-row" style="margin:0;">
+              <button class="btn-ghost icon-btn" id="nvMonPrev">‹</button>
+              <div class="nav-label" id="nvMonLabel"></div>
+              <button class="btn-ghost icon-btn" id="nvMonNext">›</button>
+            </div>
+            <div id="nvMonRing"></div>
           </div>
-          <div class="frow">
-            <div class="field" style="flex:2 1 220px;"><label for="nvMonText">Aylık Hedef</label><input type="text" id="nvMonText" placeholder="Bu ay neyi başaracaksın?"></div>
-            <div class="field"><label for="nvMonLink">Edina Haritası</label><select id="nvMonLink" class="link-select"></select></div>
+          <div class="composer">
+            <button class="star-toggle" id="nvMonStar" title="Önemli olarak işaretle">☆</button>
+            <input type="text" id="nvMonText" placeholder="Bu ay neyi başaracaksın? (Enter)">
+            <select id="nvMonLink" class="link-select" title="Edina Haritası bağlantısı"></select>
             <button class="btn-primary" id="nvMonAdd">Ekle</button>
           </div>
           <div id="nvMonList"></div>
         </div>
-        <div class="card">
-          <h2>Haritaya Göre İlerleme</h2>
-          <p class="hint">Bu aydaki günlük planlar ve aylık hedefler, bağlı oldukları Unirce'ye göre.</p>
-          <div id="nvMonProgress"></div>
+
+        <div class="nv-side">
+          <div class="card">
+            <h2>Ay Takvimi</h2>
+            <p class="hint">Her gün tamamlanan / toplam plan. Bir güne tıklayınca Günlük görünümde açılır.</p>
+            <div class="mcal" id="nvMonCal"></div>
+          </div>
+          <div class="card">
+            <h2>Haritaya Göre İlerleme</h2>
+            <p class="hint">Bu aydaki günlük planlar ve aylık hedefler, bağlı oldukları Unirce ya da şirkete göre.</p>
+            <div id="nvMonProgress"></div>
+          </div>
         </div>
       </div>
     </section>
@@ -732,6 +1014,15 @@
     <p class="eyebrow">Edina Haritası</p>
     <h1>Edina Haritası</h1>
     <p class="sub">Unirce → Perce → Parce. Nivose'deki planlar bu üç seviyeden herhangi birine bağlanabilir. Ad ve açıklamaları doğrudan kartın üzerinden düzenleyebilirsin.</p>
+
+    <div class="card tagbar" id="tagCard">
+      <div class="tagbar-row">
+        <span class="pop-label" style="margin:0;">Etiketler</span>
+        <div class="tagbar-chips" id="tagBar"></div>
+        <button class="btn-ghost icon-btn" id="tagManageBtn">Düzenle</button>
+      </div>
+      <div id="tagManager" hidden></div>
+    </div>
 
     <nav class="tabs">
       <button class="stab" data-sub="unirce">Unirce Haritası</button>
@@ -824,7 +1115,9 @@
     </div>
   </div>
 
-  <footer>Leiden · veriler bu tarayıcıda ve (bağlıysa) GitHub reposunda saklanır</footer>
+  <div id="optPop" hidden></div>
+
+  <footer>Leiden ·veriler bu tarayıcıda ve (bağlıysa) GitHub reposunda saklanır</footer>
 </div>
 
 <script>
@@ -1435,6 +1728,7 @@ function setupSubtabs(root){
   let saved = null;
   try{ saved = localStorage.getItem(key); }catch(e){}
   show(btns.some(b=>b.dataset.sub===saved) ? saved : btns[0].dataset.sub);
+  return show;
 }
 
 // ===== Veri: JSON yedek & GitHub senkronu =====
@@ -1457,7 +1751,7 @@ function scheduleSync(){
 }
 
 function buildBackup(){
-  return {app:'Leiden', version:2, savedAt:new Date().toISOString(), entries:DATA.entries, thistle:TH, nivose:NIV, map:MAP};
+  return {app:'Leiden', version:3, savedAt:new Date().toISOString(), entries:DATA.entries, thistle:TH, nivose:NIV, map:MAP};
 }
 function applyBackup(obj){
   if(!obj || typeof obj !== 'object' || !(obj.entries || obj.thistle || obj.nivose || obj.map)) throw new Error('geçersiz format');
@@ -1591,6 +1885,7 @@ function migrateTH(){
   }
   TH.holders = TH.holders || [];
   TH.rates = TH.rates || {};
+  TH.ratesUpdated = TH.ratesUpdated || {};
   TH.expenses = TH.expenses || [];
   TH.fixed = TH.fixed || [];
 }
@@ -1599,12 +1894,47 @@ function saveTH(){ saveJson(TH_KEY, TH); }
 function rateOf(cur){ return cur==='TRY' ? 1 : (TH.rates[cur]||0); }
 function holdTry(h){ return (h.amount||0)*rateOf(h.currency); }
 function holderTry(holder){ return holder.holdings.reduce((s,h)=>s+holdTry(h),0); }
-function curOptions(sel){
+function curOptions(sel, short){
   return ['TRY',...Object.keys(TH.rates)].map(c=>
-    '<option value="'+esc(c)+'"'+(c===sel?' selected':'')+'>'+esc(c)+(CUR_LABELS[c]?' · '+CUR_LABELS[c]:'')+'</option>'
+    '<option value="'+esc(c)+'"'+(c===sel?' selected':'')+'>'+esc(c)+(!short && CUR_LABELS[c]?' · '+CUR_LABELS[c]:'')+'</option>'
   ).join('');
 }
 let thMonth = todayStr().slice(0,7);
+let thAddingHolder = null;
+const CUR_COLORS = {TRY:'#9573b8', USD:'#4f9470', EUR:'#5c9cc0', GBP:'#c9606f', XAU:'#cf9a3e'};
+const GROUP_COLORS = {'Banka':'#9573b8', 'Döviz':'#4f9470', 'Diğer':'#cf9a3e'};
+function hashColor(s){
+  let h = 0;
+  for(const ch of String(s)) h = (h*31 + ch.charCodeAt(0)) >>> 0;
+  return PALETTE[h % PALETTE.length];
+}
+function curColor(c){ return CUR_COLORS[c] || hashColor(c); }
+function monthSpend(m){ return TH.expenses.filter(e=>e.date.startsWith(m)).reduce((s,e)=>s+e.amount,0); }
+function money(n, d){ return fmt(n, d===undefined ? 2 : d)+' ₺'; }
+function deltaHtml(cur, prev){
+  if(!prev) return '—';
+  const d = (cur-prev)/prev*100;
+  return '<span class="'+(d>0?'g-neg':'g-pos')+'">'+(d>0?'▲ ':'▼ ')+fmt(Math.abs(d),0)+'%</span>';
+}
+
+function stackBarHtml(parts){
+  parts = parts.filter(p=>p.value > 0);
+  const total = parts.reduce((s,p)=>s+p.value,0);
+  if(!total) return '<div class="stack"></div><div class="stack-legend"><span>Henüz veri yok</span></div>';
+  return '<div class="stack">'+parts.map(p=>'<span style="width:'+(p.value/total*100).toFixed(2)+'%;background:'+esc(p.color)+'" title="'+esc(p.label)+'"></span>').join('')+'</div>'+
+    '<div class="stack-legend">'+parts.map(p=>'<span><i style="background:'+esc(p.color)+'"></i>'+esc(p.label)+' <b>'+fmt(p.value/total*100,1)+'%</b></span>').join('')+'</div>';
+}
+
+function fixedStatus(f, month){
+  if(f.paid && f.paid[month]) return {cls:'ok', text:'Ödendi'};
+  const today = todayStr(), cur = today.slice(0,7);
+  if(month < cur) return {cls:'late', text:'Ödenmedi'};
+  if(month > cur || !f.day) return {cls:'wait', text:f.day ? 'Gün '+f.day : 'Bekliyor'};
+  const diff = f.day - Number(today.slice(8));
+  if(diff < 0) return {cls:'late', text:(-diff)+' gün gecikti'};
+  if(diff === 0) return {cls:'soon', text:'Bugün'};
+  return {cls:diff <= 3 ? 'soon' : 'wait', text:diff+' gün kaldı'};
+}
 
 function renderHolders(total){
   const allHold = TH.holders.flatMap(h=>h.holdings);
@@ -1613,111 +1943,180 @@ function renderHolders(total){
   rw.style.display = missing.length ? 'block' : 'none';
   rw.textContent = 'Kuru girilmemiş birim(ler): '+missing.join(', ')+' — Kurlar sekmesinden gir, yoksa TL karşılığı 0 sayılır.';
 
-  const byCur = {};
-  allHold.forEach(h=>{ byCur[h.currency] = (byCur[h.currency]||0) + (h.amount||0); });
-  document.getElementById('thCurSummary').innerHTML = Object.entries(byCur).map(([c,v])=>
-    '<span class="chip"><b style="color:var(--text);">'+fmt(v,2)+'</b> '+esc(c)+(c!=='TRY'&&rateOf(c)?' ≈ '+fmt(v*rateOf(c),0)+' ₺':'')+'</span>'
-  ).join('');
-
   let html = '';
   for(const g of TH_GROUPS){
     const hs = TH.holders.filter(h=>h.group===g);
     if(!hs.length) continue;
     const sub = hs.reduce((s,h)=>s+holderTry(h),0);
-    html += '<p class="eyebrow" style="margin:18px 0 8px;">'+g+' · '+fmt(sub,2)+' ₺'+(total?' · '+fmt(sub/total*100,1)+'%':'')+'</p>';
-    html += '<div class="holder-grid">'+hs.map(hd=>
-      '<div class="holder" data-h="'+hd.id+'">'+
+    html += '<div class="group-head"><span class="dot" style="background:'+GROUP_COLORS[g]+'"></span>'+g+
+      '<span>'+money(sub)+(total ? ' · '+fmt(sub/total*100,1)+'%' : '')+'</span></div>';
+    html += '<div class="holder-grid">'+hs.map(hd=>{
+      const ht = holderTry(hd);
+      return '<div class="holder'+(thAddingHolder===hd.id?' adding':'')+'" data-h="'+hd.id+'" style="--gc:'+GROUP_COLORS[hd.group]+'">'+
         '<div class="holder-head">'+
+          '<span class="holder-mono">'+esc((hd.name||'?').trim().charAt(0).toLocaleUpperCase('tr-TR'))+'</span>'+
           '<input class="cell-input h-name" value="'+esc(hd.name)+'">'+
           '<button class="del-btn h-del" title="Hesabı sil">✕</button>'+
         '</div>'+
-        '<div class="holder-total">'+fmt(holderTry(hd),2)+' ₺</div>'+
+        '<div class="holder-total">'+money(ht)+(total ? '<span>'+fmt(ht/total*100,1)+'%</span>' : '')+'</div>'+
         hd.holdings.map(h=>
           '<div class="holding" data-hd="'+h.id+'">'+
-            '<select class="cell-input hd-cur">'+curOptions(h.currency)+'</select>'+
+            '<span class="cur-dot" style="background:'+curColor(h.currency)+'"></span>'+
+            '<select class="cell-input hd-cur">'+curOptions(h.currency, true)+'</select>'+
             '<input class="cell-input hd-amount" inputmode="decimal" value="'+fmt(h.amount,2)+'">'+
-            '<span class="hd-try">'+(h.currency==='TRY'?'':fmt(holdTry(h),0)+' ₺')+'</span>'+
+            '<span class="hd-try">'+(h.currency==='TRY' ? '' : '≈ '+fmt(holdTry(h),0)+' ₺')+'</span>'+
             '<button class="del-btn hd-del" title="Birimi kaldır">✕</button>'+
           '</div>'
         ).join('')+
         '<div class="holding holding-new">'+
-          '<select class="cell-input hd-new-cur">'+curOptions(hd.holdings.some(h=>h.currency==='TRY')?'USD':'TRY')+'</select>'+
-          '<input class="cell-input hd-new-amount" inputmode="decimal" placeholder="tutar">'+
-          '<button class="btn-ghost hd-add" style="padding:6px 10px;">+ Birim</button>'+
+          '<span class="cur-dot"></span>'+
+          '<select class="cell-input hd-new-cur">'+curOptions(hd.holdings.some(h=>h.currency==='TRY') ? 'USD' : 'TRY', true)+'</select>'+
+          '<input class="cell-input hd-new-amount" inputmode="decimal" placeholder="tutar (Enter)">'+
+          '<button class="btn-ghost hd-add">Ekle</button>'+
         '</div>'+
-      '</div>'
-    ).join('')+'</div>';
+        '<button class="hd-open">+ Birim ekle</button>'+
+      '</div>';
+    }).join('')+'</div>';
   }
   document.getElementById('thHolders').innerHTML = html || '<div class="empty">Henüz hesap yok. Aşağıdan aç.</div>';
 }
 
-function renderThistle(){
-  const total = TH.holders.reduce((s,h)=>s+holderTry(h),0);
-  const monthSpend = m=>TH.expenses.filter(e=>e.date.startsWith(m)).reduce((s,e)=>s+e.amount,0);
-  const fixedTotal = TH.fixed.reduce((s,f)=>s+f.amount,0);
-  const curSpend = monthSpend(todayStr().slice(0,7));
-  document.getElementById('thTotal').textContent = fmt(total,2);
-  document.getElementById('thSpend').textContent = fmt(curSpend,2);
-  document.getElementById('thFixed').textContent = fmt(fixedTotal,2);
-  document.getElementById('thOut').textContent = fmt(curSpend+fixedTotal,2);
-
-  renderHolders(total);
-
-  // expenses
+function renderExpenses(){
+  const cur = todayStr().slice(0,7);
   document.getElementById('thMonLabel').innerHTML = monthLabelHtml(thMonth);
   const exps = TH.expenses.filter(e=>e.date.startsWith(thMonth)).sort((a,b)=>b.date.localeCompare(a.date));
-  document.getElementById('thExpEmpty').style.display = exps.length ? 'none' : 'block';
-  document.getElementById('thExpBody').innerHTML = exps.map(e=>'<tr data-id="'+e.id+'">'+
-    '<td class="date-cell">'+e.date+'</td><td>'+edinaDateStr(e.date)+'</td>'+
-    '<td>'+esc(e.category)+'</td><td style="font-family:Manrope,sans-serif;">'+esc(e.desc)+'</td>'+
-    '<td class="num">'+fmt(e.amount,2)+' ₺</td>'+
-    '<td><button class="del-btn exp-del" title="Sil">✕</button></td></tr>').join('');
+  const mTotal = monthSpend(thMonth);
+  const [y, m] = thMonth.split('-').map(Number);
+  const days = thMonth===cur ? Number(todayStr().slice(8)) : (thMonth < cur ? new Date(y, m, 0).getDate() : 0);
   const byCat = {};
   exps.forEach(e=>{ byCat[e.category] = (byCat[e.category]||0)+e.amount; });
-  const mTotal = monthSpend(thMonth);
-  document.getElementById('thCatBars').innerHTML = Object.entries(byCat).sort((a,b)=>b[1]-a[1]).map(([c,v])=>
-    '<div class="prog-row"><div class="top"><b>'+esc(c)+'</b><span>'+fmt(v,2)+' ₺ · '+fmt(v/mTotal*100,0)+'%</span></div>'+
-    '<div class="progress"><div style="width:'+(v/mTotal*100).toFixed(1)+'%;background:var(--gold)"></div></div></div>'
-  ).join('') + (exps.length ? '<div class="preview-total" style="margin-top:12px;font-size:1.05rem;">Ay toplamı: '+fmt(mTotal,2)+' ₺</div>' : '');
-  const cats = [...new Set([...DEFAULT_CATS, ...TH.expenses.map(e=>e.category)])];
-  document.getElementById('thCats').innerHTML = cats.map(c=>'<option value="'+esc(c)+'">').join('');
+  const cats = Object.entries(byCat).sort((a,b)=>b[1]-a[1]);
+  const kpi = (label, value)=>'<div class="mini-kpi"><b>'+value+'</b><span>'+label+'</span></div>';
+  document.getElementById('thExpSummary').innerHTML =
+    kpi('Ay toplamı', money(mTotal,0))+
+    kpi('Günlük ortalama', days ? money(mTotal/days,0) : '—')+
+    kpi('Geçen aya göre', deltaHtml(mTotal, monthSpend(addMonths(thMonth,-1))))+
+    kpi('En çok', cats.length ? esc(cats[0][0]) : '—');
 
-  // fixed
-  document.getElementById('thFixMonth').innerHTML = monthLabelHtml(thMonth).replace(/<span>.*<\/span>/,'');
+  const recent = [...new Set([...TH.expenses.slice().sort((a,b)=>b.date.localeCompare(a.date)).map(e=>e.category), ...DEFAULT_CATS])].slice(0,9);
+  document.getElementById('thQuickCats').innerHTML = recent.map(c=>
+    '<button class="tchip qcat" data-cat="'+esc(c)+'" style="--tc:'+hashColor(c)+'">'+esc(c)+'</button>').join('');
+  document.getElementById('thCats').innerHTML = [...new Set([...DEFAULT_CATS, ...TH.expenses.map(e=>e.category)])].map(c=>'<option value="'+esc(c)+'">').join('');
+
+  document.getElementById('thCatBars').innerHTML = cats.length ? cats.map(([c,v])=>
+    '<div class="prog-row"><div class="top"><b><span class="dot" style="background:'+hashColor(c)+';display:inline-block;margin-right:6px;"></span>'+esc(c)+'</b><span>'+money(v,0)+' · '+fmt(v/mTotal*100,0)+'%</span></div>'+
+    '<div class="progress"><div style="width:'+(v/mTotal*100).toFixed(1)+'%;background:'+hashColor(c)+'"></div></div></div>'
+  ).join('') : '<div class="empty" style="padding:8px 0;text-align:left;">—</div>';
+
+  const byDay = {};
+  exps.forEach(e=>{ (byDay[e.date] = byDay[e.date] || []).push(e); });
+  document.getElementById('thExpEmpty').style.display = exps.length ? 'none' : 'block';
+  document.getElementById('thExpList').innerHTML = Object.keys(byDay).sort().reverse().map(d=>{
+    const items = byDay[d];
+    const label = new Date(d+'T00:00:00').toLocaleDateString('tr-TR',{weekday:'long', day:'numeric', month:'long'});
+    return '<div class="exp-day">'+
+      '<div class="exp-day-head"><b>'+label+'</b><span>Edina '+edinaDateStr(d)+'</span><span class="exp-day-sum">'+money(items.reduce((s,e)=>s+e.amount,0))+'</span></div>'+
+      items.map(e=>'<div class="exp-row" data-id="'+e.id+'">'+
+        '<span class="tchip" style="--tc:'+hashColor(e.category)+'">'+esc(e.category)+'</span>'+
+        '<input class="cell-input exp-desc" value="'+esc(e.desc)+'" placeholder="açıklama ekle">'+
+        '<span class="exp-amt">'+money(e.amount)+'</span>'+
+        '<button class="del-btn exp-del" title="Sil">✕</button>'+
+      '</div>').join('')+
+    '</div>';
+  }).join('');
+}
+
+function renderFixed(){
+  document.getElementById('thFixMonLabel').innerHTML = monthLabelHtml(thMonth);
   const fixed = TH.fixed.slice().sort((a,b)=>(a.day||99)-(b.day||99));
-  document.getElementById('thFixBody').innerHTML = fixed.map(f=>'<tr data-id="'+f.id+'">'+
-    '<td><input type="checkbox" class="fx-paid" style="width:18px;height:18px;accent-color:var(--mint);"'+(f.paid&&f.paid[thMonth]?' checked':'')+'></td>'+
-    '<td><input class="cell-input fx-name" value="'+esc(f.name)+'"></td>'+
-    '<td><input class="cell-input fx-amount" inputmode="decimal" value="'+fmt(f.amount,2)+'"></td>'+
-    '<td><input class="cell-input fx-day" type="number" min="1" max="31" value="'+(f.day||'')+'"></td>'+
-    '<td><button class="del-btn fx-del" title="Sil">✕</button></td></tr>').join('') ||
-    '<tr><td colspan="5" class="empty">Henüz sabit gider yok.</td></tr>';
-  const paid = fixed.filter(f=>f.paid&&f.paid[thMonth]).reduce((s,f)=>s+f.amount,0);
-  document.getElementById('thFixSum').innerHTML =
-    '<div class="preview-total">Toplam: '+fmt(fixedTotal,2)+' ₺</div>'+
-    '<div style="font-family:IBM Plex Mono,monospace;font-size:.8rem;color:var(--muted);margin-top:6px;">'+
-    '<span class="g-pos">Ödenen '+fmt(paid,2)+' ₺</span> · <span class="g-neg">Kalan '+fmt(fixedTotal-paid,2)+' ₺</span></div>';
+  const total = fixed.reduce((s,f)=>s+f.amount,0);
+  const paid = fixed.filter(f=>f.paid && f.paid[thMonth]).reduce((s,f)=>s+f.amount,0);
+  document.getElementById('thFixSum').innerHTML = fixed.length
+    ? '<div class="prog-row" style="margin:0 0 14px;"><div class="top"><b>'+money(paid,0)+' / '+money(total,0)+' ödendi</b><span class="g-neg">Kalan '+money(total-paid,0)+'</span></div>'+
+      '<div class="progress" style="height:10px;"><div style="width:'+(total?paid/total*100:0).toFixed(1)+'%;background:var(--mint)"></div></div></div>'
+    : '';
+  document.getElementById('thFixList').innerHTML = fixed.map(f=>{
+    const st = fixedStatus(f, thMonth);
+    return '<div class="fx-row st-row-'+st.cls+'" data-id="'+f.id+'">'+
+      '<button class="fx-check'+(st.cls==='ok'?' on':'')+'" title="Ödendi olarak işaretle">✓</button>'+
+      '<input class="cell-input fx-name" value="'+esc(f.name)+'">'+
+      '<span class="fx-day-wrap">Gün<input class="cell-input fx-day" type="number" min="1" max="31" value="'+(f.day||'')+'"></span>'+
+      '<input class="cell-input fx-amount" inputmode="decimal" value="'+fmt(f.amount,2)+'">'+
+      '<span class="st st-'+st.cls+'">'+st.text+'</span>'+
+      '<button class="del-btn fx-del" title="Sil">✕</button>'+
+    '</div>';
+  }).join('') || '<div class="empty">Henüz sabit gider yok.</div>';
+}
 
-  // rates
-  document.getElementById('thRateBody').innerHTML = Object.keys(TH.rates).map(c=>'<tr data-cur="'+esc(c)+'">'+
-    '<td style="font-weight:600;color:var(--lilac);">'+esc(c)+'</td>'+
-    '<td style="font-family:Manrope,sans-serif;">'+(CUR_LABELS[c]||'')+'</td>'+
-    '<td style="width:180px;"><input class="cell-input rate-val" inputmode="decimal" value="'+(TH.rates[c]?fmt(TH.rates[c],4):'')+'" placeholder="TL karşılığı"></td>'+
-    '<td>'+(DEFAULT_RATES.includes(c)?'':'<button class="del-btn rate-del" title="Sil">✕</button>')+'</td></tr>').join('');
+function renderRates(byCurAmt){
+  document.getElementById('thRateList').innerHTML = Object.keys(TH.rates).map(c=>{
+    const amt = byCurAmt[c] || 0;
+    const upd = TH.ratesUpdated[c];
+    return '<div class="rate-row" data-cur="'+esc(c)+'">'+
+      '<span class="cur-dot" style="background:'+curColor(c)+'"></span>'+
+      '<b class="rate-code">'+esc(c)+'</b>'+
+      '<span class="rate-label">'+(CUR_LABELS[c]||'')+'</span>'+
+      '<span class="rate-input">1 '+esc(c)+' =<input class="cell-input rate-val" inputmode="decimal" value="'+(TH.rates[c]?fmt(TH.rates[c],4):'')+'" placeholder="?">₺</span>'+
+      '<span class="rate-meta">'+(amt ? fmt(amt,2)+' '+esc(c)+(TH.rates[c] ? ' ≈ '+fmt(amt*TH.rates[c],0)+' ₺' : '') : 'varlık yok')+
+        (upd ? '<br>güncellendi '+shortDayLabel(upd) : '')+'</span>'+
+      (DEFAULT_RATES.includes(c) ? '<span></span>' : '<button class="del-btn rate-del" title="Sil">✕</button>')+
+    '</div>';
+  }).join('');
+}
+
+function renderThistle(){
+  const cur = todayStr().slice(0,7);
+  const total = TH.holders.reduce((s,h)=>s+holderTry(h),0);
+
+  document.getElementById('thTotal').textContent = fmt(total,2);
+  const eq = [];
+  if(rateOf('USD')) eq.push('$'+fmt(total/rateOf('USD'),0));
+  if(rateOf('EUR')) eq.push('€'+fmt(total/rateOf('EUR'),0));
+  if(rateOf('XAU')) eq.push(fmt(total/rateOf('XAU'),1)+' gr altın');
+  document.getElementById('thTotalEq').textContent = eq.length ? '≈ '+eq.join(' · ') : 'Kurları girince döviz karşılıkları görünür.';
+  const byCur = {}, byCurAmt = {};
+  TH.holders.forEach(hd=>hd.holdings.forEach(h=>{
+    byCur[h.currency] = (byCur[h.currency]||0) + holdTry(h);
+    byCurAmt[h.currency] = (byCurAmt[h.currency]||0) + (h.amount||0);
+  }));
+  document.getElementById('thCurBar').innerHTML = stackBarHtml(Object.entries(byCur).sort((a,b)=>b[1]-a[1]).map(([c,v])=>({label:c, value:v, color:curColor(c)})));
+  document.getElementById('thGroupBar').innerHTML = stackBarHtml(TH_GROUPS.map(g=>({label:g, value:TH.holders.filter(h=>h.group===g).reduce((s,h)=>s+holderTry(h),0), color:GROUP_COLORS[g]})));
+
+  const spend = monthSpend(cur);
+  document.getElementById('thSpend').textContent = money(spend,0);
+  document.getElementById('thSpendDelta').innerHTML = deltaHtml(spend, monthSpend(addMonths(cur,-1)))+' geçen aya göre';
+  const unpaid = TH.fixed.filter(f=>!(f.paid && f.paid[cur]));
+  document.getElementById('thFixed').textContent = money(unpaid.reduce((s,f)=>s+f.amount,0),0);
+  document.getElementById('thFixedSub').textContent = (TH.fixed.length-unpaid.length)+' / '+TH.fixed.length+' ödeme yapıldı';
+  const next = unpaid.filter(f=>f.day).sort((a,b)=>a.day-b.day)[0];
+  document.getElementById('thNext').textContent = next ? next.name : '—';
+  const ns = next ? fixedStatus(next, cur) : null;
+  document.getElementById('thNextSub').innerHTML = next
+    ? money(next.amount,0)+' · <span class="st st-'+ns.cls+'">'+ns.text+'</span>'
+    : (TH.fixed.length ? 'Bu ayın ödemeleri tamam' : 'Sabit gider yok');
+
+  renderHolders(total);
+  renderExpenses();
+  renderFixed();
+  renderRates(byCurAmt);
 }
 
 function setupThistle(){
   const root = document.getElementById('mod-thistle');
   document.getElementById('thExpDate').value = todayStr();
+  const commit = ()=>{ saveTH(); renderThistle(); };
 
   const holderOf = el=>{ const c = el.closest('.holder'); return c ? TH.holders.find(h=>h.id===c.dataset.h) : null; };
   const holdingOf = (hd, el)=>{ const r = el.closest('.holding'); return r && hd ? hd.holdings.find(h=>h.id===r.dataset.hd) : null; };
+  const fixedOf = el=>{ const r = el.closest('.fx-row'); return r ? TH.fixed.find(f=>f.id===r.dataset.id) : null; };
+  const expenseOf = el=>{ const r = el.closest('.exp-row'); return r ? TH.expenses.find(x=>x.id===r.dataset.id) : null; };
   const addHolding = el=>{
     const hd = holderOf(el);
     const card = el.closest('.holder');
     const amount = parseNum(card.querySelector('.hd-new-amount').value);
     hd.holdings.push({id:uid(), currency:card.querySelector('.hd-new-cur').value, amount:amount || 0});
-    saveTH(); renderThistle();
+    thAddingHolder = null;
+    commit();
   };
 
   root.addEventListener('change', e=>{
@@ -1729,25 +2128,33 @@ function setupThistle(){
       else if(h && t.classList.contains('hd-cur')) h.currency = t.value;
       else if(h && t.classList.contains('hd-amount')){ const n = parseNum(t.value); if(n !== null) h.amount = n; }
       else return;
-      saveTH(); renderThistle();
-      return;
+      return commit();
     }
-    const row = t.closest('tr');
-    if(!row) return;
-    const fx = TH.fixed.find(f=>f.id===row.dataset.id);
-    if(fx && t.classList.contains('fx-paid')){ fx.paid = fx.paid||{}; if(t.checked) fx.paid[thMonth] = true; else delete fx.paid[thMonth]; }
-    else if(fx && t.classList.contains('fx-name')) fx.name = t.value.trim() || fx.name;
+    const fx = fixedOf(t), ex = expenseOf(t), rateRow = t.closest('.rate-row');
+    if(fx && t.classList.contains('fx-name')) fx.name = t.value.trim() || fx.name;
     else if(fx && t.classList.contains('fx-amount')){ const n = parseNum(t.value); if(n !== null) fx.amount = n; }
-    else if(fx && t.classList.contains('fx-day')) fx.day = parseInt(t.value,10) || null;
-    else if(t.classList.contains('rate-val')){ const n = parseNum(t.value); TH.rates[row.dataset.cur] = n || 0; }
+    else if(fx && t.classList.contains('fx-day')) fx.day = Math.min(31, Math.max(1, parseInt(t.value,10) || 0)) || null;
+    else if(ex && t.classList.contains('exp-desc')) ex.desc = t.value.trim();
+    else if(rateRow && t.classList.contains('rate-val')){
+      const n = parseNum(t.value);
+      TH.rates[rateRow.dataset.cur] = n || 0;
+      TH.ratesUpdated[rateRow.dataset.cur] = todayStr();
+    }
     else return;
-    saveTH(); renderThistle();
+    commit();
   });
 
   root.addEventListener('click', e=>{
     const t = e.target;
     const hd = holderOf(t);
     if(hd){
+      if(t.classList.contains('hd-open')){
+        thAddingHolder = hd.id;
+        renderThistle();
+        const inp = root.querySelector('.holder[data-h="'+hd.id+'"] .hd-new-amount');
+        if(inp) inp.focus();
+        return;
+      }
       if(t.classList.contains('hd-add')) return addHolding(t);
       if(t.classList.contains('h-del')){
         if(!confirm('"'+hd.name+'" ve içindeki tüm birimler silinsin mi?')) return;
@@ -1757,25 +2164,33 @@ function setupThistle(){
         if(h.amount && !confirm(fmt(h.amount,2)+' '+h.currency+' tutarlı birim kaldırılsın mı?')) return;
         hd.holdings = hd.holdings.filter(x=>x.id!==h.id);
       } else return;
-      saveTH(); renderThistle();
+      return commit();
+    }
+    if(t.classList.contains('qcat')){
+      document.getElementById('thExpCat').value = t.dataset.cat;
+      document.getElementById('thExpAmount').focus();
       return;
     }
-    const row = t.closest('tr');
-    if(!row) return;
-    if(t.classList.contains('exp-del')){
-      TH.expenses = TH.expenses.filter(x=>x.id!==row.dataset.id);
-    } else if(t.classList.contains('fx-del')){
-      const f = TH.fixed.find(x=>x.id===row.dataset.id);
-      if(!confirm('"'+f.name+'" silinsin mi?')) return;
-      TH.fixed = TH.fixed.filter(x=>x.id!==row.dataset.id);
-    } else if(t.classList.contains('rate-del')){
-      delete TH.rates[row.dataset.cur];
+    const fx = fixedOf(t), ex = expenseOf(t), rateRow = t.closest('.rate-row');
+    if(fx && t.classList.contains('fx-check')){
+      fx.paid = fx.paid || {};
+      if(fx.paid[thMonth]) delete fx.paid[thMonth]; else fx.paid[thMonth] = true;
+    } else if(fx && t.classList.contains('fx-del')){
+      if(!confirm('"'+fx.name+'" silinsin mi?')) return;
+      TH.fixed = TH.fixed.filter(x=>x.id!==fx.id);
+    } else if(ex && t.classList.contains('exp-del')){
+      if(!confirm(money(ex.amount)+' tutarlı "'+ex.category+'" harcaması silinsin mi?')) return;
+      TH.expenses = TH.expenses.filter(x=>x.id!==ex.id);
+    } else if(rateRow && t.classList.contains('rate-del')){
+      delete TH.rates[rateRow.dataset.cur];
+      delete TH.ratesUpdated[rateRow.dataset.cur];
     } else return;
-    saveTH(); renderThistle();
+    commit();
   });
 
   root.addEventListener('keydown', e=>{
     if(e.key==='Enter' && e.target.classList.contains('hd-new-amount')) addHolding(e.target);
+    if(e.key==='Escape' && thAddingHolder){ thAddingHolder = null; renderThistle(); }
   });
 
   const addHolder = ()=>{
@@ -1783,12 +2198,12 @@ function setupThistle(){
     if(!name) return;
     TH.holders.push(newHolder(document.getElementById('thHolderGroup').value, name));
     document.getElementById('thHolderName').value = '';
-    saveTH(); renderThistle();
+    commit();
   };
   document.getElementById('thHolderAdd').addEventListener('click', addHolder);
   document.getElementById('thHolderName').addEventListener('keydown', e=>{ if(e.key==='Enter') addHolder(); });
 
-  document.getElementById('thExpAdd').addEventListener('click', ()=>{
+  const addExpense = ()=>{
     const date = document.getElementById('thExpDate').value || todayStr();
     const amount = parseNum(document.getElementById('thExpAmount').value);
     const warn = document.getElementById('thExpWarn');
@@ -1805,30 +2220,41 @@ function setupThistle(){
     document.getElementById('thExpDesc').value = '';
     document.getElementById('thExpAmount').value = '';
     thMonth = date.slice(0,7);
-    saveTH(); renderThistle();
-  });
-  document.getElementById('thExpAmount').addEventListener('keydown', e=>{ if(e.key==='Enter') document.getElementById('thExpAdd').click(); });
+    commit();
+    document.getElementById('thExpAmount').focus();
+  };
+  document.getElementById('thExpAdd').addEventListener('click', addExpense);
+  ['thExpAmount','thExpDesc'].forEach(id=>document.getElementById(id).addEventListener('keydown', e=>{ if(e.key==='Enter') addExpense(); }));
 
-  document.getElementById('thFixAdd').addEventListener('click', ()=>{
+  const addFixed = ()=>{
     const name = document.getElementById('thFixName').value.trim();
     const amount = parseNum(document.getElementById('thFixAmount').value);
     if(!name || amount === null) return;
-    TH.fixed.push({id:uid(), name, amount, day:parseInt(document.getElementById('thFixDay').value,10)||null, paid:{}});
+    const day = parseInt(document.getElementById('thFixDay').value,10);
+    TH.fixed.push({id:uid(), name, amount, day:day>=1 && day<=31 ? day : null, paid:{}});
     ['thFixName','thFixAmount','thFixDay'].forEach(id=>document.getElementById(id).value = '');
-    saveTH(); renderThistle();
-  });
+    commit();
+  };
+  document.getElementById('thFixAdd').addEventListener('click', addFixed);
+  document.getElementById('thFixAmount').addEventListener('keydown', e=>{ if(e.key==='Enter') addFixed(); });
 
-  document.getElementById('thRateAdd').addEventListener('click', ()=>{
+  const addRate = ()=>{
     const code = document.getElementById('thRateCode').value.trim().toUpperCase();
     if(!code || code==='TRY') return;
     TH.rates[code] = parseNum(document.getElementById('thRateVal').value) || 0;
+    if(TH.rates[code]) TH.ratesUpdated[code] = todayStr();
     document.getElementById('thRateCode').value = '';
     document.getElementById('thRateVal').value = '';
-    saveTH(); renderThistle();
-  });
+    commit();
+  };
+  document.getElementById('thRateAdd').addEventListener('click', addRate);
+  document.getElementById('thRateVal').addEventListener('keydown', e=>{ if(e.key==='Enter') addRate(); });
 
-  document.getElementById('thMonPrev').addEventListener('click', ()=>{ thMonth = addMonths(thMonth,-1); renderThistle(); });
-  document.getElementById('thMonNext').addEventListener('click', ()=>{ thMonth = addMonths(thMonth,1); renderThistle(); });
+  const shiftMonth = n=>{ thMonth = addMonths(thMonth, n); renderThistle(); };
+  document.getElementById('thMonPrev').addEventListener('click', ()=>shiftMonth(-1));
+  document.getElementById('thMonNext').addEventListener('click', ()=>shiftMonth(1));
+  document.getElementById('thFixPrev').addEventListener('click', ()=>shiftMonth(-1));
+  document.getElementById('thFixNext').addEventListener('click', ()=>shiftMonth(1));
   setupSubtabs(root);
 }
 
@@ -1840,6 +2266,7 @@ function migrateMAP(){
   MAP.unirces.forEach(u=>{ u.perces = u.perces || []; u.perces.forEach(p=>{ p.parces = p.parces || []; }); });
   MAP.companies = MAP.companies || [];
   MAP.companies.forEach(c=>{ c.projects = c.projects || []; });
+  MAP.tags = MAP.tags || [];
 }
 migrateMAP();
 function saveMAP(){ saveJson(MAP_KEY, MAP); }
@@ -1942,58 +2369,254 @@ function moveItem(arr, item, dir){
   return true;
 }
 
+// ===== Etiketler & blok renkleri (Unirce, Perce, Parce, Şirket, Proje) =====
+const PALETTE = ['#9573b8','#cf9a3e','#5c9cc0','#4f9470','#c9606f','#d27f9f','#b88bd4','#7a8f4e','#e08a5a','#6b7a99','#3f8f8f','#a0522d'];
+let tagFilter = null;
+
+function itemByRef(ref){
+  const r = findLink(ref);
+  return r ? (r.x || r.p || r.j || r.u || r.c) : null;
+}
+function allMapItems(){
+  const out = [];
+  MAP.unirces.forEach(u=>{ out.push(u); u.perces.forEach(p=>{ out.push(p); p.parces.forEach(x=>out.push(x)); }); });
+  MAP.companies.forEach(c=>{ out.push(c); c.projects.forEach(j=>out.push(j)); });
+  return out;
+}
+function tagById(id){ return MAP.tags.find(t=>t.id===id); }
+function hasFilterTag(item){ return (item.tags||[]).includes(tagFilter); }
+function tagChipsHtml(item){
+  return (item.tags||[]).map(tagById).filter(Boolean).map(t=>
+    '<span class="tchip" style="--tc:'+esc(t.color)+'">'+esc(t.name)+'</span>').join('');
+}
+function blockAttrs(item){ return item.color ? ' style="--bc:'+esc(item.color)+'"' : ''; }
+function optBtnHtml(ref){ return '<button class="opt-btn" data-ref="'+ref+'" title="Renk ve etiketler">⋯</button>'; }
+
+// ⋯ menüsü: blok rengi + etiketler
+let popRef = null;
+function openPop(ref){ popRef = ref; renderPop(); }
+function closePop(){ popRef = null; document.getElementById('optPop').hidden = true; }
+function renderPop(){
+  const pop = document.getElementById('optPop');
+  const item = popRef && itemByRef(popRef);
+  if(!item){ closePop(); return; }
+  const isRoot = popRef[0]==='u' || popRef[0]==='c';
+  const tags = item.tags || [];
+  pop.innerHTML =
+    '<div class="pop-title">'+esc(item.name)+'</div>'+
+    '<div class="pop-label">Blok rengi</div>'+
+    '<div class="swatches">'+
+      PALETTE.map(c=>'<button class="swatch'+(item.color===c?' on':'')+'" data-color="'+c+'" style="background:'+c+'"></button>').join('')+
+      '<input type="color" class="pop-color" value="'+esc(item.color||'#9573b8')+'" title="Özel renk">'+
+      (isRoot ? '' : '<button class="swatch none'+(item.color?'':' on')+'" data-color="" title="Renksiz">∅</button>')+
+    '</div>'+
+    '<div class="pop-label">Etiketler</div>'+
+    '<div class="pop-tags">'+(MAP.tags.length
+      ? MAP.tags.map(t=>'<button class="tchip pick'+(tags.includes(t.id)?' on':'')+'" data-tag="'+t.id+'" style="--tc:'+esc(t.color)+'">'+esc(t.name)+'</button>').join('')
+      : '<span style="font-size:.78rem;color:var(--muted);">Henüz etiket yok.</span>')+
+    '</div>'+
+    '<input type="text" class="pop-newtag" placeholder="+ Yeni etiket (Enter)">';
+  pop.hidden = false;
+  const anchor = document.querySelector('.opt-btn[data-ref="'+popRef+'"]');
+  if(anchor){
+    const r = anchor.getBoundingClientRect();
+    const w = pop.offsetWidth;
+    const vw = document.documentElement.clientWidth;
+    pop.style.top = (window.scrollY + r.bottom + 6)+'px';
+    pop.style.left = (window.scrollX + Math.max(8, Math.min(r.right - w, vw - w - 8)))+'px';
+  }
+}
+
+function renderTagBar(){
+  const counts = {};
+  allMapItems().forEach(it=>(it.tags||[]).forEach(id=>{ counts[id] = (counts[id]||0)+1; }));
+  if(tagFilter && !tagById(tagFilter)) tagFilter = null;
+  document.getElementById('tagBar').innerHTML = MAP.tags.length
+    ? MAP.tags.map(t=>'<button class="tchip filter'+(tagFilter===t.id?' on':'')+'" data-tag="'+t.id+'" style="--tc:'+esc(t.color)+'">'+esc(t.name)+' · '+(counts[t.id]||0)+'</button>').join('')+
+      (tagFilter ? '<button class="tchip filter clear" style="--tc:#86735f">✕ Filtreyi kaldır</button>' : '')
+    : '<span style="font-size:.8rem;color:var(--muted);">Bir bloğun ⋯ menüsünden etiket ekleyebilirsin.</span>';
+  document.getElementById('tagManager').innerHTML =
+    MAP.tags.map(t=>'<div class="tag-row" data-tag="'+t.id+'">'+
+      '<input type="color" class="tg-color" value="'+esc(t.color)+'">'+
+      '<input class="cell-input tg-name" value="'+esc(t.name)+'">'+
+      '<span class="tag">'+(counts[t.id]||0)+' blok</span>'+
+      '<button class="del-btn tg-del" title="Etiketi sil">✕</button></div>').join('')+
+    '<div class="tag-row"><input type="text" class="tg-new" placeholder="+ Yeni etiket (Enter)"></div>';
+}
+
+function setupTags(){
+  const pop = document.getElementById('optPop');
+  const commit = ()=>{ saveMAP(); renderLeiden(); if(popRef) renderPop(); };
+
+  document.addEventListener('click', e=>{
+    const ob = e.target.closest('.opt-btn');
+    if(ob){ if(popRef===ob.dataset.ref) closePop(); else openPop(ob.dataset.ref); return; }
+    if(popRef && !pop.contains(e.target)) closePop();
+  });
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape' && popRef) closePop(); });
+  window.addEventListener('resize', ()=>{ if(popRef) renderPop(); });
+
+  pop.addEventListener('click', e=>{
+    e.stopPropagation();
+    const item = itemByRef(popRef);
+    if(!item) return;
+    const sw = e.target.closest('.swatch');
+    const tg = e.target.closest('.tchip.pick');
+    if(sw){
+      if(sw.dataset.color) item.color = sw.dataset.color; else delete item.color;
+      commit();
+    } else if(tg){
+      const id = tg.dataset.tag;
+      const cur = item.tags || [];
+      item.tags = cur.includes(id) ? cur.filter(x=>x!==id) : cur.concat(id);
+      if(!item.tags.length) delete item.tags;
+      commit();
+    }
+  });
+  pop.addEventListener('change', e=>{
+    if(!e.target.classList.contains('pop-color')) return;
+    const item = itemByRef(popRef);
+    if(item){ item.color = e.target.value; commit(); }
+  });
+  pop.addEventListener('keydown', e=>{
+    if(e.key!=='Enter' || !e.target.classList.contains('pop-newtag')) return;
+    const name = e.target.value.trim();
+    const item = itemByRef(popRef);
+    if(!name || !item) return;
+    let t = MAP.tags.find(x=>x.name.toLowerCase()===name.toLowerCase());
+    if(!t){ t = {id:uid(), name, color:PALETTE[MAP.tags.length % PALETTE.length]}; MAP.tags.push(t); }
+    item.tags = item.tags || [];
+    if(!item.tags.includes(t.id)) item.tags.push(t.id);
+    commit();
+    const ni = pop.querySelector('.pop-newtag');
+    if(ni) ni.focus();
+  });
+
+  const card = document.getElementById('tagCard');
+  document.getElementById('tagManageBtn').addEventListener('click', ()=>{
+    const m = document.getElementById('tagManager');
+    m.hidden = !m.hidden;
+  });
+  card.addEventListener('click', e=>{
+    const f = e.target.closest('.tchip.filter');
+    if(f){
+      tagFilter = f.classList.contains('clear') || tagFilter===f.dataset.tag ? null : f.dataset.tag;
+      renderLeiden();
+      return;
+    }
+    if(e.target.classList.contains('tg-del')){
+      const id = e.target.closest('.tag-row').dataset.tag;
+      const t = tagById(id);
+      if(!confirm('"'+t.name+'" etiketi silinsin mi? Bloklardan da kaldırılır.')) return;
+      MAP.tags = MAP.tags.filter(x=>x.id!==id);
+      allMapItems().forEach(it=>{
+        if(!it.tags) return;
+        it.tags = it.tags.filter(x=>x!==id);
+        if(!it.tags.length) delete it.tags;
+      });
+      if(tagFilter===id) tagFilter = null;
+      commit();
+    }
+  });
+  card.addEventListener('change', e=>{
+    const row = e.target.closest('.tag-row');
+    const t = row && tagById(row.dataset.tag);
+    if(!t) return;
+    if(e.target.classList.contains('tg-color')) t.color = e.target.value;
+    else if(e.target.classList.contains('tg-name')) t.name = e.target.value.trim() || t.name;
+    else return;
+    commit();
+  });
+  card.addEventListener('keydown', e=>{
+    if(e.key!=='Enter' || !e.target.classList.contains('tg-new')) return;
+    const name = e.target.value.trim();
+    if(!name || MAP.tags.some(x=>x.name.toLowerCase()===name.toLowerCase())) return;
+    MAP.tags.push({id:uid(), name, color:PALETTE[MAP.tags.length % PALETTE.length]});
+    commit();
+    const ni = card.querySelector('.tg-new');
+    if(ni) ni.focus();
+  });
+}
+
+function parceHtml(u, p, x){
+  const xs = planStats(q=>q.link==='x:'+x.id);
+  const dot = x.color || p.color || u.color;
+  return '<div class="parce'+(x.color?' colored':'')+'" data-x="'+x.id+'"'+blockAttrs(x)+'>'+
+    '<span class="pdot" style="border-color:'+esc(dot)+(x.color?';background:'+esc(x.color):'')+'"></span>'+
+    '<input class="cell-input x-name" value="'+esc(x.name)+'" title="'+esc(x.name)+'">'+
+    '<input class="cell-input x-desc" value="'+esc(x.desc)+'" title="'+esc(x.desc)+'" placeholder="açıklama">'+
+    tagChipsHtml(x)+
+    (xs.total ? '<span class="tag">'+xs.done+'/'+xs.total+'</span>' : '')+
+    '<span class="acts">'+optBtnHtml('x:'+x.id)+moveBtnsHtml('x')+'<button class="del-btn x-del" title="Parce sil">✕</button></span>'+
+  '</div>';
+}
+
+function perceHtml(u, p, parces){
+  const ps = planStats(x=>{ const r = findLink(x.link); return r && r.p && r.p.id===p.id; });
+  return '<div class="perce'+(p.color?' colored':'')+'" data-p="'+p.id+'"'+blockAttrs(p)+'>'+
+    '<div class="perce-head">'+
+      '<span class="dot" style="background:'+esc(p.color||u.color)+'"></span>'+
+      '<input class="cell-input p-name" value="'+esc(p.name)+'" style="font-weight:700;">'+
+      '<span class="tag" title="Parce · tamamlanan/toplam plan">'+p.parces.length+' · '+ps.done+'/'+ps.total+'</span>'+
+      optBtnHtml('p:'+p.id)+moveBtnsHtml('p', true)+
+      '<button class="del-btn p-del" title="Perce sil">✕</button>'+
+    '</div>'+
+    ((p.tags||[]).length ? '<div class="chips-row">'+tagChipsHtml(p)+'</div>' : '')+
+    '<input class="cell-input p-desc" value="'+esc(p.desc)+'" placeholder="Açıklama ekle" style="font-size:.78rem;color:var(--muted);">'+
+    '<div class="parce-list">'+parces.map(x=>parceHtml(u, p, x)).join('')+'</div>'+
+    (tagFilter ? '' :
+      '<div class="parce parce-new">'+
+        '<span class="pdot"></span>'+
+        '<input class="cell-input x-new" placeholder="+ Parce ekle (Enter)">'+
+      '</div>')+
+  '</div>';
+}
+
 function renderMap(){
-  document.getElementById('mapEmpty').style.display = MAP.unirces.length ? 'none' : 'block';
-  document.getElementById('mapGrid').innerHTML = MAP.unirces.map(u=>{
+  const f = tagFilter;
+  let shown = 0;
+  const html = MAP.unirces.map(u=>{
+    const uM = !f || hasFilterTag(u);
+    const perces = u.perces.map(p=>{
+      const pM = uM || hasFilterTag(p);
+      const parces = p.parces.filter(x=>pM || hasFilterTag(x));
+      return {p, parces, visible:pM || parces.length > 0};
+    }).filter(o=>o.visible);
+    if(f && !uM && !perces.length) return '';
+    shown++;
     const st = planStats(p=>{ const x = unirceOfLink(p.link); return x && x.id===u.id; });
     const parceCount = u.perces.reduce((s,p)=>s+p.parces.length,0);
-    return '<div class="unirce" data-u="'+u.id+'" style="border-left-color:'+esc(u.color)+'">'+
+    const open = !u.collapsed || !!f;
+    return '<div class="unirce'+(open?'':' folded')+'" data-u="'+u.id+'" style="border-left-color:'+esc(u.color)+'">'+
       '<div class="u-head">'+
+        '<button class="fold-btn u-fold" title="Daralt / genişlet">'+(open?'▾':'▸')+'</button>'+
         avatarHtml(u.img, 'u')+
         '<input type="color" class="u-color" value="'+esc(u.color)+'" style="width:34px;height:34px;">'+
         '<input class="cell-input u-name" value="'+esc(u.name)+'">'+
+        tagChipsHtml(u)+
         '<span class="tag">'+u.perces.length+' Perce · '+parceCount+' Parce</span>'+
         '<div class="u-prog">'+progressHtml('Planlar', st.done, st.total, u.color)+'</div>'+
+        optBtnHtml('u:'+u.id)+
         moveBtnsHtml('u')+
         '<button class="del-btn u-del" title="Unirce sil">✕</button>'+
       '</div>'+
-      '<textarea class="cell-input u-desc" rows="1" placeholder="Açıklama ekle" style="font-size:.84rem;color:var(--muted);resize:vertical;font-family:Manrope,sans-serif;line-height:1.5;">'+esc(u.desc)+'</textarea>'+
-      '<div class="perce-grid">'+
-        u.perces.map(p=>{
-          const ps = planStats(x=>{ const r = findLink(x.link); return r && r.p && r.p.id===p.id; });
-          return '<div class="perce" data-p="'+p.id+'">'+
-            '<div style="display:flex;gap:6px;align-items:center;">'+
-              '<span class="dot" style="background:'+esc(u.color)+'"></span>'+
-              '<input class="cell-input p-name" value="'+esc(p.name)+'" style="font-weight:700;">'+
-              '<span class="tag">'+ps.done+'/'+ps.total+'</span>'+
-              moveBtnsHtml('p', true)+
-              '<button class="del-btn p-del" title="Perce sil">✕</button>'+
-            '</div>'+
-            '<input class="cell-input p-desc" value="'+esc(p.desc)+'" placeholder="Açıklama ekle" style="font-size:.78rem;color:var(--muted);">'+
-            p.parces.map(x=>{
-              const xs = planStats(q=>q.link==='x:'+x.id);
-              return '<div class="parce" data-x="'+x.id+'">'+
-                '<span class="pdot" style="border-color:'+esc(u.color)+'"></span>'+
-                '<input class="cell-input x-name" value="'+esc(x.name)+'">'+
-                (xs.total ? '<span class="tag">'+xs.done+'/'+xs.total+'</span>' : '')+
-                moveBtnsHtml('x')+
-                '<button class="del-btn x-del" title="Parce sil">✕</button>'+
-                '<textarea class="cell-input x-desc" rows="1" placeholder="Açıklama ekle">'+esc(x.desc)+'</textarea>'+
-              '</div>';
-            }).join('')+
-            '<div class="parce parce-new">'+
-              '<span class="pdot"></span>'+
-              '<input class="cell-input x-new" placeholder="+ Parce ekle (Enter)">'+
-            '</div>'+
-          '</div>';
-        }).join('')+
-        '<div class="perce perce-new">'+
-          '<input type="text" class="p-new" placeholder="Yeni Perce adı">'+
-          '<button class="btn-ghost p-add">Perce Ekle</button>'+
-        '</div>'+
-      '</div>'+
+      (open ?
+        '<textarea class="cell-input u-desc" rows="1" placeholder="Açıklama ekle" style="font-size:.84rem;color:var(--muted);resize:vertical;font-family:Manrope,sans-serif;line-height:1.5;">'+esc(u.desc)+'</textarea>'+
+        '<div class="perce-grid">'+
+          perces.map(o=>perceHtml(u, o.p, o.parces)).join('')+
+          (f ? '' :
+            '<div class="perce perce-new">'+
+              '<input type="text" class="p-new" placeholder="Yeni Perce adı">'+
+              '<button class="btn-ghost p-add">Perce Ekle</button>'+
+            '</div>')+
+        '</div>'
+      : '')+
     '</div>';
   }).join('');
+  document.getElementById('mapGrid').innerHTML = html;
+  const empty = document.getElementById('mapEmpty');
+  empty.style.display = shown ? 'none' : 'block';
+  empty.textContent = f ? 'Bu etikete sahip Unirce, Perce ya da Parce yok.' : 'Henüz Unirce yok. Yukarıdan ilkini ekle.';
 }
 
 function setupMap(){
@@ -2048,6 +2671,12 @@ function setupMap(){
       return;
     }
     if(t.classList.contains('u-img-clear')){ delete u.img; saveMAP(); renderLeiden(); return; }
+    if(t.classList.contains('u-fold')){
+      if(tagFilter) return;
+      if(u.collapsed) delete u.collapsed; else u.collapsed = true;
+      saveMAP(); renderLeiden();
+      return;
+    }
     const p = perceOf(u, t);
     if(t.classList.contains('mv-btn')){
       const dir = Number(t.dataset.dir), level = t.dataset.level;
@@ -2124,16 +2753,63 @@ function linkOptionsHtml(){
     c.projects.map(j=>'<option value="j:'+j.id+'">'+esc(j.name)+'</option>').join('')+'</optgroup>'
   ).join('');
 }
-function planRowHtml(p){
-  const r = resolveLink(p.link);
-  return '<div class="plan'+(p.done?' done':'')+'" data-id="'+p.id+'">'+
-    '<input type="checkbox" class="pl-done"'+(p.done?' checked':'')+'>'+
-    '<span class="txt">'+esc(p.text)+'</span>'+
-    (r ? '<span class="tag"><span class="dot" style="background:'+esc(r.color)+'"></span>'+esc(r.label)+'</span>' : '')+
-    '<button class="del-btn pl-del" title="Sil">✕</button></div>';
+// Plan: {id, scope:'day'|'month', date, text, link, done, time?, star?}
+function sortPlans(plans){
+  return plans.slice().sort((a,b)=>
+    (a.done-b.done) || ((b.star?1:0)-(a.star?1:0)) || (a.time||'99').localeCompare(b.time||'99'));
 }
-function planListHtml(plans, emptyText){
-  return plans.length ? plans.map(planRowHtml).join('') : '<div class="empty">'+emptyText+'</div>';
+function dayPlansOf(date){ return NIV.plans.filter(p=>p.scope==='day' && p.date===date); }
+function doneCount(plans){ return plans.filter(p=>p.done).length; }
+function overduePlans(){
+  const today = todayStr();
+  return NIV.plans.filter(p=>p.scope==='day' && !p.done && p.date < today)
+    .sort((a,b)=>a.date.localeCompare(b.date));
+}
+function shortDayLabel(date){
+  return new Date(date+'T00:00:00').toLocaleDateString('tr-TR',{day:'numeric',month:'short'});
+}
+
+function ringHtml(done, total){
+  const r = 22, c = 2*Math.PI*r, pct = total ? done/total : 0;
+  return '<svg class="ring" viewBox="0 0 54 54" width="64" height="64">'+
+    '<circle cx="27" cy="27" r="'+r+'" fill="none" style="stroke:#f0e4d2" stroke-width="6"/>'+
+    (pct > 0 ? '<circle cx="27" cy="27" r="'+r+'" fill="none" style="stroke:'+(pct===1?'var(--mint)':'var(--lilac)')+'" stroke-width="6" stroke-linecap="round"'+
+      ' stroke-dasharray="'+(c*pct).toFixed(1)+' '+c.toFixed(1)+'" transform="rotate(-90 27 27)"/>' : '')+
+    '<text x="27" y="31" text-anchor="middle" style="font:600 11px \'IBM Plex Mono\',monospace;fill:var(--text)">'+(total ? Math.round(pct*100)+'%' : '—')+'</text>'+
+  '</svg>';
+}
+
+function planRowHtml(p, opts){
+  opts = opts || {};
+  const r = resolveLink(p.link);
+  return '<div class="plan'+(p.done?' done':'')+(p.star?' star':'')+'" data-id="'+p.id+'"'+(r?' style="--pc:'+esc(r.color)+'"':'')+'>'+
+    '<input type="checkbox" class="pl-done"'+(p.done?' checked':'')+' title="Tamamlandı">'+
+    '<button class="pl-star" title="Önemli">'+(p.star?'★':'☆')+'</button>'+
+    (opts.showDate ? '<span class="pl-time">'+shortDayLabel(p.date)+'</span>' : '')+
+    (p.time ? '<span class="pl-time">'+esc(p.time)+'</span>' : '')+
+    '<input class="cell-input pl-text" value="'+esc(p.text)+'" title="'+esc(p.text)+'">'+
+    (r ? '<span class="tag pl-link"><span class="dot" style="background:'+esc(r.color)+'"></span>'+esc(r.label)+'</span>' : '')+
+    '<span class="acts">'+
+      (opts.overdue ? '<button class="btn-ghost pl-today" title="Bugüne taşı">Bugüne</button>' : '')+
+      (p.scope==='day' && !p.done && !opts.overdue ? '<button class="mv-btn pl-move" title="Ertesi güne ertele">↷</button>' : '')+
+      '<button class="del-btn pl-del" title="Sil">✕</button>'+
+    '</span>'+
+  '</div>';
+}
+function planListHtml(plans, emptyText, opts){
+  return plans.length ? sortPlans(plans).map(p=>planRowHtml(p, opts)).join('') : '<div class="empty">'+emptyText+'</div>';
+}
+
+function streakDays(){
+  let d = todayStr(), n = 0;
+  const today = dayPlansOf(d);
+  if(!(today.length && doneCount(today)===today.length)) d = addDays(d,-1);
+  for(let i=0;i<730;i++){
+    const ps = dayPlansOf(d);
+    if(!ps.length || doneCount(ps) !== ps.length) break;
+    n++; d = addDays(d,-1);
+  }
+  return n;
 }
 
 function renderNivose(){
@@ -2142,111 +2818,231 @@ function renderNivose(){
     s.innerHTML = linkOptionsHtml();
     s.value = [...s.options].some(o=>o.value===v) ? v : '';
   });
+  const today = todayStr();
+
+  // stats
+  const tp = dayPlansOf(today);
+  document.getElementById('nvStatToday').textContent = doneCount(tp)+'/'+tp.length;
+  const wkSat = saturdayOf(today);
+  const wk = NIV.plans.filter(p=>p.scope==='day' && p.date>=wkSat && p.date<=addDays(wkSat,6));
+  document.getElementById('nvStatWeek').textContent = wk.length ? Math.round(doneCount(wk)/wk.length*100)+'%' : '—';
+  document.getElementById('nvStatStreak').textContent = streakDays();
+  const overdue = overduePlans();
+  document.getElementById('nvStatOverdue').textContent = overdue.length;
+
+  // week strip
+  const sat = saturdayOf(nvDay);
+  document.getElementById('nvDayInput').value = nvDay;
+  document.getElementById('nvWeekLabel').innerHTML = weekRangeLabel(sat).replace(/Cmt |Cum /g,'')+'<span>'+edinaDateStr(sat)+' → '+edinaDateStr(addDays(sat,6))+'</span>';
+  let strip = '';
+  for(let i=0;i<7;i++){
+    const d = addDays(sat,i);
+    const ps = dayPlansOf(d);
+    const dn = doneCount(ps);
+    const late = d < today && dn < ps.length;
+    strip += '<button class="wday'+(d===nvDay?' sel':'')+(d===today?' today':'')+(ps.length && dn===ps.length?' full':'')+'" data-date="'+d+'">'+
+      '<span class="wd-name">'+DAY_NAMES[i]+'</span>'+
+      '<span class="wd-num">'+new Date(d+'T00:00:00').getDate()+'</span>'+
+      '<span class="wd-bar"><span style="width:'+(ps.length?dn/ps.length*100:0).toFixed(0)+'%"></span></span>'+
+      '<span class="wd-count'+(late?' late':'')+'">'+(ps.length ? dn+'/'+ps.length : '·')+'</span>'+
+    '</button>';
+  }
+  document.getElementById('nvWeekStrip').innerHTML = strip;
 
   // day
-  document.getElementById('nvDayInput').value = nvDay;
-  const dLabel = new Date(nvDay+'T00:00:00').toLocaleDateString('tr-TR',{weekday:'long',day:'numeric',month:'long'});
-  document.getElementById('nvDayLabel').innerHTML = dLabel+'<span>Edina '+edinaDateStr(nvDay)+'</span>';
-  const dayPlans = NIV.plans.filter(p=>p.scope==='day' && p.date===nvDay);
-  document.getElementById('nvDayList').innerHTML = planListHtml(dayPlans, 'Bu gün için plan yok.');
+  const dayPlans = dayPlansOf(nvDay);
+  const dt = new Date(nvDay+'T00:00:00');
+  document.getElementById('nvDayLabel').textContent = dt.toLocaleDateString('tr-TR',{weekday:'long', day:'numeric', month:'long'});
+  const rel = nvDay===today ? 'Bugün' : nvDay===addDays(today,1) ? 'Yarın' : nvDay===addDays(today,-1) ? 'Dün' : '';
+  document.getElementById('nvDaySub').textContent = [rel, 'Edina '+edinaDateStr(nvDay), dayPlans.length ? doneCount(dayPlans)+' / '+dayPlans.length+' plan' : 'plan yok'].filter(Boolean).join(' · ');
+  document.getElementById('nvDayRing').innerHTML = ringHtml(doneCount(dayPlans), dayPlans.length);
+  document.getElementById('nvDayList').innerHTML = planListHtml(dayPlans, 'Bu gün için plan yok. Yukarıdan ekleyebilirsin.');
+
+  document.getElementById('nvOverdueCard').style.display = overdue.length ? '' : 'none';
+  document.getElementById('nvOverdueList').innerHTML = overdue.map(p=>planRowHtml(p, {showDate:true, overdue:true})).join('');
+
   const dm = nvDay.slice(0,7);
   document.getElementById('nvDayMonthHint').innerHTML = monthLabelHtml(dm).replace('<span>',' · ').replace('</span>','');
   document.getElementById('nvDayMonthList').innerHTML = planListHtml(NIV.plans.filter(p=>p.scope==='month' && p.date===dm), 'Bu ay için hedef yok. Aylık sekmesinden ekleyebilirsin.');
 
   // month
   document.getElementById('nvMonLabel').innerHTML = monthLabelHtml(nvMonth);
-  document.getElementById('nvMonList').innerHTML = planListHtml(NIV.plans.filter(p=>p.scope==='month' && p.date===nvMonth), 'Bu ay için hedef yok.');
+  const goals = NIV.plans.filter(p=>p.scope==='month' && p.date===nvMonth);
+  document.getElementById('nvMonRing').innerHTML = ringHtml(doneCount(goals), goals.length);
+  document.getElementById('nvMonList').innerHTML = planListHtml(goals, 'Bu ay için hedef yok.');
+
+  const [my, mm] = nvMonth.split('-').map(Number);
+  const first = nvMonth+'-01';
+  const last = ymd(new Date(my, mm, 0));
+  let cal = DAY_NAMES.map(n=>'<div class="mcal-dow">'+n+'</div>').join('');
+  for(let d = saturdayOf(first); d <= addDays(saturdayOf(last),6); d = addDays(d,1)){
+    const ps = dayPlansOf(d);
+    const dn = doneCount(ps);
+    const out = d.slice(0,7) !== nvMonth;
+    const ratio = ps.length ? dn/ps.length : 0;
+    const bg = ps.length ? 'background:color-mix(in srgb,var(--lilac) '+Math.round(10+ratio*45)+'%,#fff);' : '';
+    cal += '<button class="mcal-day'+(out?' out':'')+(d===today?' today':'')+(d===nvDay?' sel':'')+'" data-date="'+d+'" style="'+bg+'">'+
+      '<span>'+Number(d.slice(8))+'</span>'+
+      (ps.length ? '<small>'+dn+'/'+ps.length+'</small>' : '')+
+    '</button>';
+  }
+  document.getElementById('nvMonCal').innerHTML = cal;
+
   const inMonth = NIV.plans.filter(p=>(p.scope==='month' && p.date===nvMonth) || (p.scope==='day' && p.date.startsWith(nvMonth)));
   const groups = MAP.unirces.map(u=>{
     const ps = inMonth.filter(p=>{ const x = unirceOfLink(p.link); return x && x.id===u.id; });
-    return {label:esc(u.name), color:u.color, done:ps.filter(p=>p.done).length, total:ps.length};
+    return {label:esc(u.name), color:u.color, done:doneCount(ps), total:ps.length};
   }).filter(g=>g.total).concat(MAP.companies.map(c=>{
     const ps = inMonth.filter(p=>{ const x = companyOfLink(p.link); return x && x.id===c.id; });
-    return {label:esc(c.name), color:c.color, done:ps.filter(p=>p.done).length, total:ps.length};
+    return {label:esc(c.name), color:c.color, done:doneCount(ps), total:ps.length};
   }).filter(g=>g.total));
   const loose = inMonth.filter(p=>!findLink(p.link));
-  if(loose.length) groups.push({label:'Bağlantısız', color:'var(--muted-2)', done:loose.filter(p=>p.done).length, total:loose.length});
-  const all = {done:inMonth.filter(p=>p.done).length, total:inMonth.length};
+  if(loose.length) groups.push({label:'Bağlantısız', color:'var(--muted-2)', done:doneCount(loose), total:loose.length});
   document.getElementById('nvMonProgress').innerHTML = inMonth.length
-    ? progressHtml('Toplam', all.done, all.total, 'var(--lilac)') + groups.map(g=>progressHtml(g.label, g.done, g.total, g.color)).join('')
+    ? progressHtml('Toplam', doneCount(inMonth), inMonth.length, 'var(--lilac)') + groups.map(g=>progressHtml(g.label, g.done, g.total, g.color)).join('')
     : '<div class="empty">Bu ay için plan yok.</div>';
 }
 
 function setupNivose(){
   const root = document.getElementById('mod-nivose');
+  const planOf = el=>{ const row = el.closest('.plan'); return row ? NIV.plans.find(x=>x.id===row.dataset.id) : null; };
+  const commit = ()=>{ saveNIV(); renderLeiden(); };
+  let showSub = ()=>{};
+
   root.addEventListener('change', e=>{
-    if(!e.target.classList.contains('pl-done')) return;
-    const p = NIV.plans.find(x=>x.id===e.target.closest('.plan').dataset.id);
-    p.done = e.target.checked;
-    saveNIV(); renderLeiden();
-  });
-  root.addEventListener('click', e=>{
-    if(!e.target.classList.contains('pl-del')) return;
-    const id = e.target.closest('.plan').dataset.id;
-    NIV.plans = NIV.plans.filter(x=>x.id!==id);
-    saveNIV(); renderLeiden();
+    const p = planOf(e.target);
+    if(!p) return;
+    if(e.target.classList.contains('pl-done')) p.done = e.target.checked;
+    else if(e.target.classList.contains('pl-text')) p.text = e.target.value.trim() || p.text;
+    else return;
+    commit();
   });
 
-  const addPlan = (scope, textId, linkId)=>{
-    const input = document.getElementById(textId);
+  root.addEventListener('click', e=>{
+    const t = e.target;
+    const day = t.closest('.wday, .mcal-day');
+    if(day){
+      nvDay = day.dataset.date;
+      if(day.classList.contains('mcal-day')) showSub('gun');
+      renderNivose();
+      return;
+    }
+    const p = planOf(t);
+    if(!p) return;
+    if(t.classList.contains('pl-star')){ if(p.star) delete p.star; else p.star = true; }
+    else if(t.classList.contains('pl-move')) p.date = addDays(p.date, 1);
+    else if(t.classList.contains('pl-today')) p.date = todayStr();
+    else if(t.classList.contains('pl-del')){
+      if(!confirm('"'+p.text+'" silinsin mi?')) return;
+      NIV.plans = NIV.plans.filter(x=>x.id!==p.id);
+    }
+    else return;
+    commit();
+  });
+
+  const starToggle = id=>{
+    const btn = document.getElementById(id);
+    btn.addEventListener('click', ()=>{ btn.classList.toggle('on'); btn.textContent = btn.classList.contains('on') ? '★' : '☆'; });
+    return {get:()=>btn.classList.contains('on'), reset:()=>{ btn.classList.remove('on'); btn.textContent = '☆'; }};
+  };
+  const dayStar = starToggle('nvDayStar'), monStar = starToggle('nvMonStar');
+
+  const addPlan = scope=>{
+    const isDay = scope==='day';
+    const input = document.getElementById(isDay ? 'nvDayText' : 'nvMonText');
     const text = input.value.trim();
     if(!text) return;
-    NIV.plans.push({id:uid(), scope, date:scope==='day'?nvDay:nvMonth, text, link:document.getElementById(linkId).value, done:false});
+    const plan = {id:uid(), scope, date:isDay ? nvDay : nvMonth, text, link:document.getElementById(isDay ? 'nvDayLink' : 'nvMonLink').value, done:false};
+    const star = isDay ? dayStar : monStar;
+    if(star.get()) plan.star = true;
+    if(isDay){
+      const time = document.getElementById('nvDayTime').value;
+      if(time) plan.time = time;
+      document.getElementById('nvDayTime').value = '';
+    }
+    NIV.plans.push(plan);
     input.value = '';
-    saveNIV(); renderLeiden();
+    star.reset();
+    commit();
     input.focus();
   };
-  document.getElementById('nvDayAdd').addEventListener('click', ()=>addPlan('day','nvDayText','nvDayLink'));
-  document.getElementById('nvDayText').addEventListener('keydown', e=>{ if(e.key==='Enter') addPlan('day','nvDayText','nvDayLink'); });
-  document.getElementById('nvMonAdd').addEventListener('click', ()=>addPlan('month','nvMonText','nvMonLink'));
-  document.getElementById('nvMonText').addEventListener('keydown', e=>{ if(e.key==='Enter') addPlan('month','nvMonText','nvMonLink'); });
+  document.getElementById('nvDayAdd').addEventListener('click', ()=>addPlan('day'));
+  document.getElementById('nvDayText').addEventListener('keydown', e=>{ if(e.key==='Enter') addPlan('day'); });
+  document.getElementById('nvMonAdd').addEventListener('click', ()=>addPlan('month'));
+  document.getElementById('nvMonText').addEventListener('keydown', e=>{ if(e.key==='Enter') addPlan('month'); });
+
+  document.getElementById('nvOverdueAll').addEventListener('click', ()=>{
+    const list = overduePlans();
+    if(!list.length || !confirm(list.length+' geciken plan bugüne taşınsın mı?')) return;
+    list.forEach(p=>{ p.date = todayStr(); });
+    nvDay = todayStr();
+    commit();
+  });
 
   document.getElementById('nvDayInput').addEventListener('change', e=>{ if(e.target.value){ nvDay = e.target.value; renderNivose(); } });
-  document.getElementById('nvDayPrev').addEventListener('click', ()=>{ nvDay = addDays(nvDay,-1); renderNivose(); });
-  document.getElementById('nvDayNext').addEventListener('click', ()=>{ nvDay = addDays(nvDay,1); renderNivose(); });
+  document.getElementById('nvWeekPrev').addEventListener('click', ()=>{ nvDay = addDays(nvDay,-7); renderNivose(); });
+  document.getElementById('nvWeekNext').addEventListener('click', ()=>{ nvDay = addDays(nvDay,7); renderNivose(); });
   document.getElementById('nvDayToday').addEventListener('click', ()=>{ nvDay = todayStr(); renderNivose(); });
   document.getElementById('nvMonPrev').addEventListener('click', ()=>{ nvMonth = addMonths(nvMonth,-1); renderNivose(); });
   document.getElementById('nvMonNext').addEventListener('click', ()=>{ nvMonth = addMonths(nvMonth,1); renderNivose(); });
-  setupSubtabs(root);
+  showSub = setupSubtabs(root);
 }
 
 // ===== Linden Union Şirketleri: Şirket → Proje =====
 function renderCompanies(){
-  document.getElementById('compEmpty').style.display = MAP.companies.length ? 'none' : 'block';
-  document.getElementById('compGrid').innerHTML = MAP.companies.map(c=>{
+  const f = tagFilter;
+  let shown = 0;
+  const html = MAP.companies.map(c=>{
+    const cM = !f || hasFilterTag(c);
+    const projects = c.projects.filter(j=>cM || hasFilterTag(j));
+    if(f && !cM && !projects.length) return '';
+    shown++;
     const st = planStats(p=>{ const x = companyOfLink(p.link); return x && x.id===c.id; });
-    return '<div class="unirce" data-c="'+c.id+'" style="border-left-color:'+esc(c.color)+'">'+
+    const open = !c.collapsed || !!f;
+    return '<div class="unirce'+(open?'':' folded')+'" data-c="'+c.id+'" style="border-left-color:'+esc(c.color)+'">'+
       '<div class="u-head">'+
+        '<button class="fold-btn c-fold" title="Daralt / genişlet">'+(open?'▾':'▸')+'</button>'+
         avatarHtml(c.img, 'c')+
         '<input type="color" class="c-color" value="'+esc(c.color)+'" style="width:34px;height:34px;">'+
         '<input class="cell-input u-name c-name" value="'+esc(c.name)+'">'+
+        tagChipsHtml(c)+
         '<span class="tag">'+c.projects.length+' Proje</span>'+
         '<div class="u-prog">'+progressHtml('Planlar', st.done, st.total, c.color)+'</div>'+
+        optBtnHtml('c:'+c.id)+
         moveBtnsHtml('c')+
         '<button class="del-btn c-del" title="Şirketi sil">✕</button>'+
       '</div>'+
-      '<textarea class="cell-input c-desc" rows="1" placeholder="Açıklama ekle" style="font-size:.84rem;color:var(--muted);resize:vertical;font-family:Manrope,sans-serif;line-height:1.5;">'+esc(c.desc)+'</textarea>'+
-      '<div class="perce-grid">'+
-        c.projects.map(j=>{
-          const js = planStats(x=>x.link==='j:'+j.id);
-          return '<div class="perce" data-j="'+j.id+'">'+
-            '<div style="display:flex;gap:6px;align-items:center;">'+
-              '<span class="dot" style="background:'+esc(c.color)+'"></span>'+
-              '<input class="cell-input j-name" value="'+esc(j.name)+'" style="font-weight:700;">'+
-              '<span class="tag">'+js.done+'/'+js.total+'</span>'+
-              moveBtnsHtml('j', true)+
-              '<button class="del-btn j-del" title="Projeyi sil">✕</button>'+
-            '</div>'+
-            '<textarea class="cell-input j-desc" rows="2" placeholder="Açıklama ekle" style="font-size:.78rem;color:var(--muted);resize:vertical;font-family:Manrope,sans-serif;line-height:1.5;">'+esc(j.desc)+'</textarea>'+
-          '</div>';
-        }).join('')+
-        '<div class="perce perce-new">'+
-          '<input type="text" class="j-new" placeholder="Yeni proje adı">'+
-          '<button class="btn-ghost j-add">Proje Ekle</button>'+
-        '</div>'+
-      '</div>'+
+      (open ?
+        '<textarea class="cell-input c-desc" rows="1" placeholder="Açıklama ekle" style="font-size:.84rem;color:var(--muted);resize:vertical;font-family:Manrope,sans-serif;line-height:1.5;">'+esc(c.desc)+'</textarea>'+
+        '<div class="perce-grid">'+
+          projects.map(j=>{
+            const js = planStats(x=>x.link==='j:'+j.id);
+            return '<div class="perce'+(j.color?' colored':'')+'" data-j="'+j.id+'"'+blockAttrs(j)+'>'+
+              '<div class="perce-head">'+
+                '<span class="dot" style="background:'+esc(j.color||c.color)+'"></span>'+
+                '<input class="cell-input j-name" value="'+esc(j.name)+'" style="font-weight:700;">'+
+                '<span class="tag">'+js.done+'/'+js.total+'</span>'+
+                optBtnHtml('j:'+j.id)+
+                moveBtnsHtml('j', true)+
+                '<button class="del-btn j-del" title="Projeyi sil">✕</button>'+
+              '</div>'+
+              ((j.tags||[]).length ? '<div class="chips-row">'+tagChipsHtml(j)+'</div>' : '')+
+              '<textarea class="cell-input j-desc" rows="2" placeholder="Açıklama ekle" style="font-size:.78rem;color:var(--muted);resize:vertical;font-family:Manrope,sans-serif;line-height:1.5;">'+esc(j.desc)+'</textarea>'+
+            '</div>';
+          }).join('')+
+          (f ? '' :
+            '<div class="perce perce-new">'+
+              '<input type="text" class="j-new" placeholder="Yeni proje adı">'+
+              '<button class="btn-ghost j-add">Proje Ekle</button>'+
+            '</div>')+
+        '</div>'
+      : '')+
     '</div>';
   }).join('');
+  document.getElementById('compGrid').innerHTML = html;
+  const empty = document.getElementById('compEmpty');
+  empty.style.display = shown ? 'none' : 'block';
+  empty.textContent = f ? 'Bu etikete sahip şirket ya da proje yok.' : 'Henüz şirket yok. Yukarıdan ilkini ekle.';
 }
 
 function setupCompanies(){
@@ -2289,6 +3085,12 @@ function setupCompanies(){
       return;
     }
     if(t.classList.contains('c-img-clear')){ delete c.img; saveMAP(); renderLeiden(); return; }
+    if(t.classList.contains('c-fold')){
+      if(tagFilter) return;
+      if(c.collapsed) delete c.collapsed; else c.collapsed = true;
+      saveMAP(); renderLeiden();
+      return;
+    }
     const j = projectOf(c, t);
     if(t.classList.contains('mv-btn')){
       const dir = Number(t.dataset.dir);
@@ -2337,6 +3139,7 @@ function setupCompanies(){
 
 function renderLeiden(){
   renderThistle();
+  renderTagBar();
   renderMap();
   renderCompanies();
   renderNivose();
@@ -2350,6 +3153,7 @@ render();
 setupThistle();
 setupMap();
 setupCompanies();
+setupTags();
 setupNivose();
 setupVeri();
 renderLeiden();
