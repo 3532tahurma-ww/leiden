@@ -45,7 +45,7 @@ Günlük E<sub>MR</sub> = Σ (saat × α).
 
 ## Kullanım
 
-- **Yerelde:** `index.html` (ya da `MR.html`) dosyasını tarayıcıda aç.
+- **Yerelde:** `index.html` dosyasını tarayıcıda aç.
 - **GitHub Pages ile:** Dosyayı public bir repoya `index.html` adıyla yükle. Repo **Settings → Pages → Deploy from a branch → `main` / root** ayarını yap. Sayfa `https://<kullanıcı>.github.io/<repo>/` adresinde açılır.
 
 ## Veri ve GitHub senkronu

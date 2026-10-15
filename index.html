@@ -328,6 +328,12 @@
   .perce-new{display:flex;flex-direction:column;gap:8px;justify-content:center;border-style:dashed;background:transparent;}
   .parce{display:flex;align-items:center;gap:6px;padding:2px 6px;margin-top:6px;border-radius:10px;background:#fff;border:1px solid var(--border);}
   .parce-new{background:transparent;border-style:dashed;}
+  .parce{flex-wrap:wrap;}
+  .parce .x-name{flex:1 1 0;width:auto;}
+  textarea.cell-input.x-desc{
+    flex-basis:100%;margin:-4px 0 2px 15px;width:calc(100% - 15px);
+    font-family:'Manrope',sans-serif;font-size:.76rem;color:var(--muted);line-height:1.45;resize:vertical;
+  }
   .avatar{
     width:42px;height:42px;border-radius:12px;flex:none;padding:0;
     border:1px dashed var(--muted-2);background:#fff center/cover no-repeat;
@@ -1972,6 +1978,7 @@ function renderMap(){
                 (xs.total ? '<span class="tag">'+xs.done+'/'+xs.total+'</span>' : '')+
                 moveBtnsHtml('x')+
                 '<button class="del-btn x-del" title="Parce sil">✕</button>'+
+                '<textarea class="cell-input x-desc" rows="1" placeholder="Açıklama ekle">'+esc(x.desc)+'</textarea>'+
               '</div>';
             }).join('')+
             '<div class="parce parce-new">'+
@@ -2026,6 +2033,7 @@ function setupMap(){
     else if(p && t.classList.contains('p-name')) p.name = t.value.trim() || p.name;
     else if(p && t.classList.contains('p-desc')) p.desc = t.value.trim();
     else if(x && t.classList.contains('x-name')) x.name = t.value.trim() || x.name;
+    else if(x && t.classList.contains('x-desc')) x.desc = t.value.trim();
     else return;
     saveMAP(); renderLeiden();
   });

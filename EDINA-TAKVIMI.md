@@ -55,7 +55,7 @@ Edina Tarihi = "{Edina Ayı}-{G, 2 haneli}"
 
 ## Uygulamadaki Kullanımı
 
-Edina MR Sistemi (`MR.html`) içinde Edina Takvimi şu yerlerde kullanılır:
+Leiden (`index.html`) içinde Edina Takvimi şu yerlerde kullanılır:
 
 1. **Takvim** görünümünde (Cumartesi → Cuma haftalar), her günün Edina karşılığı ve ayın Edina ay numarası gösterilir.
 2. **Üst istatistik şeridinde**, bugünün Edina Tarihi ayrı bir kutuda gösterilir.
