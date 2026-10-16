@@ -418,6 +418,86 @@
   .unirce.folded{padding-top:12px;padding-bottom:12px;}
   .chips-row{display:flex;flex-wrap:wrap;gap:4px;margin:4px 0 0 14px;}
 
+  /* Academy */
+  .modnav{max-width:100%;}
+  .ac-layout{display:grid;grid-template-columns:270px 1fr;gap:20px;align-items:start;}
+  .ac-side{position:sticky;top:70px;padding:16px;max-height:calc(100vh - 90px);overflow-y:auto;}
+  .ac-item{
+    display:flex;align-items:center;gap:8px;width:100%;text-align:left;padding:8px 10px;margin-top:2px;
+    background:transparent;border:1px solid transparent;border-radius:12px;color:var(--text);font-weight:600;font-size:.86rem;
+  }
+  .ac-item:hover{background:var(--surface-2);}
+  .ac-item.sel{background:#fff;border-color:var(--border);box-shadow:0 4px 14px -10px rgba(120,80,40,.5);}
+  .ac-item-name{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .ac-item-name small{display:block;font-weight:400;font-size:.68rem;color:var(--muted-2);overflow:hidden;text-overflow:ellipsis;}
+  .ac-count{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--muted);background:var(--surface-2);border-radius:999px;padding:2px 7px;flex:none;}
+  .ac-tools{display:flex;flex-direction:column;gap:6px;margin-top:14px;padding-top:14px;border-top:1px dashed var(--border);}
+  .ac-tools button{padding:9px 12px;font-size:.8rem;text-align:left;}
+  .ac-main{min-width:0;}
+  .ac-progress{margin-bottom:14px;padding:12px 14px;border-radius:14px;background:color-mix(in srgb,var(--lilac) 8%,#fff);border:1px solid var(--lilac-soft);}
+  .ac-progress-file{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--muted);margin-top:6px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  #acFileBtn{max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:9px 12px;}
+  #acFileBtn.on{border-color:var(--lilac);color:var(--lilac);}
+  .ac-filter-bar{display:flex;flex-direction:column;gap:8px;margin:12px 0 8px;}
+  #acSearch{padding:8px 12px;font-size:.84rem;}
+  .ac-filters{display:flex;flex-wrap:wrap;gap:6px;align-items:center;}
+  .ac-sep{width:1px;height:18px;background:var(--border);margin:0 4px;}
+  .ac-entry{background:#fff;border:1px solid var(--border);border-radius:12px;margin-top:6px;padding:4px 8px;}
+  .ac-entry.done .ac-title{color:var(--muted);}
+  .ac-entry.open{box-shadow:0 6px 18px -14px rgba(120,80,40,.5);border-color:var(--lilac-soft);}
+  .ac-top{display:flex;align-items:center;gap:6px;min-width:0;}
+  .ac-top .ac-title{flex:1 1 auto;min-width:60px;font-weight:600;font-size:.88rem;text-overflow:ellipsis;}
+  .ac-type{font-family:'IBM Plex Mono',monospace;font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;padding:3px 6px;border-radius:6px;flex:none;}
+  .ac-type-makale{background:rgba(149,115,184,.12);color:var(--lilac);}
+  .ac-type-okuma{background:rgba(92,156,192,.14);color:#3f7fa3;}
+  .ac-chip{font-family:'IBM Plex Mono',monospace;font-size:.64rem;color:var(--muted);background:var(--surface-2);border-radius:999px;padding:2px 8px;white-space:nowrap;flex:none;max-width:160px;overflow:hidden;text-overflow:ellipsis;}
+  .ac-chip.sec{background:rgba(207,154,62,.12);color:#a8741f;}
+  .ac-chip.up{background:rgba(149,115,184,.12);color:var(--lilac);}
+  .ac-note-dot{color:var(--gold);font-size:.8rem;flex:none;}
+  .ac-file{
+    font-family:'IBM Plex Mono',monospace;font-size:.62rem;font-weight:600;padding:3px 7px;border-radius:6px;flex:none;
+    background:var(--surface-2);border:1px solid var(--border);color:var(--text);text-decoration:none;line-height:1.3;
+  }
+  .ac-file:hover{border-color:var(--lilac);color:var(--lilac);}
+  .ac-entry .ac-status{border:none;cursor:pointer;}
+  .ac-detail{padding:6px 2px 6px;border-top:1px dashed var(--border);margin-top:4px;}
+  .ac-detail-row{display:grid;grid-template-columns:110px 1fr 1fr;gap:6px;}
+  .ac-detail-row .cell-input{font-size:.82rem;background:var(--surface-2);}
+  .ac-detail .ac-notes{margin-top:6px;font-family:'Manrope',sans-serif;font-size:.84rem;line-height:1.5;resize:vertical;background:var(--surface-2);}
+  .ac-detail-foot{display:flex;align-items:center;gap:8px;margin-top:6px;font-family:'IBM Plex Mono',monospace;font-size:.66rem;color:var(--muted-2);}
+  .ac-detail-foot span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .ac-detail-foot button{padding:5px 10px;font-size:.74rem;}
+  .book-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px;margin-top:10px;align-items:start;}
+  .book{display:flex;gap:12px;background:#fff;border:1px solid var(--border);border-radius:16px;padding:12px;}
+  .book-cover{
+    width:76px;height:108px;flex:none;border-radius:8px;padding:0;
+    background:linear-gradient(160deg,#e9dcf5,#f6e2c2) center/cover no-repeat;border:1px solid var(--border);
+    font-family:'Fraunces',serif;font-size:1.8rem;color:var(--lilac);box-shadow:3px 4px 0 -1px var(--surface-2);
+  }
+  .book-cover.has{background-color:#fff;}
+  .book-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;}
+  .book-top{display:flex;align-items:center;gap:4px;}
+  .book-top .bk-title{font-family:'Fraunces',serif;font-weight:600;font-size:1.02rem;}
+  .bk-author{font-size:.82rem;color:var(--muted);}
+  .bk-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  .bk-row .bk-status{width:auto;flex:0 1 120px;font-size:.8rem;}
+  .stars{display:inline-flex;}
+  .star{background:none;border:none;padding:0 1px;font-size:1rem;color:#e6d9c4;line-height:1;}
+  .star.on{color:var(--gold);}
+  .star:hover{color:var(--gold);}
+  .bk-progress{display:flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--muted);}
+  .bk-progress .progress{flex:1;}
+  .bk-progress input.cell-input{width:60px;padding:2px 4px;text-align:center;background:#fff;border-color:var(--border);font-family:'IBM Plex Mono',monospace;font-size:.74rem;}
+  .bk-dates label{display:flex;flex-direction:column;margin:0;font-size:.62rem;color:var(--muted-2);font-family:'IBM Plex Mono',monospace;font-weight:500;letter-spacing:0;flex:1 1 90px;}
+  .bk-dates input{font-size:.74rem;padding:3px 4px;font-family:'IBM Plex Mono',monospace;}
+  .bk-notes{font-family:'Manrope',sans-serif;font-size:.8rem;line-height:1.45;resize:vertical;color:var(--muted);}
+  @media (max-width:860px){
+    .ac-layout{grid-template-columns:1fr;}
+    .ac-side{position:static;max-height:none;}
+    .ac-detail-row{grid-template-columns:1fr;}
+    .book-grid{grid-template-columns:1fr;}
+  }
+
   /* tags & options popover */
   .tchip{
     display:inline-flex;align-items:center;gap:4px;flex:none;
@@ -608,6 +688,7 @@
       <button class="modbtn" data-module="thistle">Thistle</button>
       <button class="modbtn" data-module="nivose">Nivose</button>
       <button class="modbtn" data-module="harita">Edina Haritası</button>
+      <button class="modbtn" data-module="academy">Academy</button>
       <button class="modbtn" data-module="veri">Veri</button>
     </nav>
     <span class="sync-status sync-pill"></span>
@@ -1059,6 +1140,72 @@
 
     <div class="map-grid" id="mapGrid"></div>
     <div class="empty" id="mapEmpty">Henüz Unirce yok. Yukarıdan ilkini ekle.</div>
+    </section>
+  </div>
+
+  <!-- ===== ACADEMY ===== -->
+  <div class="module" data-module="academy" id="mod-academy">
+    <p class="eyebrow">Academy · Makaleler, Okumalar, Kitaplar</p>
+    <h1>Academy</h1>
+    <p class="sub">Edina Haritasındaki akademilere bağlı makaleler ve okumalar. Dosyalar GitHub'daki private veri reposunda <b>Essais/</b> klasöründe saklanır.</p>
+
+    <div class="stats four">
+      <div class="stat"><div class="n" id="acStatTotal">0</div><div class="l">Makale &amp; Okuma</div></div>
+      <div class="stat"><div class="n" id="acStatRead">0</div><div class="l">Okundu</div></div>
+      <div class="stat"><div class="n" id="acStatReading">0</div><div class="l">Şu An Okunan</div></div>
+      <div class="stat"><div class="n" id="acStatBooks">0</div><div class="l">Bu Yıl Okunan Kitap</div></div>
+    </div>
+
+    <nav class="tabs">
+      <button class="stab" data-sub="akademi">Akademiler</button>
+      <button class="stab" data-sub="kitap">Kitaplar</button>
+    </nav>
+
+    <section class="spanel" data-sub="akademi">
+      <div class="ac-layout">
+        <aside class="card ac-side">
+          <div class="pop-label" style="margin-top:0;">Akademiler</div>
+          <div id="acList"></div>
+          <div class="ac-tools">
+            <button class="btn-ghost" id="acImportBtn">📁 Klasörden içe aktar</button>
+            <button class="btn-ghost" id="acScanBtn">⟳ Repodan tara</button>
+            <input type="file" id="acImportInput" webkitdirectory multiple hidden>
+          </div>
+          <p class="hint" style="font-size:.74rem;margin:10px 0 0;">Essais klasörünü seç. Dosyalar GitHub reposunda aynı klasör yapısıyla <b>Essais/</b> altına yüklenir. Zaten kayıtlı dosyalar atlanır.</p>
+        </aside>
+
+        <div class="card ac-main">
+          <div id="acProgress" class="ac-progress" hidden></div>
+          <div class="day-head" id="acHead"></div>
+          <div class="composer" id="acComposer">
+            <select id="acType" style="flex:0 1 110px;"><option value="makale">Makale</option><option value="okuma">Okuma</option></select>
+            <input type="text" id="acTitle" placeholder="Başlık (Enter)">
+            <input type="text" id="acUrl" placeholder="Bağlantı (isteğe bağlı)" style="flex:0 1 190px;">
+            <button class="btn-ghost" id="acFileBtn">📎 Dosya</button>
+            <button class="btn-primary" id="acAdd">Ekle</button>
+          </div>
+          <div class="ac-filter-bar">
+            <input type="text" id="acSearch" placeholder="Ara: başlık, yazar, not…">
+            <div class="ac-filters" id="acFilters"></div>
+          </div>
+          <div id="acEntries"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="spanel" data-sub="kitap">
+      <div class="tablecard">
+        <div class="mini-kpis" id="bkSummary"></div>
+        <div class="composer">
+          <input type="text" id="bkTitle" placeholder="Kitap adı (Enter)">
+          <input type="text" id="bkAuthor" placeholder="Yazar" style="flex:0 1 200px;">
+          <input type="number" id="bkPages" min="0" placeholder="Sayfa" style="flex:0 1 100px;">
+          <select id="bkStatus" style="flex:0 1 130px;"><option value="okunacak">Okunacak</option><option value="okunuyor">Okunuyor</option><option value="okundu">Okundu</option></select>
+          <button class="btn-primary" id="bkAdd">Ekle</button>
+        </div>
+        <div class="ac-filters" id="bkFilters" style="margin:12px 0 4px;"></div>
+        <div class="book-grid" id="bkGrid"></div>
+      </div>
     </section>
   </div>
 
@@ -1751,25 +1898,37 @@ function scheduleSync(){
 }
 
 function buildBackup(){
-  return {app:'Leiden', version:3, savedAt:new Date().toISOString(), entries:DATA.entries, thistle:TH, nivose:NIV, map:MAP};
+  return {app:'Leiden', version:4, savedAt:new Date().toISOString(), entries:DATA.entries, thistle:TH, nivose:NIV, map:MAP, academy:ACAD};
 }
 function applyBackup(obj){
-  if(!obj || typeof obj !== 'object' || !(obj.entries || obj.thistle || obj.nivose || obj.map)) throw new Error('geçersiz format');
+  if(!obj || typeof obj !== 'object' || !(obj.entries || obj.thistle || obj.nivose || obj.map || obj.academy)) throw new Error('geçersiz format');
   syncSuppress = true;
   try{
     if(obj.entries){ DATA = {entries:obj.entries}; saveData(); }
     if(obj.thistle){ TH = obj.thistle; migrateTH(); saveTH(); }
     if(obj.nivose){ NIV = obj.nivose; if(!NIV.plans) NIV.plans = []; saveNIV(); }
     if(obj.map){ MAP = obj.map; migrateMAP(); saveMAP(); }
+    if(obj.academy){ ACAD = obj.academy; migrateACAD(); saveACAD(); }
   } finally { syncSuppress = false; }
   render();
   loadWeekIntoForm();
   renderLeiden();
 }
 
-function ghUrl(){
-  return 'https://api.github.com/repos/'+encodeURIComponent(SYNC.owner)+'/'+encodeURIComponent(SYNC.repo)+
-    '/contents/'+SYNC.path.replace(/^\/+/,'').split('/').map(encodeURIComponent).join('/');
+function ghRepoUrl(){
+  return 'https://api.github.com/repos/'+encodeURIComponent(SYNC.owner)+'/'+encodeURIComponent(SYNC.repo);
+}
+function ghFileUrl(path){
+  return ghRepoUrl()+'/contents/'+path.replace(/^\/+/,'').split('/').map(encodeURIComponent).join('/');
+}
+function ghUrl(){ return ghFileUrl(SYNC.path); }
+
+// Tüm GitHub yazma işlemleri sırayla çalışır; aynı branch'e eşzamanlı commit çakışmasını önler
+let ghChain = Promise.resolve();
+function ghSerial(task){
+  const p = ghChain.then(task, task);
+  ghChain = p.catch(()=>{});
+  return p;
 }
 function ghHeaders(accept){
   return {Authorization:'Bearer '+SYNC.token, Accept:accept || 'application/vnd.github+json', 'X-GitHub-Api-Version':'2022-11-28'};
@@ -1782,10 +1941,13 @@ function b64encode(str){
 async function ghError(res){
   let m = 'HTTP '+res.status;
   try{ const j = await res.json(); if(j.message) m += ' · '+j.message; }catch(e){}
-  return new Error(m);
+  const err = new Error(m);
+  err.status = res.status;
+  return err;
 }
 
-async function pushToGithub(){
+function pushToGithub(){ return ghSerial(pushToGithubNow); }
+async function pushToGithubNow(){
   if(!syncReady()){ setSyncStatus('GitHub ayarları eksik.', 'err'); return false; }
   if(syncBusy){ clearTimeout(syncTimer); syncTimer = setTimeout(()=>{ syncTimer = null; pushToGithub(); }, 2000); return false; }
   syncBusy = true;
@@ -2415,7 +2577,11 @@ function renderPop(){
       ? MAP.tags.map(t=>'<button class="tchip pick'+(tags.includes(t.id)?' on':'')+'" data-tag="'+t.id+'" style="--tc:'+esc(t.color)+'">'+esc(t.name)+'</button>').join('')
       : '<span style="font-size:.78rem;color:var(--muted);">Henüz etiket yok.</span>')+
     '</div>'+
-    '<input type="text" class="pop-newtag" placeholder="+ Yeni etiket (Enter)">';
+    '<input type="text" class="pop-newtag" placeholder="+ Yeni etiket (Enter)">'+
+    (popRef[0]==='p' || popRef[0]==='x' ?
+      '<div class="pop-label">Academy</div>'+
+      '<button class="tchip pick pop-acad'+(isAcademy(item)?' on':'')+'" style="--tc:#5c9cc0">'+(isAcademy(item) ? '✓ Akademi' : 'Akademi olarak işaretle')+'</button>'
+    : '');
   pop.hidden = false;
   const anchor = document.querySelector('.opt-btn[data-ref="'+popRef+'"]');
   if(anchor){
@@ -2462,7 +2628,12 @@ function setupTags(){
     if(!item) return;
     const sw = e.target.closest('.swatch');
     const tg = e.target.closest('.tchip.pick');
-    if(sw){
+    if(e.target.closest('.pop-acad')){
+      const want = !isAcademy(item);
+      delete item.academy;
+      if(isAcademy(item) !== want) item.academy = want;
+      commit();
+    } else if(sw){
       if(sw.dataset.color) item.color = sw.dataset.color; else delete item.color;
       commit();
     } else if(tg){
@@ -3137,12 +3308,615 @@ function setupCompanies(){
   setupSubtabs(document.getElementById('mod-harita'));
 }
 
+// ===== Academy: makaleler, okumalar, kitaplar =====
+// Dosyalar GitHub veri reposunda ESSAIS_ROOT altında saklanır; JSON'da yalnızca yol ve meta veri tutulur.
+const ACAD_KEY = 'leidenAcademy_v1';
+const ESSAIS_ROOT = 'Essais';
+const AC_STATUS = [
+  {id:'okunacak', label:'Okunacak', cls:'wait'},
+  {id:'okunuyor', label:'Okunuyor', cls:'soon'},
+  {id:'okundu',   label:'Okundu',   cls:'ok'}
+];
+const AC_MIME = {
+  pdf:'application/pdf', md:'text/plain;charset=utf-8', txt:'text/plain;charset=utf-8',
+  png:'image/png', jpg:'image/jpeg', jpeg:'image/jpeg', webp:'image/webp',
+  docx:'application/vnd.openxmlformats-officedocument.wordprocessingml.document', doc:'application/msword'
+};
+const AC_VIEWABLE = ['pdf','md','txt','png','jpg','jpeg','webp'];
+const AC_MAX_BYTES = 25*1024*1024;
+
+let ACAD = loadJson(ACAD_KEY, {entries:[], books:[]});
+function migrateACAD(){
+  ACAD.entries = ACAD.entries || [];
+  ACAD.books = ACAD.books || [];
+}
+migrateACAD();
+function saveACAD(){ saveJson(ACAD_KEY, ACAD); }
+
+let acSel = 'all';
+let acFilter = {status:'all', type:'all', section:'all', q:''};
+let acOpen = new Set();
+let acUploading = new Set();
+let acImport = null;
+let acPendingFile = null;
+let bkFilter = 'all';
+
+function acNorm(s){ return String(s||'').toLocaleLowerCase('tr-TR').replace(/\s+/g,' ').trim(); }
+function extOf(name){ const m = /\.([a-z0-9]+)$/i.exec(name||''); return m ? m[1].toLowerCase() : ''; }
+function fmtSize(b){ return b >= 1048576 ? fmt(b/1048576,1)+' MB' : fmt(Math.max(1, Math.round((b||0)/1024)),0)+' KB'; }
+function isAcademy(item){
+  if(item.academy === true) return true;
+  if(item.academy === false) return false;
+  return /academy|akademi/i.test(item.name||'');
+}
+function titleFromFile(name, folder){
+  let t = name.replace(/\.[^.]+$/,'').replace(/_/g,' ').replace(/\s+/g,' ').trim();
+  const f = acNorm(folder);
+  if(f && acNorm(t).startsWith(f)) t = t.slice(folder.length).replace(/^[\s\-–:·]+/,'') || t;
+  if(f && acNorm(t).endsWith(f)) t = t.slice(0, t.length-folder.length).replace(/[\s\-–:·]+$/,'') || t;
+  return t;
+}
+
+// Haritadaki akademiler + içe aktarılan klasörler, ada göre birleştirilir
+function academyList(){
+  const map = new Map();
+  const put = (name, extra)=>{
+    const key = acNorm(name);
+    if(!key) return;
+    const cur = map.get(key) || {key, name, count:0, read:0};
+    map.set(key, Object.assign(cur, extra || {}));
+  };
+  const names = new Set(ACAD.entries.map(e=>acNorm(e.folder)));
+  MAP.unirces.forEach(u=>u.perces.forEach(p=>{
+    if(isAcademy(p) || names.has(acNorm(p.name))) put(p.name, {ref:'p:'+p.id, path:u.name, color:p.color||u.color});
+    p.parces.forEach(x=>{
+      if(isAcademy(x) || names.has(acNorm(x.name))) put(x.name, {ref:'x:'+x.id, path:u.name+' › '+p.name, color:x.color||p.color||u.color});
+    });
+  }));
+  ACAD.entries.forEach(e=>{
+    put(e.folder || 'Genel');
+    const a = map.get(acNorm(e.folder || 'Genel'));
+    a.count++;
+    if(e.status==='okundu') a.read++;
+  });
+  return [...map.values()];
+}
+
+// ---- GitHub dosya işlemleri ----
+function bufToB64(buf){
+  const bytes = new Uint8Array(buf);
+  let bin = '';
+  for(let i=0;i<bytes.length;i+=0x8000) bin += String.fromCharCode.apply(null, bytes.subarray(i, i+0x8000));
+  return btoa(bin);
+}
+const sleep = ms=>new Promise(r=>setTimeout(r, ms));
+async function ghPutFile(path, base64, message){
+  for(let attempt=0; attempt<5; attempt++){
+    const res = await fetch(ghFileUrl(path), {
+      method:'PUT',
+      headers:Object.assign(ghHeaders(), {'Content-Type':'application/json'}),
+      body:JSON.stringify({message, content:base64, branch:SYNC.branch})
+    });
+    if(res.ok) return (await res.json()).content;
+    const text = await res.clone().text();
+    const limited = res.status===429 || (res.status===403 && /rate limit|abuse/i.test(text));
+    if(res.status===409 || limited){
+      const wait = Number(res.headers.get('retry-after')) || (limited ? 30*(attempt+1) : 2);
+      await sleep(wait*1000);
+      continue;
+    }
+    throw await ghError(res);
+  }
+  throw new Error('GitHub çok fazla isteği reddetti, biraz sonra tekrar dene.');
+}
+async function ghFetchFile(path){
+  const res = await fetch(ghFileUrl(path)+'?ref='+encodeURIComponent(SYNC.branch), {headers:ghHeaders('application/vnd.github.raw+json'), cache:'no-store'});
+  if(!res.ok) throw await ghError(res);
+  return res.blob();
+}
+async function ghDeleteFile(path){
+  const meta = await fetch(ghFileUrl(path)+'?ref='+encodeURIComponent(SYNC.branch), {headers:ghHeaders(), cache:'no-store'});
+  if(meta.status===404) return;
+  if(!meta.ok) throw await ghError(meta);
+  const sha = (await meta.json()).sha;
+  const res = await fetch(ghFileUrl(path), {
+    method:'DELETE',
+    headers:Object.assign(ghHeaders(), {'Content-Type':'application/json'}),
+    body:JSON.stringify({message:'Academy: '+path.split('/').pop()+' silindi', sha, branch:SYNC.branch})
+  });
+  if(!res.ok) throw await ghError(res);
+}
+async function ghListTree(prefix){
+  const res = await fetch(ghRepoUrl()+'/git/trees/'+encodeURIComponent(SYNC.branch)+'?recursive=1', {headers:ghHeaders(), cache:'no-store'});
+  if(res.status===404 || res.status===409) return [];
+  if(!res.ok) throw await ghError(res);
+  const j = await res.json();
+  return j.tree.filter(t=>t.type==='blob' && t.path.startsWith(prefix+'/'));
+}
+// Yeni dosyalar için çakışmayan bir yol üretir
+async function uploadUnique(path, file, message){
+  const b64 = bufToB64(await file.arrayBuffer());
+  let p = path;
+  for(let i=2;i<20;i++){
+    try{ return await ghSerial(()=>ghPutFile(p, b64, message)); }
+    catch(err){
+      if(err.status !== 422) throw err;
+      p = path.replace(/(\.[^./]+)?$/, ' ('+i+')$1');
+    }
+  }
+  throw new Error('Uygun dosya adı bulunamadı.');
+}
+
+function requireGithub(action){
+  if(syncReady()) return true;
+  alert(action+' için önce Veri modülünden GitHub bağlantısını kur (kullanıcı, repo ve token).');
+  return false;
+}
+
+async function openEntryFile(en, download){
+  if(!requireGithub('Dosyayı açmak')) return;
+  const ext = extOf(en.path);
+  const view = !download && AC_VIEWABLE.includes(ext);
+  const win = view ? window.open('', '_blank') : null;
+  if(win) win.document.write('<p style="font-family:sans-serif;padding:24px;color:#86735f">'+esc(en.title)+' yükleniyor…</p>');
+  try{
+    const raw = await ghFetchFile(en.path);
+    const url = URL.createObjectURL(new Blob([raw], {type:AC_MIME[ext] || 'application/octet-stream'}));
+    if(win) win.location.href = url;
+    else{
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = en.path.split('/').pop();
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    }
+    setTimeout(()=>URL.revokeObjectURL(url), 120000);
+  }catch(err){
+    if(win) win.close();
+    alert('Dosya alınamadı: '+err.message);
+  }
+}
+
+// ---- Klasörden içe aktarma (Essais/<Akademi>/<alt klasör>/<dosya>) ----
+function importItemsFromFiles(fileList){
+  const items = [];
+  [...fileList].forEach(f=>{
+    const name = f.name;
+    if(name.startsWith('~$') || name.startsWith('.') || /^(desktop\.ini|thumbs\.db)$/i.test(name)) return;
+    let segs = (f.webkitRelativePath || name).split('/');
+    if(acNorm(segs[0]) === acNorm(ESSAIS_ROOT)) segs = segs.slice(1);
+    const folder = segs.length > 1 ? segs[0] : 'Genel';
+    const section = segs.length > 2 ? segs.slice(1, -1).join(' / ') : '';
+    items.push({file:f, path:ESSAIS_ROOT+'/'+(segs.length > 1 ? segs.join('/') : 'Genel/'+name), folder, section, title:titleFromFile(name, folder)});
+  });
+  return items;
+}
+function newEntry(it, extra){
+  return Object.assign({
+    id:uid(), type:'makale', status:'okunacak', title:it.title, folder:it.folder, section:it.section||'',
+    path:it.path, size:it.size || (it.file && it.file.size) || 0, authors:'', url:'', notes:'', added:todayStr()
+  }, extra || {});
+}
+
+async function runImport(items){
+  const known = new Set(ACAD.entries.map(e=>e.path));
+  const todo = items.filter(it=>!known.has(it.path));
+  if(!todo.length){ alert('Seçilen klasördeki tüm dosyalar zaten kayıtlı.'); return; }
+  const tooBig = todo.filter(it=>it.file.size > AC_MAX_BYTES);
+  const total = todo.reduce((s,it)=>s+it.file.size,0);
+  if(!confirm(todo.length+' yeni dosya bulundu ('+fmtSize(total)+').'+
+    (items.length-todo.length ? ' '+(items.length-todo.length)+' dosya zaten kayıtlı, atlanacak.' : '')+
+    (tooBig.length ? ' '+tooBig.length+' dosya 25 MB\'tan büyük, atlanacak.' : '')+
+    '\n\nDosyalar GitHub reposunda '+ESSAIS_ROOT+'/ altına yüklensin mi? Bu birkaç dakika sürebilir; sayfayı kapatma.')) return;
+
+  acImport = {done:0, total:todo.length, current:'', cancel:false, errors:[]};
+  renderAcademy();
+  let existing = new Set();
+  try{ existing = new Set((await ghListTree(ESSAIS_ROOT)).map(t=>t.path)); }
+  catch(err){ acImport.errors.push('Repo taranamadı: '+err.message); }
+
+  for(const it of todo){
+    if(acImport.cancel) break;
+    acImport.current = it.path.slice(ESSAIS_ROOT.length+1);
+    renderAcProgress();
+    try{
+      if(it.file.size > AC_MAX_BYTES) throw new Error('25 MB sınırını aşıyor');
+      if(!existing.has(it.path)){
+        const b64 = bufToB64(await it.file.arrayBuffer());
+        await ghSerial(()=>ghPutFile(it.path, b64, 'Academy: '+it.path.slice(ESSAIS_ROOT.length+1)));
+      }
+      ACAD.entries.push(newEntry(it));
+      if(acImport.done % 10 === 0) saveACAD();
+    }catch(err){
+      acImport.errors.push(it.path.split('/').pop()+': '+err.message);
+    }
+    acImport.done++;
+    renderAcProgress();
+  }
+  saveACAD();
+  const res = acImport;
+  acImport = null;
+  renderLeiden();
+  alert((res.cancel ? 'İçe aktarma durduruldu. ' : 'İçe aktarma tamamlandı. ')+
+    (res.done - res.errors.length)+' dosya eklendi.'+
+    (res.errors.length ? '\n\nHatalar ('+res.errors.length+'):\n'+res.errors.slice(0,12).join('\n') : ''));
+}
+
+async function scanRepo(){
+  if(!requireGithub('Repoyu taramak')) return;
+  try{
+    const tree = await ghListTree(ESSAIS_ROOT);
+    const known = new Set(ACAD.entries.map(e=>e.path));
+    let added = 0;
+    tree.forEach(t=>{
+      if(known.has(t.path)) return;
+      const segs = t.path.split('/').slice(1);
+      const name = segs[segs.length-1];
+      if(name.startsWith('~$') || name.startsWith('.')) return;
+      const folder = segs.length > 1 ? segs[0] : 'Genel';
+      ACAD.entries.push(newEntry({path:t.path, folder, section:segs.length > 2 ? segs.slice(1,-1).join(' / ') : '', title:titleFromFile(name, folder), size:t.size}));
+      added++;
+    });
+    const inRepo = new Set(tree.map(t=>t.path));
+    const missing = ACAD.entries.filter(e=>e.path && !inRepo.has(e.path)).length;
+    if(added) saveACAD();
+    renderLeiden();
+    alert('Repoda '+tree.length+' dosya bulundu, '+added+' yeni kayıt eklendi.'+(missing ? '\n'+missing+' kaydın dosyası repoda yok.' : ''));
+  }catch(err){
+    alert('Repo taranamadı: '+err.message);
+  }
+}
+
+function renderAcProgress(){
+  const el = document.getElementById('acProgress');
+  if(!acImport){ el.hidden = true; return; }
+  el.hidden = false;
+  const pct = acImport.total ? acImport.done/acImport.total*100 : 0;
+  el.innerHTML =
+    '<div class="prog-row" style="margin:0;"><div class="top"><b>GitHub\'a yükleniyor · '+acImport.done+' / '+acImport.total+'</b>'+
+    '<button class="btn-ghost icon-btn" id="acCancel">'+(acImport.cancel ? 'Durduruluyor…' : 'Durdur')+'</button></div>'+
+    '<div class="progress" style="height:10px;"><div style="width:'+pct.toFixed(1)+'%;background:var(--lilac)"></div></div>'+
+    '<div class="ac-progress-file">'+esc(acImport.current)+(acImport.errors.length ? ' · <span class="g-neg">'+acImport.errors.length+' hata</span>' : '')+'</div></div>';
+}
+
+// ---- Render ----
+function acStatusBtn(e){
+  const s = AC_STATUS.find(x=>x.id===e.status) || AC_STATUS[0];
+  return '<button class="st st-'+s.cls+' ac-status" title="Durumu değiştir">'+s.label+'</button>';
+}
+function entryHtml(e, showAcademy){
+  const ext = extOf(e.path);
+  const open = acOpen.has(e.id);
+  const safeUrl = /^https?:\/\//i.test(e.url||'') ? e.url : '';
+  return '<div class="ac-entry'+(open?' open':'')+(e.status==='okundu'?' done':'')+'" data-id="'+e.id+'">'+
+    '<div class="ac-top">'+
+      '<span class="ac-type ac-type-'+e.type+'">'+(e.type==='okuma'?'Okuma':'Makale')+'</span>'+
+      '<input class="cell-input ac-title" value="'+esc(e.title)+'" title="'+esc(e.title)+'">'+
+      (showAcademy ? '<span class="ac-chip">'+esc(e.folder)+'</span>' : '')+
+      (e.section ? '<span class="ac-chip sec">'+esc(e.section)+'</span>' : '')+
+      (e.notes ? '<span class="ac-note-dot" title="Not var">✎</span>' : '')+
+      (acUploading.has(e.id) ? '<span class="ac-chip up">Yükleniyor…</span>'
+        : e.path ? '<button class="ac-file" title="Aç">'+(ext||'dosya').toUpperCase()+'</button>' : '')+
+      (safeUrl ? '<a class="ac-file link" href="'+esc(safeUrl)+'" target="_blank" rel="noopener" title="Bağlantıyı aç">↗</a>' : '')+
+      acStatusBtn(e)+
+      '<button class="mv-btn ac-toggle" title="Ayrıntılar">'+(open?'▴':'▾')+'</button>'+
+    '</div>'+
+    (open ?
+      '<div class="ac-detail">'+
+        '<div class="ac-detail-row">'+
+          '<select class="cell-input ac-type-sel"><option value="makale"'+(e.type!=='okuma'?' selected':'')+'>Makale</option><option value="okuma"'+(e.type==='okuma'?' selected':'')+'>Okuma</option></select>'+
+          '<input class="cell-input ac-authors" value="'+esc(e.authors)+'" placeholder="Yazar(lar)">'+
+          '<input class="cell-input ac-url" value="'+esc(e.url)+'" placeholder="Bağlantı (https://…)">'+
+        '</div>'+
+        '<textarea class="cell-input ac-notes" rows="3" placeholder="Notlar, özet, alıntılar…">'+esc(e.notes)+'</textarea>'+
+        '<div class="ac-detail-foot">'+
+          '<span>Eklendi '+shortDayLabel(e.added || todayStr())+(e.path ? ' · '+esc(e.path)+(e.size ? ' · '+fmtSize(e.size) : '') : '')+'</span>'+
+          (e.path ? '<button class="btn-ghost icon-btn ac-dl">İndir</button>' : '<button class="btn-ghost icon-btn ac-attach">📎 Dosya ekle</button>')+
+          '<button class="btn-danger icon-btn ac-del">Sil</button>'+
+        '</div>'+
+      '</div>' : '')+
+  '</div>';
+}
+
+function renderAcademy(){
+  const list = academyList();
+  if(acSel !== 'all' && !list.some(a=>a.key===acSel)) acSel = 'all';
+  const sel = list.find(a=>a.key===acSel);
+
+  // stats
+  const year = todayStr().slice(0,4);
+  document.getElementById('acStatTotal').textContent = ACAD.entries.length;
+  document.getElementById('acStatRead').textContent = ACAD.entries.filter(e=>e.status==='okundu').length;
+  document.getElementById('acStatReading').textContent = ACAD.entries.filter(e=>e.status==='okunuyor').length + ACAD.books.filter(b=>b.status==='okunuyor').length;
+  document.getElementById('acStatBooks').textContent = ACAD.books.filter(b=>b.status==='okundu' && (b.end||'').startsWith(year)).length;
+
+  // sidebar
+  const allCount = ACAD.entries.length;
+  document.getElementById('acList').innerHTML =
+    '<button class="ac-item'+(acSel==='all'?' sel':'')+'" data-key="all"><span class="dot" style="background:var(--muted-2)"></span><span class="ac-item-name">Tümü</span><span class="ac-count">'+allCount+'</span></button>'+
+    list.sort((a,b)=>a.name.localeCompare(b.name,'tr')).map(a=>
+      '<button class="ac-item'+(acSel===a.key?' sel':'')+'" data-key="'+esc(a.key)+'">'+
+        '<span class="dot" style="background:'+esc(a.color||'var(--muted-2)')+'"></span>'+
+        '<span class="ac-item-name">'+esc(a.name)+(a.path ? '<small>'+esc(a.path)+'</small>' : '<small>haritada yok</small>')+'</span>'+
+        '<span class="ac-count">'+(a.count ? a.read+'/'+a.count : '0')+'</span>'+
+      '</button>').join('');
+
+  // head
+  const scope = sel ? ACAD.entries.filter(e=>acNorm(e.folder||'Genel')===sel.key) : ACAD.entries;
+  const read = scope.filter(e=>e.status==='okundu').length;
+  document.getElementById('acHead').innerHTML =
+    '<div style="min-width:0;"><div class="day-title" style="text-transform:none;">'+(sel ? esc(sel.name) : 'Tüm akademiler')+'</div>'+
+    '<div class="day-sub">'+(sel && sel.path ? esc(sel.path)+' · ' : '')+scope.length+' kayıt · '+read+' okundu</div></div>'+
+    ringHtml(read, scope.length);
+  document.getElementById('acComposer').style.display = sel ? '' : 'none';
+  document.getElementById('acFileBtn').textContent = acPendingFile ? '📎 '+acPendingFile.name : '📎 Dosya';
+  document.getElementById('acFileBtn').classList.toggle('on', !!acPendingFile);
+
+  // filters
+  const sections = [...new Set(scope.map(e=>e.section).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'tr'));
+  if(acFilter.section!=='all' && !sections.includes(acFilter.section)) acFilter.section = 'all';
+  const chip = (group, val, label, n)=>'<button class="tchip filter ac-f'+(acFilter[group]===val?' on':'')+'" data-g="'+group+'" data-v="'+esc(val)+'" style="--tc:#9573b8">'+esc(label)+(n!==undefined?' · '+n:'')+'</button>';
+  const searchEl = document.getElementById('acSearch');
+  document.getElementById('acFilters').innerHTML =
+    chip('status','all','Tümü')+AC_STATUS.map(s=>chip('status', s.id, s.label, scope.filter(e=>e.status===s.id).length)).join('')+
+    '<span class="ac-sep"></span>'+chip('type','all','Hepsi')+chip('type','makale','Makale')+chip('type','okuma','Okuma')+
+    (sections.length ? '<span class="ac-sep"></span>'+chip('section','all','Tüm bölümler')+sections.map(s=>chip('section', s, s)).join('') : '');
+  if(searchEl && searchEl.value !== acFilter.q) searchEl.value = acFilter.q;
+
+  const q = acNorm(acFilter.q);
+  const order = {okunuyor:0, okunacak:1, okundu:2};
+  const shown = scope.filter(e=>
+    (acFilter.status==='all' || e.status===acFilter.status) &&
+    (acFilter.type==='all' || e.type===acFilter.type) &&
+    (acFilter.section==='all' || e.section===acFilter.section) &&
+    (!q || acNorm(e.title+' '+e.authors+' '+e.notes+' '+e.folder).includes(q))
+  ).sort((a,b)=>(order[a.status]-order[b.status]) || (a.section||'').localeCompare(b.section||'','tr') || a.title.localeCompare(b.title,'tr'));
+  document.getElementById('acEntries').innerHTML = shown.length
+    ? shown.map(e=>entryHtml(e, !sel)).join('')
+    : '<div class="empty">'+(ACAD.entries.length ? 'Bu filtreye uyan kayıt yok.' : 'Henüz kayıt yok. Soldan "Klasörden içe aktar" ile Essais klasörünü seç ya da bir akademi seçip yeni kayıt ekle.')+'</div>';
+  document.getElementById('acImportBtn').disabled = !!acImport;
+  renderAcProgress();
+  renderBooks();
+}
+
+// ---- Kitaplar ----
+function starsHtml(r){
+  let s = '<span class="stars">';
+  for(let i=1;i<=5;i++) s += '<button class="star'+(i<=(r||0)?' on':'')+'" data-r="'+i+'" title="'+i+' puan">★</button>';
+  return s+'</span>';
+}
+function renderBooks(){
+  const year = todayStr().slice(0,4);
+  const readYear = ACAD.books.filter(b=>b.status==='okundu' && (b.end||'').startsWith(year));
+  const rated = ACAD.books.filter(b=>b.rating);
+  const kpi = (label, value)=>'<div class="mini-kpi"><b>'+value+'</b><span>'+label+'</span></div>';
+  document.getElementById('bkSummary').innerHTML =
+    kpi(year+' yılında okunan', readYear.length)+
+    kpi(year+' sayfa', fmt(readYear.reduce((s,b)=>s+(Number(b.pages)||0),0),0))+
+    kpi('Şu an okunan', ACAD.books.filter(b=>b.status==='okunuyor').length)+
+    kpi('Ortalama puan', rated.length ? fmt(rated.reduce((s,b)=>s+b.rating,0)/rated.length,1)+' ★' : '—');
+
+  const chip = (val, label, n)=>'<button class="tchip filter bk-f'+(bkFilter===val?' on':'')+'" data-v="'+val+'" style="--tc:#cf9a3e">'+label+(n!==undefined?' · '+n:'')+'</button>';
+  document.getElementById('bkFilters').innerHTML = chip('all','Tümü',ACAD.books.length)+
+    AC_STATUS.map(s=>chip(s.id, s.label, ACAD.books.filter(b=>b.status===s.id).length)).join('');
+
+  const order = {okunuyor:0, okunacak:1, okundu:2};
+  const books = ACAD.books.filter(b=>bkFilter==='all' || b.status===bkFilter)
+    .sort((a,b)=>(order[a.status]-order[b.status]) || (b.end||'').localeCompare(a.end||'') || a.title.localeCompare(b.title,'tr'));
+  document.getElementById('bkGrid').innerHTML = books.length ? books.map(b=>{
+    const pct = b.pages && b.page ? Math.min(100, b.page/b.pages*100) : 0;
+    return '<div class="book" data-id="'+b.id+'">'+
+      '<button class="book-cover'+(b.cover?' has':'')+'" title="Kapak yükle"'+(b.cover ? ' style="background-image:url(&quot;'+esc(b.cover)+'&quot;)"' : '')+'>'+(b.cover ? '' : esc((b.title||'?').charAt(0).toLocaleUpperCase('tr-TR')))+'</button>'+
+      '<div class="book-body">'+
+        '<div class="book-top">'+
+          '<input class="cell-input bk-title" value="'+esc(b.title)+'">'+
+          '<button class="del-btn bk-del" title="Sil">✕</button>'+
+        '</div>'+
+        '<input class="cell-input bk-author" value="'+esc(b.author)+'" placeholder="Yazar">'+
+        '<div class="bk-row">'+
+          '<select class="cell-input bk-status">'+AC_STATUS.map(s=>'<option value="'+s.id+'"'+(b.status===s.id?' selected':'')+'>'+s.label+'</option>').join('')+'</select>'+
+          starsHtml(b.rating)+
+        '</div>'+
+        (b.status==='okunuyor' ?
+          '<div class="bk-progress"><div class="progress"><div style="width:'+pct.toFixed(1)+'%;background:var(--gold)"></div></div>'+
+          '<span>Sayfa <input class="cell-input bk-page" type="number" min="0" value="'+(b.page||'')+'"> / '+(b.pages||'?')+'</span></div>' : '')+
+        '<div class="bk-row bk-dates">'+
+          '<label>Başlangıç<input class="cell-input bk-start" type="date" value="'+esc(b.start||'')+'"></label>'+
+          '<label>Bitiş<input class="cell-input bk-end" type="date" value="'+esc(b.end||'')+'"></label>'+
+          '<label>Sayfa<input class="cell-input bk-pages" type="number" min="0" value="'+(b.pages||'')+'"></label>'+
+        '</div>'+
+        '<textarea class="cell-input bk-notes" rows="2" placeholder="Notlar, alıntılar…">'+esc(b.notes)+'</textarea>'+
+      '</div>'+
+    '</div>';
+  }).join('') : '<div class="empty">'+(ACAD.books.length ? 'Bu filtrede kitap yok.' : 'Henüz kitap yok. Yukarıdan ilkini ekle.')+'</div>';
+}
+
+function setupAcademy(){
+  const root = document.getElementById('mod-academy');
+  const entryOf = el=>{ const r = el.closest('.ac-entry'); return r ? ACAD.entries.find(e=>e.id===r.dataset.id) : null; };
+  const bookOf = el=>{ const r = el.closest('.book'); return r ? ACAD.books.find(b=>b.id===r.dataset.id) : null; };
+  const commit = ()=>{ saveACAD(); renderAcademy(); };
+  const selected = ()=>academyList().find(a=>a.key===acSel);
+
+  const attachTo = async (en, file)=>{
+    if(file.size > AC_MAX_BYTES){ alert('Dosya 25 MB sınırını aşıyor.'); return; }
+    acUploading.add(en.id);
+    renderAcademy();
+    try{
+      const content = await uploadUnique(ESSAIS_ROOT+'/'+(en.folder||'Genel')+'/'+file.name, file, 'Academy: '+file.name);
+      en.path = content.path;
+      en.size = file.size;
+    }catch(err){
+      alert('Dosya yüklenemedi: '+err.message);
+    }
+    acUploading.delete(en.id);
+    commit();
+  };
+  const pickFile = ()=>new Promise(resolve=>{
+    const inp = document.createElement('input');
+    inp.type = 'file';
+    inp.addEventListener('change', ()=>resolve(inp.files[0] || null));
+    inp.click();
+  });
+
+  root.addEventListener('click', e=>{
+    const t = e.target;
+    const item = t.closest('.ac-item');
+    if(item){ acSel = item.dataset.key; acFilter.section = 'all'; renderAcademy(); return; }
+    if(t.closest('.ac-f')){ const c = t.closest('.ac-f'); acFilter[c.dataset.g] = c.dataset.v; renderAcademy(); return; }
+    if(t.closest('.bk-f')){ bkFilter = t.closest('.bk-f').dataset.v; renderBooks(); return; }
+    if(t.id==='acCancel' && acImport){ acImport.cancel = true; renderAcProgress(); return; }
+
+    const en = entryOf(t);
+    if(en){
+      if(t.classList.contains('ac-toggle')){ if(acOpen.has(en.id)) acOpen.delete(en.id); else acOpen.add(en.id); renderAcademy(); return; }
+      if(t.classList.contains('ac-status')){
+        const i = AC_STATUS.findIndex(s=>s.id===en.status);
+        en.status = AC_STATUS[(i+1) % AC_STATUS.length].id;
+        return commit();
+      }
+      if(t.classList.contains('ac-file') && !t.classList.contains('link')) return openEntryFile(en, false);
+      if(t.classList.contains('ac-dl')) return openEntryFile(en, true);
+      if(t.classList.contains('ac-attach')){
+        if(!requireGithub('Dosya yüklemek')) return;
+        pickFile().then(f=>{ if(f) attachTo(en, f); });
+        return;
+      }
+      if(t.classList.contains('ac-del')){
+        if(!confirm('"'+en.title+'" kaydı silinsin mi?')) return;
+        const path = en.path;
+        ACAD.entries = ACAD.entries.filter(x=>x.id!==en.id);
+        commit();
+        if(path && syncReady() && confirm('Dosya GitHub reposundan da silinsin mi?\n'+path)){
+          ghSerial(()=>ghDeleteFile(path)).catch(err=>alert('Dosya silinemedi: '+err.message));
+        }
+        return;
+      }
+      return;
+    }
+
+    const bk = bookOf(t);
+    if(bk){
+      if(t.classList.contains('star')){
+        const r = Number(t.dataset.r);
+        bk.rating = bk.rating===r ? 0 : r;
+        if(!bk.rating) delete bk.rating;
+        return commit();
+      }
+      if(t.classList.contains('book-cover')){
+        pickImage().then(url=>{ if(url){ bk.cover = url; commit(); } });
+        return;
+      }
+      if(t.classList.contains('bk-del')){
+        if(!confirm('"'+bk.title+'" silinsin mi?')) return;
+        ACAD.books = ACAD.books.filter(x=>x.id!==bk.id);
+        return commit();
+      }
+    }
+  });
+
+  root.addEventListener('change', e=>{
+    const t = e.target;
+    const en = entryOf(t);
+    if(en){
+      if(t.classList.contains('ac-title')) en.title = t.value.trim() || en.title;
+      else if(t.classList.contains('ac-authors')) en.authors = t.value.trim();
+      else if(t.classList.contains('ac-url')) en.url = t.value.trim();
+      else if(t.classList.contains('ac-notes')) en.notes = t.value.trim();
+      else if(t.classList.contains('ac-type-sel')) en.type = t.value;
+      else return;
+      return commit();
+    }
+    const bk = bookOf(t);
+    if(bk){
+      const today = todayStr();
+      if(t.classList.contains('bk-title')) bk.title = t.value.trim() || bk.title;
+      else if(t.classList.contains('bk-author')) bk.author = t.value.trim();
+      else if(t.classList.contains('bk-notes')) bk.notes = t.value.trim();
+      else if(t.classList.contains('bk-start')) bk.start = t.value;
+      else if(t.classList.contains('bk-end')) bk.end = t.value;
+      else if(t.classList.contains('bk-pages')) bk.pages = parseInt(t.value,10) || 0;
+      else if(t.classList.contains('bk-page')) bk.page = parseInt(t.value,10) || 0;
+      else if(t.classList.contains('bk-status')){
+        bk.status = t.value;
+        if(bk.status==='okunuyor' && !bk.start) bk.start = today;
+        if(bk.status==='okundu'){ if(!bk.end) bk.end = today; if(bk.pages) bk.page = bk.pages; }
+      }
+      else return;
+      return commit();
+    }
+  });
+
+  document.getElementById('acSearch').addEventListener('input', e=>{ acFilter.q = e.target.value; renderAcademy(); document.getElementById('acSearch').focus(); });
+
+  // yeni kayıt
+  document.getElementById('acFileBtn').addEventListener('click', ()=>{
+    if(acPendingFile){ acPendingFile = null; renderAcademy(); return; }
+    if(!requireGithub('Dosya yüklemek')) return;
+    pickFile().then(f=>{ if(f){ acPendingFile = f; renderAcademy(); } });
+  });
+  const addEntry = ()=>{
+    const sel = selected();
+    const title = document.getElementById('acTitle').value.trim() || (acPendingFile ? titleFromFile(acPendingFile.name, sel.name) : '');
+    if(!sel || !title) return;
+    const en = newEntry({title, folder:sel.name, section:'', path:''}, {
+      type:document.getElementById('acType').value,
+      url:document.getElementById('acUrl').value.trim()
+    });
+    ACAD.entries.push(en);
+    const file = acPendingFile;
+    acPendingFile = null;
+    document.getElementById('acTitle').value = '';
+    document.getElementById('acUrl').value = '';
+    commit();
+    if(file) attachTo(en, file);
+  };
+  document.getElementById('acAdd').addEventListener('click', addEntry);
+  document.getElementById('acTitle').addEventListener('keydown', e=>{ if(e.key==='Enter') addEntry(); });
+
+  // içe aktarma & tarama
+  const importInput = document.getElementById('acImportInput');
+  document.getElementById('acImportBtn').addEventListener('click', ()=>{
+    if(acImport || !requireGithub('Dosyaları GitHub\'a yüklemek')) return;
+    importInput.value = '';
+    importInput.click();
+  });
+  importInput.addEventListener('change', ()=>{
+    const items = importItemsFromFiles(importInput.files);
+    if(items.length) runImport(items);
+  });
+  document.getElementById('acScanBtn').addEventListener('click', scanRepo);
+
+  // kitap ekleme
+  const addBook = ()=>{
+    const title = document.getElementById('bkTitle').value.trim();
+    if(!title) return;
+    const status = document.getElementById('bkStatus').value;
+    const today = todayStr();
+    const b = {id:uid(), title, author:document.getElementById('bkAuthor').value.trim(), status,
+      pages:parseInt(document.getElementById('bkPages').value,10) || 0, notes:''};
+    if(status==='okunuyor') b.start = today;
+    if(status==='okundu') b.end = today;
+    ACAD.books.push(b);
+    ['bkTitle','bkAuthor','bkPages'].forEach(id=>document.getElementById(id).value = '');
+    commit();
+    document.getElementById('bkTitle').focus();
+  };
+  document.getElementById('bkAdd').addEventListener('click', addBook);
+  ['bkTitle','bkAuthor','bkPages'].forEach(id=>document.getElementById(id).addEventListener('keydown', e=>{ if(e.key==='Enter') addBook(); }));
+
+  window.addEventListener('beforeunload', e=>{ if(acImport || acUploading.size){ e.preventDefault(); e.returnValue = ''; } });
+  setupSubtabs(root);
+}
+
 function renderLeiden(){
   renderThistle();
   renderTagBar();
   renderMap();
   renderCompanies();
   renderNivose();
+  renderAcademy();
 }
 
 renderLegendAndAlphaTable();
@@ -3155,6 +3929,7 @@ setupMap();
 setupCompanies();
 setupTags();
 setupNivose();
+setupAcademy();
 setupVeri();
 renderLeiden();
 document.querySelectorAll('.modbtn').forEach(b=>b.addEventListener('click', ()=>showModule(b.dataset.module)));

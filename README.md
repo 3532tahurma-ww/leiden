@@ -12,6 +12,7 @@ Leiden tek bir HTML dosyasıdır. Kurulum, sunucu veya derleme gerektirmez. Dosy
 | **Thistle** | Maliye: bankalar ve hesaplar (aynı hesapta birden fazla para birimi), kurlar, harcamalar, aylık sabit giderler. |
 | **Nivose** | Günlük ve aylık planlar. Her plan Edina Haritasındaki bir öğeye bağlanabilir. |
 | **Edina Haritası** | Unirce → Perce → Parce hiyerarşisi ve Linden Union Şirketleri (Şirket → Proje). |
+| **Academy** | Akademilere bağlı makaleler ve okumalar (dosyalar private veri reposunda `Essais/` altında), okunan kitaplar. |
 | **Veri** | JSON dışa / içe aktarma ve GitHub senkronu. |
 
 Tarihler [Edina Takvimi](EDINA-TAKVIMI.md)'ne göre de gösterilir (Eylül 2006 = 1. ay).
@@ -87,13 +88,34 @@ Tüm veri tarayıcının `localStorage`'ında tutulur. İstersen ayrıca bir Git
 ```json
 {
   "app": "Leiden",
-  "version": 3,
+  "version": 4,
   "savedAt": "2026-10-15T12:00:00.000Z",
   "entries": { "2026-10-10": { "activities": { "P": 2, "CL": 1 }, "likit": null, "pkur": null } },
   "thistle": { "holders": [], "rates": {}, "expenses": [], "fixed": [] },
   "nivose":  { "plans": [] },
-  "map":     { "unirces": [], "companies": [], "tags": [] }
+  "map":     { "unirces": [], "companies": [], "tags": [] },
+  "academy": { "entries": [], "books": [] }
 }
 ```
+
+### Academy dosyaları
+
+Makale ve okuma dosyaları JSON'a gömülmez. Veri reposunda klasör yapısıyla saklanır:
+
+```
+leiden-data/
+├── data/leiden.json
+└── Essais/
+    ├── Busena Academy/…
+    ├── Claire Academy/Manipulation/…
+    └── …
+```
+
+- **Academy → Klasörden içe aktar**: Bilgisayardaki `Essais` klasörünü seç. Dosyalar repoya aynı yapıyla yüklenir. Zaten kayıtlı olanlar atlanır, yarıda kalan bir içe aktarma tekrar başlatılabilir.
+- **Academy → Repodan tara**: `Essais/` altına başka bir yolla (GitHub Desktop vb.) eklenen dosyalar için kayıt oluşturur.
+- Klasör adı Edina Haritasındaki bir Perce ya da Parce adıyla eşleşirse o akademiye bağlanır. Adında "Academy" / "Akademi" geçen bloklar otomatik olarak akademi sayılır, diğerleri ⋯ menüsünden işaretlenebilir.
+- Dosya başına sınır 25 MB'tır.
+
+> ⚠️ `Essais` klasörünü sayfanın bulunduğu **public** repoya yükleme. Yalnızca private veri reposunda durmalı.
 
 Unirce ve şirket resimleri 256 piksele küçültülüp bu dosyanın içinde saklanır. Haritadaki her blok isteğe bağlı olarak `color` (blok rengi) ve `tags` (etiket id listesi) alanlarını taşır. Eski sürümlerle (version 2) kaydedilmiş dosyalar olduğu gibi açılır.
