@@ -498,6 +498,87 @@
     .book-grid{grid-template-columns:1fr;}
   }
 
+  /* Notlar */
+  .notes-layout{display:grid;grid-template-columns:260px 1fr;gap:20px;align-items:start;}
+  .notes-side{position:sticky;top:20px;padding:14px;max-height:calc(100vh - 40px);overflow-y:auto;}
+  .notes-side-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+  .notes-side-head .icon-btn{padding:6px 10px;font-size:.78rem;}
+  #ntSearch{padding:7px 10px;font-size:.82rem;margin-bottom:8px;}
+  .nt-row{display:flex;align-items:center;gap:4px;padding:4px 6px;border-radius:9px;cursor:pointer;font-size:.86rem;color:var(--text);}
+  .nt-row:hover{background:var(--surface-2);}
+  .nt-row.sel{background:#fff;box-shadow:0 0 0 1px var(--border);font-weight:600;}
+  .nt-caret{background:none;border:none;padding:0;width:16px;font-size:.7rem;color:var(--muted-2);flex:none;}
+  .nt-ic{flex:none;width:20px;text-align:center;}
+  .nt-label{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .nt-label small{display:block;font-size:.66rem;color:var(--muted-2);font-weight:400;}
+  .nt-plus{background:none;border:none;padding:0 4px;color:var(--muted-2);font-size:.95rem;opacity:0;flex:none;}
+  .nt-row:hover .nt-plus{opacity:1;}
+  .nt-plus:hover{color:var(--lilac);}
+  .notes-main{min-height:70vh;padding:28px 40px 60px;}
+  .nt-empty{text-align:center;padding:80px 20px;}
+  .nt-empty-ic{font-size:2.6rem;}
+  .nt-crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:4px;font-size:.76rem;color:var(--muted-2);min-height:20px;}
+  .nt-crumb{background:none;border:none;padding:2px 6px;border-radius:6px;font-size:.76rem;font-weight:500;color:var(--muted);}
+  .nt-crumb:hover{background:var(--surface-2);}
+  .nt-head{display:flex;align-items:flex-start;gap:10px;margin-top:10px;}
+  .nt-icon{background:none;border:none;padding:2px;font-size:2.2rem;line-height:1.2;border-radius:10px;flex:none;}
+  .nt-icon:hover{background:var(--surface-2);}
+  .nt-title{flex:1;font-family:'Fraunces',serif;font-weight:600;font-size:2.1rem;line-height:1.25;outline:none;padding:4px 0;min-width:0;word-break:break-word;}
+  .nt-title:empty:before{content:attr(data-ph);color:var(--muted-2);}
+  .nt-meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;margin:6px 0 18px;padding-bottom:14px;border-bottom:1px solid var(--border);font-size:.74rem;color:var(--muted-2);}
+  .nt-meta label{display:flex;align-items:center;gap:6px;margin:0;font-size:.72rem;font-weight:500;color:var(--muted-2);}
+  .nt-meta select.cell-input{width:auto;max-width:220px;font-size:.76rem;padding:3px 6px;background:var(--surface-2);}
+  .nt-meta-actions{display:flex;gap:6px;margin-left:auto;}
+  .nt-meta-actions button{padding:5px 10px;font-size:.74rem;}
+  .nt-icons{display:flex;flex-wrap:wrap;gap:4px;padding:8px;margin:-8px 0 14px;background:#fff;border:1px solid var(--border);border-radius:12px;}
+  .nt-icons[hidden]{display:none;}
+  .nt-icons button{background:none;border:none;padding:4px;font-size:1.25rem;border-radius:8px;}
+  .nt-icons button:hover{background:var(--surface-2);}
+  .nt-blocks{max-width:760px;}
+  .nb{position:relative;display:flex;align-items:flex-start;gap:6px;padding:1px 0 1px 0;margin-left:-44px;padding-left:44px;border-radius:6px;}
+  .nb-gutter{position:absolute;left:0;top:3px;display:flex;gap:2px;opacity:0;transition:opacity .1s ease;}
+  .nb:hover .nb-gutter,.nb:focus-within .nb-gutter{opacity:1;}
+  .nb-add,.nb-handle{background:none;border:none;padding:0 3px;color:var(--muted-2);font-size:.95rem;line-height:1.4;cursor:pointer;border-radius:5px;user-select:none;}
+  .nb-handle{cursor:grab;font-size:.8rem;letter-spacing:-2px;}
+  .nb-add:hover,.nb-handle:hover{background:var(--surface-2);color:var(--text);}
+  .nb.drop-before{box-shadow:0 -2px 0 var(--lilac);}
+  .nb.drop-after{box-shadow:0 2px 0 var(--lilac);}
+  .nb-text{flex:1;min-width:0;outline:none;padding:3px 2px;line-height:1.65;font-size:.98rem;word-break:break-word;}
+  .nb-text:empty:before{content:attr(data-ph);color:var(--muted-2);pointer-events:none;}
+  .nb-p .nb-text:empty:not(:focus):before{content:'';}
+  .nb-h1 .nb-text{font-family:'Fraunces',serif;font-size:1.65rem;font-weight:600;margin-top:18px;line-height:1.3;}
+  .nb-h2 .nb-text{font-family:'Fraunces',serif;font-size:1.32rem;font-weight:600;margin-top:14px;line-height:1.35;}
+  .nb-h3 .nb-text{font-size:1.08rem;font-weight:700;margin-top:10px;}
+  .nb-bullet,.nb-num{flex:none;min-width:18px;padding-top:3px;line-height:1.65;color:var(--lilac);font-weight:700;text-align:right;}
+  .nb-check{width:17px;height:17px;margin-top:7px;accent-color:var(--lilac);flex:none;}
+  .nb.checked .nb-text{text-decoration:line-through;color:var(--muted-2);}
+  .nb-quote .nb-text{border-left:3px solid var(--text);padding-left:14px;font-style:italic;color:var(--muted);}
+  .nb-callout{background:color-mix(in srgb,var(--gold) 12%,#fff);border-radius:12px;padding-top:8px;padding-bottom:8px;margin:6px 0 6px -44px;padding-right:12px;}
+  .nb-callout-ic{flex:none;padding-top:3px;}
+  .nb-code .nb-text{font-family:'IBM Plex Mono',monospace;font-size:.84rem;background:#f4ece0;border-radius:10px;padding:12px 14px;line-height:1.55;}
+  .nb-divider hr{flex:1;border:none;border-top:1px solid var(--border);margin:14px 0;}
+  .nb-text code{font-family:'IBM Plex Mono',monospace;font-size:.86em;background:#f4ece0;color:var(--rose);padding:1px 5px;border-radius:5px;}
+  .nb-text a{color:var(--lilac);text-decoration:underline;}
+  .nb-pagelink{display:flex;align-items:center;gap:6px;background:none;border:none;padding:5px 6px;margin:1px 0;border-radius:8px;font-size:.95rem;font-weight:600;color:var(--text);text-decoration:underline;text-decoration-color:var(--border);text-underline-offset:4px;}
+  .nb-pagelink:hover{background:var(--surface-2);}
+  .nt-kids{max-width:760px;margin-top:24px;}
+  #ntSlash{
+    position:absolute;z-index:60;width:250px;max-height:320px;overflow-y:auto;background:#fff;
+    border:1px solid var(--border);border-radius:14px;padding:8px;box-shadow:0 16px 40px -18px rgba(80,50,20,.45);
+  }
+  .nt-slash-item{display:flex;align-items:center;gap:10px;width:100%;background:none;border:none;padding:6px 8px;border-radius:8px;font-size:.86rem;font-weight:500;color:var(--text);text-align:left;}
+  .nt-slash-item small{margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--muted-2);}
+  .nt-slash-item.on,.nt-slash-item:hover{background:var(--surface-2);}
+  .nt-slash-ic{width:28px;height:28px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);border-radius:7px;font-size:.78rem;font-weight:700;flex:none;background:#fff;}
+  @media (max-width:860px){
+    .notes-layout{grid-template-columns:1fr;}
+    .notes-side{position:static;max-height:none;}
+    .notes-main{padding:20px 18px 40px;}
+    .nb{margin-left:0;padding-left:0;}
+    .nb-gutter{display:none;}
+    .nb-callout{margin-left:0;}
+  }
+
   /* tags & options popover */
   .tchip{
     display:inline-flex;align-items:center;gap:4px;flex:none;
@@ -689,6 +770,7 @@
       <button class="modbtn" data-module="nivose">Nivose</button>
       <button class="modbtn" data-module="harita">Edina Haritası</button>
       <button class="modbtn" data-module="academy">Academy</button>
+      <button class="modbtn" data-module="notlar">Notlar</button>
       <button class="modbtn" data-module="veri">Veri</button>
     </nav>
     <span class="sync-status sync-pill"></span>
@@ -1209,6 +1291,26 @@
     </section>
   </div>
 
+  <!-- ===== NOTLAR ===== -->
+  <div class="module" data-module="notlar" id="mod-notlar">
+    <div class="notes-layout">
+      <aside class="card notes-side">
+        <div class="notes-side-head">
+          <span class="pop-label" style="margin:0;">Notlar</span>
+          <button class="btn-ghost icon-btn" id="ntNew" title="Yeni sayfa">＋ Sayfa</button>
+        </div>
+        <input type="text" id="ntSearch" placeholder="Notlarda ara…">
+        <div id="ntTree"></div>
+        <div class="ac-tools">
+          <button class="btn-ghost" id="ntImportBtn">⇪ İçe aktar (.md / .json)</button>
+          <input type="file" id="ntImportInput" accept=".md,.markdown,.txt,.json" multiple hidden>
+        </div>
+        <p class="hint" style="font-size:.72rem;margin:8px 0 0;">Markdown dosyasında birden fazla <b>#</b> başlığı varsa ilki ana sayfa, diğerleri alt sayfa olur.</p>
+      </aside>
+      <div class="card notes-main" id="ntMain"></div>
+    </div>
+  </div>
+
   <!-- ===== VERI ===== -->
   <div class="module" data-module="veri" id="mod-veri">
     <p class="eyebrow">Veri · Kayıt &amp; Senkron</p>
@@ -1263,6 +1365,7 @@
   </div>
 
   <div id="optPop" hidden></div>
+  <div id="ntSlash" hidden></div>
 
   <footer>Leiden ·veriler bu tarayıcıda ve (bağlıysa) GitHub reposunda saklanır</footer>
 </div>
@@ -1898,10 +2001,10 @@ function scheduleSync(){
 }
 
 function buildBackup(){
-  return {app:'Leiden', version:4, savedAt:new Date().toISOString(), entries:DATA.entries, thistle:TH, nivose:NIV, map:MAP, academy:ACAD};
+  return {app:'Leiden', version:5, savedAt:new Date().toISOString(), entries:DATA.entries, thistle:TH, nivose:NIV, map:MAP, academy:ACAD, notes:NOTES};
 }
 function applyBackup(obj){
-  if(!obj || typeof obj !== 'object' || !(obj.entries || obj.thistle || obj.nivose || obj.map || obj.academy)) throw new Error('geçersiz format');
+  if(!obj || typeof obj !== 'object' || !(obj.entries || obj.thistle || obj.nivose || obj.map || obj.academy || obj.notes)) throw new Error('geçersiz format');
   syncSuppress = true;
   try{
     if(obj.entries){ DATA = {entries:obj.entries}; saveData(); }
@@ -1909,6 +2012,7 @@ function applyBackup(obj){
     if(obj.nivose){ NIV = obj.nivose; if(!NIV.plans) NIV.plans = []; saveNIV(); }
     if(obj.map){ MAP = obj.map; migrateMAP(); saveMAP(); }
     if(obj.academy){ ACAD = obj.academy; migrateACAD(); saveACAD(); }
+    if(obj.notes){ NOTES = obj.notes; migrateNOTES(); saveNOTES(); }
   } finally { syncSuppress = false; }
   render();
   loadWeekIntoForm();
@@ -3910,6 +4014,710 @@ function setupAcademy(){
   setupSubtabs(root);
 }
 
+// ===== Notlar: Notion tarzı sayfa + blok düzenleyici =====
+// Sayfa: {id, parent, title, icon, blocks:[{id, type, html, checked?, pageId?}], link?, open?, order, created, updated}
+const NOTES_KEY = 'leidenNotes_v1';
+const NT_SEL_KEY = 'leidenNoteSel';
+const NT_TYPES = [
+  {type:'p',        label:'Metin',          ic:'¶',   hint:''},
+  {type:'h1',       label:'Başlık 1',       ic:'H1',  hint:'#'},
+  {type:'h2',       label:'Başlık 2',       ic:'H2',  hint:'##'},
+  {type:'h3',       label:'Başlık 3',       ic:'H3',  hint:'###'},
+  {type:'ul',       label:'Madde listesi',  ic:'•',   hint:'-'},
+  {type:'ol',       label:'Numaralı liste', ic:'1.',  hint:'1.'},
+  {type:'todo',     label:'Yapılacak',      ic:'☐',   hint:'[]'},
+  {type:'quote',    label:'Alıntı',         ic:'❝',   hint:'>'},
+  {type:'callout',  label:'Bilgi kutusu',   ic:'💡',  hint:'!'},
+  {type:'code',     label:'Kod',            ic:'</>', hint:'```'},
+  {type:'divider',  label:'Ayırıcı',        ic:'—',   hint:'---'},
+  {type:'pagelink', label:'Alt sayfa',      ic:'📄',  hint:''}
+];
+const NT_SHORTCUTS = [
+  [/^###\s/, 'h3'], [/^##\s/, 'h2'], [/^#\s/, 'h1'], [/^[-*]\s/, 'ul'], [/^1[.)]\s/, 'ol'],
+  [/^\[\s?\]\s/, 'todo'], [/^>\s/, 'quote'], [/^!\s/, 'callout'], [/^```\s?/, 'code'], [/^---$/, 'divider']
+];
+const NT_ICONS = ['📄','📝','📌','💡','📚','🧭','🧠','🎯','🗂️','📖','✍️','🔬','🏛️','⚖️','💬','🌱','🔥','⭐','🌙','☕','🎨','🧩','🔑','🛠️','📈','🗺️','❤️','🕊️','🍀','🌸'];
+
+let NOTES = loadJson(NOTES_KEY, {pages:[]});
+function migrateNOTES(){
+  NOTES.pages = NOTES.pages || [];
+  NOTES.pages.forEach(p=>{ p.blocks = p.blocks || []; });
+}
+migrateNOTES();
+function saveNOTES(){ saveJson(NOTES_KEY, NOTES); }
+
+let ntSel = (()=>{ try{ return localStorage.getItem(NT_SEL_KEY); }catch(e){ return null; } })();
+let ntQuery = '';
+let ntSaveTimer = null;
+let ntSlash = null;   // {blockId, index}
+let ntDragId = null;
+
+function ntPage(id){ return NOTES.pages.find(p=>p.id===id) || null; }
+function ntChildren(pid){
+  return NOTES.pages.filter(p=>(p.parent||null)===(pid||null)).sort((a,b)=>(a.order||0)-(b.order||0));
+}
+function ntPath(p){
+  const out = [];
+  let cur = p;
+  for(let i=0; cur && i<20; i++){ out.unshift(cur); cur = cur.parent ? ntPage(cur.parent) : null; }
+  return out;
+}
+function ntDescendants(id){
+  const out = [];
+  const walk = pid=>ntChildren(pid).forEach(c=>{ out.push(c.id); walk(c.id); });
+  walk(id);
+  return out;
+}
+let ntOrderSeq = 0;
+function ntNextOrder(){ return Date.now() + (ntOrderSeq++)/1000; }
+function ntNewPage(title, parent, blocks){
+  const now = new Date().toISOString();
+  const p = {id:uid(), parent:parent||null, title:title||'', icon:'📄', blocks:blocks||[], order:ntNextOrder(), created:now, updated:now};
+  NOTES.pages.push(p);
+  return p;
+}
+function ntTouch(p){ p.updated = new Date().toISOString(); }
+function ntSelect(id){
+  ntSel = id;
+  try{ localStorage.setItem(NT_SEL_KEY, id || ''); }catch(e){}
+}
+
+// ---- HTML temizleme ----
+const NT_ALLOWED = {B:1, STRONG:1, I:1, EM:1, U:1, S:1, STRIKE:1, CODE:1, A:1, BR:1};
+function ntSanitize(html){
+  const doc = new DOMParser().parseFromString('<div>'+(html||'')+'</div>', 'text/html');
+  const root = doc.body.firstChild;
+  const walk = node=>{
+    [...node.childNodes].forEach(ch=>{
+      if(ch.nodeType === 1){
+        walk(ch);
+        if(!NT_ALLOWED[ch.tagName]){
+          const frag = doc.createDocumentFragment();
+          if((ch.tagName==='DIV' || ch.tagName==='P') && ch.previousSibling) frag.appendChild(doc.createElement('br'));
+          while(ch.firstChild) frag.appendChild(ch.firstChild);
+          ch.replaceWith(frag);
+        } else {
+          [...ch.attributes].forEach(a=>{ if(!(ch.tagName==='A' && a.name==='href')) ch.removeAttribute(a.name); });
+          if(ch.tagName==='A'){
+            if(!/^(https?:|mailto:)/i.test(ch.getAttribute('href')||'')) ch.removeAttribute('href');
+            else { ch.setAttribute('target','_blank'); ch.setAttribute('rel','noopener'); }
+          }
+        }
+      } else if(ch.nodeType !== 3){
+        ch.remove();
+      }
+    });
+  };
+  walk(root);
+  const out = root.innerHTML;
+  return out === '<br>' ? '' : out;
+}
+function ntText(html){
+  const d = document.createElement('div');
+  d.innerHTML = (html||'').replace(/<br\s*\/?>/gi, '\n');
+  return d.textContent;
+}
+
+// ---- Markdown ----
+function mdInline(s){
+  return esc(s)
+    .replace(/`([^`]+)`/g, '<code>$1</code>')
+    .replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>')
+    .replace(/(^|[^*])\*([^*\n]+)\*/g, '$1<i>$2</i>')
+    .replace(/\[([^\]]+)\]\((https?:[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+}
+function mdToBlocks(md){
+  const lines = String(md||'').replace(/\r/g,'').split('\n');
+  const blocks = [];
+  let para = null, code = null, quote = null;
+  const push = (type, html, extra)=>{ const b = Object.assign({id:uid(), type, html}, extra||{}); blocks.push(b); return b; };
+  const flush = ()=>{ if(para !== null){ push('p', para); para = null; } quote = null; };
+  for(const line of lines){
+    if(code !== null){
+      if(/^```/.test(line)){ push('code', esc(code.join('\n')).replace(/\n/g,'<br>')); code = null; }
+      else code.push(line);
+      continue;
+    }
+    let m;
+    if(/^```/.test(line)){ flush(); code = []; continue; }
+    if(!line.trim()){ flush(); continue; }
+    if((m = /^(#{1,3})\s+(.*)$/.exec(line))){ flush(); push('h'+m[1].length, mdInline(m[2])); continue; }
+    if(/^\s*(-{3,}|\*{3,}|_{3,})\s*$/.test(line)){ flush(); push('divider', ''); continue; }
+    if((m = /^\s*[-*+]\s+\[( |x|X)\]\s+(.*)$/.exec(line))){ flush(); push('todo', mdInline(m[2]), {checked:m[1].toLowerCase()==='x'}); continue; }
+    if((m = /^\s*[-*+]\s+(.*)$/.exec(line))){ flush(); push('ul', mdInline(m[1])); continue; }
+    if((m = /^\s*\d+[.)]\s+(.*)$/.exec(line))){ flush(); push('ol', mdInline(m[1])); continue; }
+    if((m = /^>\s?(.*)$/.exec(line))){
+      if(para !== null){ push('p', para); para = null; }
+      const callout = /^\[!\w+\]\s*/.exec(m[1]);
+      if(callout){ quote = push('callout', mdInline(m[1].slice(callout[0].length))); }
+      else if(quote){ quote.html += (quote.html ? '<br>' : '') + mdInline(m[1]); }
+      else quote = push('quote', mdInline(m[1]));
+      continue;
+    }
+    quote = null;
+    para = para === null ? mdInline(line) : para + ' ' + mdInline(line);
+  }
+  if(code !== null) push('code', esc(code.join('\n')).replace(/\n/g,'<br>'));
+  flush();
+  return blocks;
+}
+function htmlToMd(html){
+  return ntText(String(html||'')
+    .replace(/<(b|strong)>(.*?)<\/\1>/gi, '**$2**')
+    .replace(/<(i|em)>(.*?)<\/\1>/gi, '*$2*')
+    .replace(/<code>(.*?)<\/code>/gi, '`$1`')
+    .replace(/<a [^>]*href="([^"]+)"[^>]*>(.*?)<\/a>/gi, '[$2]($1)'));
+}
+function blocksToMd(page){
+  let n = 0;
+  const lines = ['# '+(page.icon && page.icon!=='📄' ? page.icon+' ' : '')+(page.title||'Başlıksız'), ''];
+  page.blocks.forEach(b=>{
+    const t = htmlToMd(b.html);
+    n = b.type==='ol' ? n+1 : 0;
+    switch(b.type){
+      case 'h1': lines.push('## '+t, ''); break;
+      case 'h2': lines.push('### '+t, ''); break;
+      case 'h3': lines.push('#### '+t, ''); break;
+      case 'ul': lines.push('- '+t); break;
+      case 'ol': lines.push(n+'. '+t); break;
+      case 'todo': lines.push('- ['+(b.checked?'x':' ')+'] '+t); break;
+      case 'quote': lines.push(t.split('\n').map(l=>'> '+l).join('\n'), ''); break;
+      case 'callout': lines.push('> [!NOTE] '+t, ''); break;
+      case 'code': lines.push('```', ntText(b.html), '```', ''); break;
+      case 'divider': lines.push('---', ''); break;
+      case 'pagelink': { const sp = ntPage(b.pageId); lines.push('→ '+(sp ? sp.title : 'silinmiş sayfa'), ''); break; }
+      default: lines.push(t, '');
+    }
+  });
+  return lines.join('\n').replace(/\n{3,}/g, '\n\n');
+}
+// Birden fazla "# " başlığı varsa ilki ana sayfa, diğerleri onun alt sayfaları olur
+function importMarkdown(text, fallbackTitle){
+  const parts = [];
+  let cur = null, inCode = false;
+  String(text||'').replace(/\r/g,'').split('\n').forEach(l=>{
+    if(/^```/.test(l)) inCode = !inCode;
+    const m = !inCode && /^#\s+(.*)$/.exec(l);
+    if(m){ cur = {title:m[1].trim(), body:[]}; parts.push(cur); }
+    else { if(!cur){ cur = {title:fallbackTitle, body:[]}; parts.push(cur); } cur.body.push(l); }
+  });
+  if(parts.length > 1 && parts[0].title===fallbackTitle && !parts[0].body.join('').trim()) parts.shift();
+  const make = (part, parent)=>{
+    let title = part.title, icon = '📄';
+    const em = /^(\p{Extended_Pictographic}️?)\s+(.*)$/u.exec(title);
+    if(em){ icon = em[1]; title = em[2]; }
+    const p = ntNewPage(title, parent, mdToBlocks(part.body.join('\n')));
+    p.icon = icon;
+    return p;
+  };
+  const root = make(parts[0], null);
+  parts.slice(1).forEach(part=>make(part, root.id));
+  return root;
+}
+function importNotesJson(obj){
+  const pages = Array.isArray(obj) ? obj : (obj && (obj.pages || (obj.notes && obj.notes.pages)));
+  if(!Array.isArray(pages)) throw new Error('geçersiz not dosyası');
+  const map = {};
+  pages.forEach(p=>{ map[p.id] = uid(); });
+  let first = null;
+  pages.forEach(p=>{
+    const np = Object.assign({}, p, {
+      id:map[p.id], parent:p.parent && map[p.parent] ? map[p.parent] : null,
+      blocks:(p.blocks||[]).map(b=>Object.assign({}, b, {id:uid(), html:ntSanitize(b.html), pageId:b.pageId && map[b.pageId] ? map[b.pageId] : b.pageId})),
+      order:ntNextOrder()
+    });
+    NOTES.pages.push(np);
+    if(!first && !np.parent) first = np;
+  });
+  return first;
+}
+
+// ---- Render ----
+function ntBlockHtml(b, num){
+  const ph = {p:"Yazmaya başla ya da '/' ile blok seç", h1:'Başlık 1', h2:'Başlık 2', h3:'Başlık 3', ul:'Liste', ol:'Liste', todo:'Yapılacak', quote:'Alıntı', callout:'Not', code:'Kod'}[b.type] || '';
+  let pre = '';
+  if(b.type==='todo') pre = '<input type="checkbox" class="nb-check"'+(b.checked?' checked':'')+'>';
+  else if(b.type==='ul') pre = '<span class="nb-bullet">•</span>';
+  else if(b.type==='ol') pre = '<span class="nb-num">'+num+'.</span>';
+  else if(b.type==='callout') pre = '<span class="nb-callout-ic">💡</span>';
+  let body;
+  if(b.type==='divider') body = '<hr>';
+  else if(b.type==='pagelink'){
+    const sp = ntPage(b.pageId);
+    body = '<button class="nb-pagelink" data-page="'+esc(b.pageId)+'">'+(sp ? esc(sp.icon||'📄')+' '+esc(sp.title||'Başlıksız') : '⚠ silinmiş sayfa')+'</button>';
+  }
+  else body = '<div class="nb-text" contenteditable="true" spellcheck="true" data-ph="'+esc(ph)+'">'+(b.html||'')+'</div>';
+  return '<div class="nb nb-'+b.type+(b.checked?' checked':'')+'" data-id="'+b.id+'">'+
+    '<div class="nb-gutter"><button class="nb-add" title="Altına blok ekle" tabindex="-1">+</button><span class="nb-handle" draggable="true" title="Sürükle · tıkla: sil">⋮⋮</span></div>'+
+    pre+body+'</div>';
+}
+
+function renderNoteBlocks(){
+  const p = ntPage(ntSel);
+  const box = document.getElementById('ntBlocks');
+  if(!p || !box) return;
+  if(!p.blocks.length) p.blocks.push({id:uid(), type:'p', html:''});
+  let n = 0;
+  box.innerHTML = p.blocks.map(b=>{ n = b.type==='ol' ? n+1 : 0; return ntBlockHtml(b, n); }).join('');
+  const kids = ntChildren(p.id).filter(c=>!p.blocks.some(b=>b.type==='pagelink' && b.pageId===c.id));
+  document.getElementById('ntKids').innerHTML = kids.length
+    ? '<div class="pop-label">Alt sayfalar</div>'+kids.map(c=>'<button class="nb-pagelink" data-page="'+c.id+'">'+esc(c.icon||'📄')+' '+esc(c.title||'Başlıksız')+'</button>').join('')
+    : '';
+}
+
+function renderNoteMain(){
+  const main = document.getElementById('ntMain');
+  const p = ntPage(ntSel);
+  if(!p){
+    main.innerHTML = '<div class="nt-empty"><div class="nt-empty-ic">📝</div><h2>Notlar</h2>'+
+      '<p class="hint">Sayfalar oluştur, iç içe düzenle. <b>/</b> ile blok seç; <b>#</b>, <b>-</b>, <b>[]</b>, <b>&gt;</b> gibi kısayollar da çalışır.</p>'+
+      '<button class="btn-primary" id="ntEmptyNew">İlk sayfayı oluştur</button></div>';
+    return;
+  }
+  const path = ntPath(p);
+  const upd = new Date(p.updated);
+  const parentOpts = '<option value="">— en üst —</option>'+NOTES.pages
+    .filter(x=>x.id!==p.id && !ntDescendants(p.id).includes(x.id))
+    .map(x=>'<option value="'+x.id+'"'+(x.id===p.parent?' selected':'')+'>'+esc(ntPath(x).map(y=>y.title||'Başlıksız').join(' › '))+'</option>').join('');
+  main.innerHTML =
+    '<div class="nt-crumbs">'+path.map((x,i)=>i<path.length-1 ? '<button class="nt-crumb" data-page="'+x.id+'">'+esc(x.icon||'📄')+' '+esc(x.title||'Başlıksız')+'</button><span>/</span>' : '').join('')+'</div>'+
+    '<div class="nt-head">'+
+      '<button class="nt-icon" id="ntIcon" title="Simge seç">'+esc(p.icon||'📄')+'</button>'+
+      '<div class="nt-title" id="ntTitle" contenteditable="true" spellcheck="true" data-ph="Başlıksız">'+esc(p.title)+'</div>'+
+    '</div>'+
+    '<div class="nt-meta">'+
+      '<span>Düzenlendi '+upd.toLocaleDateString('tr-TR',{day:'numeric',month:'short'})+' '+upd.toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'})+'</span>'+
+      '<label>Üst sayfa<select id="ntParent" class="cell-input">'+parentOpts+'</select></label>'+
+      '<label>Bağlantı<select id="ntLink" class="cell-input link-select">'+linkOptionsHtml()+'</select></label>'+
+      '<span class="nt-meta-actions">'+
+        '<button class="btn-ghost icon-btn" id="ntAddChild">+ Alt sayfa</button>'+
+        '<button class="btn-ghost icon-btn" id="ntExport" title="Markdown olarak indir">⇩ .md</button>'+
+        '<button class="btn-danger icon-btn" id="ntDelete">Sil</button>'+
+      '</span>'+
+    '</div>'+
+    '<div class="nt-icons" id="ntIconPick" hidden>'+NT_ICONS.map(i=>'<button data-ic="'+i+'">'+i+'</button>').join('')+'</div>'+
+    '<div class="nt-blocks" id="ntBlocks"></div>'+
+    '<div class="nt-kids" id="ntKids"></div>';
+  document.getElementById('ntLink').value = p.link || '';
+  renderNoteBlocks();
+}
+
+function renderNotesTree(){
+  const tree = document.getElementById('ntTree');
+  const q = acNorm(ntQuery);
+  if(q){
+    const hits = NOTES.pages.filter(p=>acNorm((p.title||'')+' '+p.blocks.map(b=>ntText(b.html)).join(' ')).includes(q));
+    tree.innerHTML = hits.length ? hits.map(p=>
+      '<div class="nt-row'+(p.id===ntSel?' sel':'')+'" data-id="'+p.id+'"><span class="nt-ic">'+esc(p.icon||'📄')+'</span>'+
+      '<span class="nt-label">'+esc(p.title||'Başlıksız')+'<small>'+esc(ntPath(p).slice(0,-1).map(x=>x.title).join(' › '))+'</small></span></div>').join('')
+      : '<div class="empty" style="padding:10px 0;">Sonuç yok.</div>';
+    return;
+  }
+  const html = (pid, depth)=>ntChildren(pid).map(p=>{
+    const kids = ntChildren(p.id);
+    const open = p.open !== false;
+    return '<div class="nt-row'+(p.id===ntSel?' sel':'')+'" data-id="'+p.id+'" style="padding-left:'+(6+depth*14)+'px">'+
+        '<button class="nt-caret" tabindex="-1">'+(kids.length ? (open?'▾':'▸') : '')+'</button>'+
+        '<span class="nt-ic">'+esc(p.icon||'📄')+'</span>'+
+        '<span class="nt-label">'+esc(p.title||'Başlıksız')+'</span>'+
+        '<button class="nt-plus" title="Alt sayfa ekle" tabindex="-1">+</button>'+
+      '</div>'+(kids.length && open ? html(p.id, depth+1) : '');
+  }).join('');
+  tree.innerHTML = html(null, 0) || '<div class="empty" style="padding:10px 0;">Henüz sayfa yok.</div>';
+}
+
+function renderNotes(){
+  if(ntSel && !ntPage(ntSel)) ntSelect(null);
+  if(!ntSel && NOTES.pages.length) ntSelect(ntChildren(null)[0] ? ntChildren(null)[0].id : NOTES.pages[0].id);
+  renderNotesTree();
+  const main = document.getElementById('ntMain');
+  if(!main.contains(document.activeElement)) renderNoteMain();
+}
+
+// ---- Düzenleyici yardımcıları ----
+function ntCaretOffset(el){
+  const sel = getSelection();
+  if(!sel.rangeCount) return 0;
+  const r = sel.getRangeAt(0);
+  const pre = r.cloneRange();
+  pre.selectNodeContents(el);
+  pre.setEnd(r.startContainer, r.startOffset);
+  return pre.toString().length;
+}
+function ntSetCaret(el, offset){
+  el.focus();
+  const sel = getSelection();
+  const r = document.createRange();
+  let placed = false;
+  if(offset >= 0){
+    let rest = offset;
+    const w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+    let node;
+    while((node = w.nextNode())){
+      if(rest <= node.length){ r.setStart(node, rest); placed = true; break; }
+      rest -= node.length;
+    }
+  }
+  if(placed) r.collapse(true);
+  else { r.selectNodeContents(el); r.collapse(offset === 0 ? true : false); }
+  sel.removeAllRanges();
+  sel.addRange(r);
+}
+function ntFocus(id, offset){
+  const el = document.querySelector('.nb[data-id="'+id+'"] .nb-text');
+  if(el) ntSetCaret(el, offset === undefined ? -1 : offset);
+}
+function ntSplitAtCaret(el){
+  const r = getSelection().getRangeAt(0);
+  const a = document.createRange(); a.selectNodeContents(el); a.setEnd(r.startContainer, r.startOffset);
+  const b = document.createRange(); b.selectNodeContents(el); b.setStart(r.endContainer, r.endOffset);
+  const d = document.createElement('div');
+  d.appendChild(a.cloneContents());
+  const before = ntSanitize(d.innerHTML);
+  d.innerHTML = '';
+  d.appendChild(b.cloneContents());
+  return [before, ntSanitize(d.innerHTML)];
+}
+function ntCommit(p, rerender, focusId, offset){
+  ntTouch(p);
+  saveNOTES();
+  if(rerender){ renderNoteBlocks(); if(focusId) ntFocus(focusId, offset); }
+}
+function ntScheduleSave(){
+  clearTimeout(ntSaveTimer);
+  ntSaveTimer = setTimeout(()=>{ ntSaveTimer = null; const p = ntPage(ntSel); if(p){ ntTouch(p); saveNOTES(); } }, 500);
+}
+
+// ---- "/" menüsü ----
+function ntSlashItems(q){
+  q = acNorm(q);
+  return NT_TYPES.filter(t=>!q || acNorm(t.label).includes(q) || t.type.startsWith(q));
+}
+function ntOpenSlash(blockId, q){
+  ntSlash = {blockId, index:0, q:q||''};
+  ntRenderSlash();
+}
+function ntCloseSlash(){
+  ntSlash = null;
+  const m = document.getElementById('ntSlash');
+  if(m) m.hidden = true;
+}
+function ntRenderSlash(){
+  const m = document.getElementById('ntSlash');
+  const items = ntSlashItems(ntSlash.q);
+  if(!items.length){ ntCloseSlash(); return; }
+  ntSlash.index = Math.min(ntSlash.index, items.length-1);
+  m.innerHTML = '<div class="pop-label" style="margin:0 0 4px;">Bloklar</div>'+items.map((t,i)=>
+    '<button class="nt-slash-item'+(i===ntSlash.index?' on':'')+'" data-type="'+t.type+'"><span class="nt-slash-ic">'+t.ic+'</span>'+t.label+(t.hint?'<small>'+esc(t.hint)+'</small>':'')+'</button>').join('');
+  const el = document.querySelector('.nb[data-id="'+ntSlash.blockId+'"]');
+  if(el){
+    const r = el.getBoundingClientRect();
+    m.style.top = (window.scrollY + r.bottom + 4)+'px';
+    m.style.left = (window.scrollX + r.left + 30)+'px';
+  }
+  m.hidden = false;
+}
+function ntApplyType(blockId, type){
+  const p = ntPage(ntSel);
+  const i = p.blocks.findIndex(b=>b.id===blockId);
+  if(i < 0) return;
+  const b = p.blocks[i];
+  ntCloseSlash();
+  if(type==='pagelink'){
+    const child = ntNewPage('', p.id, []);
+    Object.assign(b, {type:'pagelink', html:'', pageId:child.id});
+    ntTouch(p); saveNOTES();
+    ntSelect(child.id);
+    renderNotesTree(); renderNoteMain();
+    document.getElementById('ntTitle').focus();
+    return;
+  }
+  b.type = type;
+  b.html = ntSanitize(b.html).replace(/^\/[^<\s]*/, '');
+  if(type!=='todo') delete b.checked;
+  if(type==='divider'){
+    b.html = '';
+    const nb = {id:uid(), type:'p', html:''};
+    p.blocks.splice(i+1, 0, nb);
+    ntCommit(p, true, nb.id, 0);
+    return;
+  }
+  ntCommit(p, true, b.id, -1);
+}
+
+function setupNotes(){
+  const root = document.getElementById('mod-notlar');
+  const main = document.getElementById('ntMain');
+  const blockOf = el=>{ const n = el.closest('.nb'); const p = ntPage(ntSel); return n && p ? p.blocks.find(b=>b.id===n.dataset.id) : null; };
+
+  const openPage = id=>{ ntCloseSlash(); ntSelect(id); renderNotesTree(); renderNoteMain(); };
+  const newPage = parent=>{
+    const p = ntNewPage('', parent, []);
+    if(parent){ const par = ntPage(parent); if(par) par.open = true; }
+    saveNOTES();
+    openPage(p.id);
+    document.getElementById('ntTitle').focus();
+  };
+
+  // sayfa ağacı
+  document.getElementById('ntTree').addEventListener('click', e=>{
+    const row = e.target.closest('.nt-row');
+    if(!row) return;
+    const p = ntPage(row.dataset.id);
+    if(e.target.classList.contains('nt-caret')){ p.open = p.open === false; saveNOTES(); renderNotesTree(); return; }
+    if(e.target.classList.contains('nt-plus')) return newPage(p.id);
+    openPage(p.id);
+  });
+  document.getElementById('ntNew').addEventListener('click', ()=>newPage(null));
+  document.getElementById('ntSearch').addEventListener('input', e=>{ ntQuery = e.target.value; renderNotesTree(); });
+
+  // içe aktarma
+  const importInput = document.getElementById('ntImportInput');
+  document.getElementById('ntImportBtn').addEventListener('click', ()=>{ importInput.value = ''; importInput.click(); });
+  importInput.addEventListener('change', async ()=>{
+    let last = null, count = 0;
+    for(const f of importInput.files){
+      try{
+        const text = await f.text();
+        last = /\.json$/i.test(f.name) ? importNotesJson(JSON.parse(text)) : importMarkdown(text, f.name.replace(/\.[^.]+$/, ''));
+        count++;
+      }catch(err){ alert(f.name+' içe aktarılamadı: '+err.message); }
+    }
+    if(!count) return;
+    saveNOTES();
+    if(last) openPage(last.id);
+  });
+
+  // sayfa başlığı & meta
+  main.addEventListener('click', e=>{
+    const t = e.target;
+    if(t.id==='ntEmptyNew') return newPage(null);
+    const link = t.closest('.nb-pagelink, .nt-crumb');
+    if(link){ const id = link.dataset.page; if(ntPage(id)) openPage(id); return; }
+    const p = ntPage(ntSel);
+    if(!p) return;
+    if(t.id==='ntIcon'){ const pick = document.getElementById('ntIconPick'); pick.hidden = !pick.hidden; return; }
+    if(t.closest('#ntIconPick button')){ p.icon = t.closest('button').dataset.ic; ntTouch(p); saveNOTES(); renderNotesTree(); renderNoteMain(); return; }
+    if(t.id==='ntAddChild') return newPage(p.id);
+    if(t.id==='ntExport'){
+      const url = URL.createObjectURL(new Blob([blocksToMd(p)], {type:'text/markdown;charset=utf-8'}));
+      const a = document.createElement('a');
+      a.href = url; a.download = (p.title||'not').replace(/[\\/:*?"<>|]/g,'_')+'.md';
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(()=>URL.revokeObjectURL(url), 30000);
+      return;
+    }
+    if(t.id==='ntDelete'){
+      const ids = [p.id, ...ntDescendants(p.id)];
+      if(!confirm('"'+(p.title||'Başlıksız')+'"'+(ids.length>1 ? ' ve '+(ids.length-1)+' alt sayfası' : '')+' silinsin mi?')) return;
+      NOTES.pages = NOTES.pages.filter(x=>!ids.includes(x.id));
+      saveNOTES();
+      ntSelect(p.parent && ntPage(p.parent) ? p.parent : null);
+      renderNotes(); renderNoteMain();
+      return;
+    }
+    // blok etkileşimleri
+    const b = blockOf(t);
+    if(!b) return;
+    if(t.classList.contains('nb-check')){ b.checked = t.checked; if(!b.checked) delete b.checked; ntCommit(p, true); return; }
+    if(t.classList.contains('nb-add')){
+      const i = p.blocks.indexOf(b);
+      const nb = {id:uid(), type:'p', html:''};
+      p.blocks.splice(i+1, 0, nb);
+      ntCommit(p, true, nb.id, 0);
+      ntOpenSlash(nb.id, '');
+      return;
+    }
+    if(t.classList.contains('nb-handle')){
+      if(!confirm('Bu blok silinsin mi?')) return;
+      p.blocks = p.blocks.filter(x=>x!==b);
+      ntCommit(p, true);
+      return;
+    }
+    if(t.closest('.nb-text a') && (e.ctrlKey || e.metaKey)){ window.open(t.closest('a').href, '_blank', 'noopener'); }
+  });
+
+  main.addEventListener('change', e=>{
+    const p = ntPage(ntSel);
+    if(!p) return;
+    if(e.target.id==='ntParent'){
+      p.parent = e.target.value || null;
+      if(p.parent){ const par = ntPage(p.parent); if(par) par.open = true; }
+      ntTouch(p); saveNOTES(); renderNotesTree(); renderNoteMain();
+    } else if(e.target.id==='ntLink'){
+      if(e.target.value) p.link = e.target.value; else delete p.link;
+      ntTouch(p); saveNOTES();
+    }
+  });
+
+  main.addEventListener('input', e=>{
+    const p = ntPage(ntSel);
+    if(!p) return;
+    const t = e.target;
+    if(t.id==='ntTitle'){
+      p.title = t.textContent.replace(/\s+/g,' ').trim();
+      const row = document.querySelector('.nt-row[data-id="'+p.id+'"] .nt-label');
+      if(row) row.textContent = p.title || 'Başlıksız';
+      ntScheduleSave();
+      return;
+    }
+    if(!t.classList.contains('nb-text')) return;
+    const b = blockOf(t);
+    if(!b) return;
+    const text = t.textContent;
+    // Markdown kısayolları
+    if(b.type==='p'){
+      for(const [re, type] of NT_SHORTCUTS){
+        const m = re.exec(text);
+        if(m && (type!=='divider' || text==='---')){
+          b.type = type;
+          b.html = esc(text.slice(m[0].length));
+          if(type==='divider'){
+            b.html = '';
+            const i = p.blocks.indexOf(b);
+            const nb = {id:uid(), type:'p', html:''};
+            p.blocks.splice(i+1, 0, nb);
+            ntCommit(p, true, nb.id, 0);
+          } else ntCommit(p, true, b.id, 0);
+          return;
+        }
+      }
+    }
+    // "/" menüsü
+    if(text.startsWith('/') && !/\s/.test(text)) ntOpenSlash(b.id, text.slice(1));
+    else if(ntSlash) ntCloseSlash();
+    b.html = ntSanitize(t.innerHTML);
+    ntScheduleSave();
+  });
+
+  main.addEventListener('keydown', e=>{
+    const p = ntPage(ntSel);
+    if(!p) return;
+    const t = e.target;
+    if(t.id==='ntTitle'){
+      if(e.key==='Enter'){
+        e.preventDefault();
+        if(!p.blocks.length) p.blocks.push({id:uid(), type:'p', html:''});
+        renderNoteBlocks();
+        ntFocus(p.blocks[0].id, 0);
+      }
+      return;
+    }
+    if(!t.classList.contains('nb-text')) return;
+    const b = blockOf(t);
+    if(!b) return;
+    const i = p.blocks.indexOf(b);
+
+    if(ntSlash && ntSlash.blockId===b.id){
+      const items = ntSlashItems(ntSlash.q);
+      if(e.key==='ArrowDown'){ e.preventDefault(); ntSlash.index = (ntSlash.index+1) % items.length; ntRenderSlash(); return; }
+      if(e.key==='ArrowUp'){ e.preventDefault(); ntSlash.index = (ntSlash.index-1+items.length) % items.length; ntRenderSlash(); return; }
+      if(e.key==='Enter'){ e.preventDefault(); b.html = ''; ntApplyType(b.id, items[ntSlash.index].type); return; }
+      if(e.key==='Escape'){ e.preventDefault(); ntCloseSlash(); return; }
+    }
+
+    if(e.key==='Enter' && !e.shiftKey){
+      e.preventDefault();
+      if(b.type==='code'){ document.execCommand('insertLineBreak'); return; }
+      const listy = ['ul','ol','todo'].includes(b.type);
+      if(listy && !t.textContent.trim()){ b.type = 'p'; b.html = ''; delete b.checked; ntCommit(p, true, b.id, 0); return; }
+      const [before, after] = ntSplitAtCaret(t);
+      b.html = before;
+      const nb = {id:uid(), type:listy ? b.type : 'p', html:after};
+      p.blocks.splice(i+1, 0, nb);
+      ntCommit(p, true, nb.id, 0);
+      return;
+    }
+    if(e.key==='Backspace' && getSelection().isCollapsed && ntCaretOffset(t)===0){
+      if(b.type!=='p'){ e.preventDefault(); b.type = 'p'; delete b.checked; b.html = ntSanitize(t.innerHTML); ntCommit(p, true, b.id, 0); return; }
+      if(i > 0){
+        e.preventDefault();
+        const prev = p.blocks[i-1];
+        if(prev.type==='divider' || prev.type==='pagelink'){ p.blocks.splice(i-1, 1); ntCommit(p, true, b.id, 0); return; }
+        const len = ntText(prev.html).length;
+        prev.html = ntSanitize(prev.html + t.innerHTML);
+        p.blocks.splice(i, 1);
+        ntCommit(p, true, prev.id, len);
+      }
+      return;
+    }
+    if(e.key==='ArrowUp' && ntCaretOffset(t)===0){
+      const prev = p.blocks.slice(0, i).reverse().find(x=>x.type!=='divider' && x.type!=='pagelink');
+      if(prev){ e.preventDefault(); ntFocus(prev.id, -1); }
+      return;
+    }
+    if(e.key==='ArrowDown' && ntCaretOffset(t)===t.textContent.length){
+      const next = p.blocks.slice(i+1).find(x=>x.type!=='divider' && x.type!=='pagelink');
+      if(next){ e.preventDefault(); ntFocus(next.id, 0); }
+    }
+  });
+
+  // yapıştırma: düz metin; çok satırlıysa Markdown olarak bloklara dönüşür
+  main.addEventListener('paste', e=>{
+    const t = e.target.closest('.nb-text, #ntTitle');
+    if(!t) return;
+    e.preventDefault();
+    const text = (e.clipboardData || window.clipboardData).getData('text/plain');
+    if(t.id==='ntTitle' || !/\n/.test(text.trim())){ document.execCommand('insertText', false, t.id==='ntTitle' ? text.replace(/\s+/g,' ') : text); return; }
+    const p = ntPage(ntSel);
+    const b = blockOf(t);
+    const blocks = mdToBlocks(text);
+    if(!blocks.length) return;
+    const i = p.blocks.indexOf(b);
+    if(!t.textContent.trim()) p.blocks.splice(i, 1, ...blocks);
+    else p.blocks.splice(i+1, 0, ...blocks);
+    ntCommit(p, true, blocks[blocks.length-1].id, -1);
+  });
+
+  // sürükle-bırak ile blok sıralama
+  main.addEventListener('dragstart', e=>{
+    const h = e.target.closest && e.target.closest('.nb-handle');
+    if(!h) return;
+    ntDragId = h.closest('.nb').dataset.id;
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', ntDragId);
+  });
+  main.addEventListener('dragover', e=>{
+    const nb = ntDragId && e.target.closest && e.target.closest('.nb');
+    if(!nb) return;
+    e.preventDefault();
+    const r = nb.getBoundingClientRect();
+    document.querySelectorAll('.nb.drop-before, .nb.drop-after').forEach(x=>x.classList.remove('drop-before','drop-after'));
+    nb.classList.add(e.clientY < r.top + r.height/2 ? 'drop-before' : 'drop-after');
+  });
+  main.addEventListener('drop', e=>{
+    const nb = ntDragId && e.target.closest && e.target.closest('.nb');
+    if(!nb) return;
+    e.preventDefault();
+    const p = ntPage(ntSel);
+    const from = p.blocks.findIndex(x=>x.id===ntDragId);
+    const moving = p.blocks.splice(from, 1)[0];
+    let to = p.blocks.findIndex(x=>x.id===nb.dataset.id);
+    if(nb.classList.contains('drop-after')) to++;
+    if(to < 0) to = p.blocks.length;
+    p.blocks.splice(to, 0, moving);
+    ntDragId = null;
+    ntCommit(p, true);
+  });
+  main.addEventListener('dragend', ()=>{
+    ntDragId = null;
+    document.querySelectorAll('.nb.drop-before, .nb.drop-after').forEach(x=>x.classList.remove('drop-before','drop-after'));
+  });
+
+  document.getElementById('ntSlash').addEventListener('mousedown', e=>{
+    const it = e.target.closest('.nt-slash-item');
+    if(!it || !ntSlash) return;
+    e.preventDefault();
+    const p = ntPage(ntSel);
+    const b = p.blocks.find(x=>x.id===ntSlash.blockId);
+    if(b) b.html = '';
+    ntApplyType(ntSlash.blockId, it.dataset.type);
+  });
+  document.addEventListener('mousedown', e=>{ if(ntSlash && !e.target.closest('#ntSlash')) ntCloseSlash(); });
+  window.addEventListener('beforeunload', ()=>{ if(ntSaveTimer){ clearTimeout(ntSaveTimer); const p = ntPage(ntSel); if(p){ ntTouch(p); saveNOTES(); } } });
+  root.dataset.ready = '1';
+}
+
 function renderLeiden(){
   renderThistle();
   renderTagBar();
@@ -3917,6 +4725,7 @@ function renderLeiden(){
   renderCompanies();
   renderNivose();
   renderAcademy();
+  renderNotes();
 }
 
 renderLegendAndAlphaTable();
@@ -3930,6 +4739,7 @@ setupCompanies();
 setupTags();
 setupNivose();
 setupAcademy();
+setupNotes();
 setupVeri();
 renderLeiden();
 document.querySelectorAll('.modbtn').forEach(b=>b.addEventListener('click', ()=>showModule(b.dataset.module)));

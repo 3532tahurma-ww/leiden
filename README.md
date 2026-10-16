@@ -13,6 +13,7 @@ Leiden tek bir HTML dosyasıdır. Kurulum, sunucu veya derleme gerektirmez. Dosy
 | **Nivose** | Günlük ve aylık planlar. Her plan Edina Haritasındaki bir öğeye bağlanabilir. |
 | **Edina Haritası** | Unirce → Perce → Parce hiyerarşisi ve Linden Union Şirketleri (Şirket → Proje). |
 | **Academy** | Akademilere bağlı makaleler ve okumalar (dosyalar private veri reposunda `Essais/` altında), okunan kitaplar. |
+| **Notlar** | Notion tarzı iç içe sayfalar ve blok düzenleyici: `/` menüsü, Markdown kısayolları, sürükle-bırak, Markdown içe/dışa aktarma. |
 | **Veri** | JSON dışa / içe aktarma ve GitHub senkronu. |
 
 Tarihler [Edina Takvimi](EDINA-TAKVIMI.md)'ne göre de gösterilir (Eylül 2006 = 1. ay).
@@ -88,13 +89,14 @@ Tüm veri tarayıcının `localStorage`'ında tutulur. İstersen ayrıca bir Git
 ```json
 {
   "app": "Leiden",
-  "version": 4,
+  "version": 5,
   "savedAt": "2026-10-15T12:00:00.000Z",
   "entries": { "2026-10-10": { "activities": { "P": 2, "CL": 1 }, "likit": null, "pkur": null } },
   "thistle": { "holders": [], "rates": {}, "expenses": [], "fixed": [] },
   "nivose":  { "plans": [] },
   "map":     { "unirces": [], "companies": [], "tags": [] },
-  "academy": { "entries": [], "books": [] }
+  "academy": { "entries": [], "books": [] },
+  "notes":   { "pages": [] }
 }
 ```
 
@@ -116,6 +118,23 @@ leiden-data/
 - Klasör adı Edina Haritasındaki bir Perce ya da Parce adıyla eşleşirse o akademiye bağlanır. Adında "Academy" / "Akademi" geçen bloklar otomatik olarak akademi sayılır, diğerleri ⋯ menüsünden işaretlenebilir.
 - Dosya başına sınır 25 MB'tır.
 
-> ⚠️ `Essais` klasörünü sayfanın bulunduğu **public** repoya yükleme. Yalnızca private veri reposunda durmalı.
+> ⚠️ `Essais` ve `Notlar` klasörlerini sayfanın bulunduğu **public** repoya yükleme. Kişisel içerik yalnızca private veri reposunda durmalı.
+
+### Notlar kısayolları
+
+| Yaz | Sonuç |
+|---|---|
+| `/` | Blok menüsü |
+| `# ` · `## ` · `### ` | Başlık 1 · 2 · 3 |
+| `- ` | Madde listesi |
+| `1. ` | Numaralı liste |
+| `[] ` | Yapılacak |
+| `> ` | Alıntı |
+| `! ` | Bilgi kutusu |
+| ```` ``` ```` | Kod |
+| `---` | Ayırıcı |
+| Ctrl+B / Ctrl+I / Ctrl+U | Kalın / italik / altı çizili |
+
+Çok satırlı metin yapıştırıldığında Markdown olarak bloklara dönüşür. Markdown dosyası içe aktarılırken birden fazla `#` başlığı varsa ilki ana sayfa, diğerleri alt sayfa olur.
 
 Unirce ve şirket resimleri 256 piksele küçültülüp bu dosyanın içinde saklanır. Haritadaki her blok isteğe bağlı olarak `color` (blok rengi) ve `tags` (etiket id listesi) alanlarını taşır. Eski sürümlerle (version 2) kaydedilmiş dosyalar olduğu gibi açılır.
