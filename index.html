@@ -951,6 +951,7 @@
   .oow-import{margin:16px 0 4px;padding:14px;border:1px dashed var(--border);border-radius:14px;background:var(--surface-2);}
   .oow-add{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:18px 0 6px;}
   .oow-doc{max-width:760px;margin:24px auto 0;}
+  .oow-add-bottom{max-width:760px;margin:22px auto 0;padding-left:38px;}
   .oow-day{position:relative;margin:0 0 26px;padding-left:44px;border-radius:14px;}
   .oow-dhead{display:flex;align-items:center;gap:10px;margin-left:-44px;}
   .oow-dic{width:34px;text-align:center;font-size:1.3rem;flex:none;}
@@ -5632,7 +5633,8 @@ function renderOowMonth(main){
     '</div>'+
     '<div class="oow-doc">'+
       (ds.length ? ds.map(d=>oowDayHtml(d, mi.icon||'📄')).join('') : '<div class="empty">Bu ayda henüz kayıt yok. Yukarıdan bir gün ekle.</div>')+
-    '</div>';
+    '</div>'+
+    (ds.length && nextFree <= lastOfMonth ? '<div class="oow-add oow-add-bottom"><button class="btn-primary" id="oowAddNext" data-d="'+nextFree+'">＋ '+oowDateLabel(nextFree)+' ekle</button></div>' : '');
 }
 
 function renderOowtory(){
@@ -5841,6 +5843,7 @@ function setupOowtory(){
       return openDay(d);
     }
     if(t.id==='oowToday') return openDay(todayStr());
+    if(t.id==='oowAddNext') return openDay(t.dataset.d);
     if(t.id==='oowMonthPdf'){
       finishEdit();
       const mi = oowMonthInfo(oowMonth);
