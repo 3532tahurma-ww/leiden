@@ -262,6 +262,7 @@
     display:flex;flex-direction:column;justify-content:center;align-items:center;gap:2px;
     font-family:'IBM Plex Mono',monospace;
   }
+  .cal-week b.cal-cmr{color:var(--lilac);margin-top:4px;}
   .cal-week b{font-size:.9rem;color:var(--gold);}
   .cal-week span{font-size:.6rem;color:var(--muted-2);letter-spacing:.06em;text-transform:uppercase;}
 
@@ -511,9 +512,18 @@
   .nt-ic{flex:none;width:20px;text-align:center;}
   .nt-label{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
   .nt-label small{display:block;font-size:.66rem;color:var(--muted-2);font-weight:400;}
-  .nt-plus{background:none;border:none;padding:0 4px;color:var(--muted-2);font-size:.95rem;opacity:0;flex:none;}
-  .nt-row:hover .nt-plus{opacity:1;}
-  .nt-plus:hover{color:var(--lilac);}
+  .nt-row-acts{display:flex;flex:none;opacity:0;transition:opacity .1s ease;}
+  .nt-row:hover .nt-row-acts{opacity:1;}
+  .nt-plus,.nt-move{background:none;border:none;padding:0 3px;color:var(--muted-2);font-size:.85rem;line-height:1.3;border-radius:5px;flex:none;}
+  .nt-plus{font-size:.95rem;}
+  .nt-plus:hover,.nt-move:hover{color:var(--lilac);background:var(--surface-2);}
+  @media (hover:none){ .nt-row-acts{opacity:1;} }
+  .nt-side-open{display:none;background:#fff;border:1px solid var(--border);border-radius:8px;padding:3px 9px;margin-right:6px;font-size:.9rem;color:var(--muted);}
+  .nt-side-open:hover{color:var(--lilac);border-color:var(--lilac-soft);}
+  #mod-notlar.side-closed .notes-layout{grid-template-columns:1fr;}
+  #mod-notlar.side-closed .notes-side{display:none;}
+  #mod-notlar.side-closed .nt-side-open{display:inline-block;}
+  #ntSideClose{padding:6px 9px;}
   .notes-main{min-height:70vh;padding:28px 40px 60px;}
   .nt-empty{text-align:center;padding:80px 20px;}
   .nt-empty-ic{font-size:2.6rem;}
@@ -757,28 +767,426 @@
     .treasury{grid-template-columns:1fr;text-align:center;}
     .pillar-col.left,.pillar-col.right{align-items:center;}
   }
+
+  /* ===================== Cila katmanı ===================== */
+  :root{
+    --shadow-sm:0 1px 2px rgba(80,50,20,.05),0 6px 16px -10px rgba(80,50,20,.3);
+    --shadow-md:0 2px 4px rgba(80,50,20,.05),0 18px 36px -18px rgba(80,50,20,.45);
+    --ease:cubic-bezier(.2,.8,.2,1);
+  }
+  html{scroll-behavior:smooth;}
+  ::selection{background:rgba(149,115,184,.25);}
+  body::before,body::after{
+    content:"";position:fixed;z-index:-1;border-radius:50%;filter:blur(60px);opacity:.6;pointer-events:none;
+    animation:blobFloat 24s ease-in-out infinite alternate;
+  }
+  body::before{width:520px;height:520px;left:-140px;top:-100px;background:radial-gradient(circle,#f7d6b8,transparent 70%);}
+  body::after{width:620px;height:620px;right:-180px;top:35vh;background:radial-gradient(circle,#e4d3f6,transparent 70%);animation-duration:30s;}
+  @keyframes blobFloat{0%{transform:translate(0,0) scale(1)}50%{transform:translate(70px,40px) scale(1.08)}100%{transform:translate(-30px,90px) scale(.94)}}
+  ::-webkit-scrollbar{width:10px;height:10px;}
+  ::-webkit-scrollbar-thumb{background:#e2d3bf;border-radius:10px;border:2px solid var(--ink);}
+  ::-webkit-scrollbar-thumb:hover{background:#d2bfa6;}
+  ::-webkit-scrollbar-track{background:transparent;}
+
+  /* başlık & navigasyon */
+  button.brand-name{background:none;border:none;padding:0;color:var(--text);cursor:pointer;}
+  .brand-mark{
+    box-shadow:0 8px 18px -8px rgba(149,115,184,.8);
+    background:linear-gradient(135deg,var(--lilac),var(--gold),var(--lilac));background-size:220% 220%;
+    animation:markShift 9s ease infinite;transition:transform .3s var(--ease);
+  }
+  button.brand-name:hover .brand-mark{transform:rotate(-10deg) scale(1.08);}
+  @keyframes markShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+  .modnav{background:rgba(255,255,255,.72);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:var(--shadow-sm);}
+  .modbtn{display:inline-flex;align-items:center;gap:6px;}
+  .modbtn .mi{font-size:1rem;line-height:1;display:inline-block;transition:transform .25s var(--ease);}
+  .modbtn:hover .mi{transform:translateY(-2px) scale(1.15);}
+  .modbtn.active{background:linear-gradient(135deg,#3d2f28,#5d4538);box-shadow:0 8px 18px -10px rgba(61,47,40,.9);}
+  @media (max-width:1180px){
+    .modbtn .ml{display:none;}
+    .modbtn.active .ml{display:inline;}
+    .modbtn{padding:8px 11px;}
+  }
+  h1 .h1-ic{display:inline-block;margin-right:12px;font-size:.82em;animation:icPop .6s var(--ease) both;}
+  @keyframes icPop{from{transform:scale(.3) rotate(-25deg);opacity:0}to{transform:none;opacity:1}}
+
+  /* geçişler */
+  .module.active > *{animation:fadeUp .5s var(--ease) both;}
+  .module.active > *:nth-child(2){animation-delay:.05s;}
+  .module.active > *:nth-child(3){animation-delay:.1s;}
+  .module.active > *:nth-child(4){animation-delay:.15s;}
+  .module.active > *:nth-child(5){animation-delay:.2s;}
+  .module.active > *:nth-child(n+6){animation-delay:.25s;}
+  .spanel.active,.tab-panel.active{animation:fadeIn .35s var(--ease) both;}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+  /* yüzeyler */
+  .card,.tablecard,.stat,.treasury,.th-hero,.unirce{box-shadow:var(--shadow-sm);transition:box-shadow .3s var(--ease),transform .3s var(--ease),border-color .3s;}
+  .stat,.holder,.book,.home-tile,.mini-kpi{transition:transform .3s var(--ease),box-shadow .3s var(--ease);}
+  .stat:hover,.holder:hover,.book:hover,.home-tile:hover,.mini-kpi:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);}
+  .stat{position:relative;overflow:hidden;}
+  .stat::after{
+    content:"";position:absolute;inset:0;pointer-events:none;transform:translateX(-110%);
+    background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.6) 50%,transparent 70%);
+    transition:transform .8s var(--ease);
+  }
+  .stat:hover::after{transform:translateX(110%);}
+  .tabs{background:rgba(255,253,249,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:var(--shadow-sm);}
+  .tab.active,.stab.active{box-shadow:0 8px 18px -10px rgba(149,115,184,.95);}
+
+  /* butonlar & alanlar */
+  button{transition:transform .15s var(--ease),opacity .15s,box-shadow .2s,background .2s,color .2s,border-color .2s;}
+  .btn-primary{position:relative;overflow:hidden;box-shadow:0 8px 18px -10px rgba(149,115,184,.95);}
+  .btn-primary:hover{opacity:1;transform:translateY(-1px);box-shadow:0 12px 24px -10px rgba(149,115,184,1);}
+  .btn-primary::after{
+    content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;pointer-events:none;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.5),transparent);transform:skewX(-20deg);transition:left .7s var(--ease);
+  }
+  .btn-primary:hover::after{left:130%;}
+  .btn-ghost:hover,.btn-danger:hover{transform:translateY(-1px);}
+  input:not([type="checkbox"]):not([type="color"]):focus,textarea:focus,select:focus{outline:none;box-shadow:0 0 0 3px rgba(149,115,184,.2);border-color:var(--lilac-soft);}
+
+  /* bildirimler */
+  #toasts{position:fixed;right:20px;bottom:20px;z-index:200;display:flex;flex-direction:column;gap:8px;align-items:flex-end;pointer-events:none;}
+  .toast{
+    background:#3d2f28;color:#fff;padding:11px 16px;border-radius:14px;font-size:.84rem;font-weight:600;max-width:360px;
+    box-shadow:0 14px 30px -12px rgba(0,0,0,.5);opacity:0;transform:translateY(14px) scale(.96);
+    transition:opacity .3s var(--ease),transform .3s var(--ease);
+  }
+  .toast.in{opacity:1;transform:none;}
+  .toast.ok::before{content:"✓  ";color:#a6e3c3;}
+  .toast.err{background:#8e3442;}
+  .toast.err::before{content:"⚠  ";}
+
+  /* konfeti */
+  .confetti{position:fixed;width:7px;height:11px;border-radius:2px;pointer-events:none;z-index:300;animation:confettiFly .95s cubic-bezier(.15,.7,.3,1) forwards;}
+  @keyframes confettiFly{
+    0%{transform:translate(-50%,-50%) rotate(0);opacity:1}
+    100%{transform:translate(calc(var(--dx) - 50%),calc(var(--dy) + 70px)) rotate(var(--r));opacity:0}
+  }
+
+  /* Ana Sayfa */
+  .home-hero{
+    display:grid;grid-template-columns:1.35fr 1fr;gap:28px;align-items:center;position:relative;overflow:hidden;
+    padding:34px 36px;border-radius:28px;margin-bottom:22px;border:1px solid var(--border);box-shadow:var(--shadow-md);
+    background:linear-gradient(135deg,#fffaf2 0%,#fbecd9 55%,#f1e3f7 100%);
+  }
+  .home-hero::after{content:"✦";position:absolute;right:30px;top:6px;font-size:6rem;color:rgba(149,115,184,.09);pointer-events:none;}
+  .home-greet{font-size:2.7rem;margin:4px 0 10px;cursor:pointer;}
+  .home-quote{font-family:'Fraunces',serif;font-style:italic;color:var(--muted);font-size:1.04rem;line-height:1.55;margin:0;max-width:540px;}
+  .home-hero-stats{display:grid;gap:10px;position:relative;z-index:1;}
+  .hh-stat{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.78);border:1px solid var(--border);border-radius:16px;padding:12px 16px;backdrop-filter:blur(6px);}
+  .hh-ic{font-size:1.45rem;width:44px;height:44px;flex:none;display:flex;align-items:center;justify-content:center;border-radius:13px;background:var(--surface-2);}
+  .hh-stat b{display:block;font-family:'IBM Plex Mono',monospace;font-size:1.25rem;}
+  .hh-stat span{font-size:.74rem;color:var(--muted);}
+  .hh-stat .hh-ic{font-size:1.45rem;color:inherit;}
+  .home-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin-bottom:22px;}
+  .home-tile{
+    position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:flex-start;gap:3px;text-align:left;
+    padding:20px 18px 18px;border-radius:20px;background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow-sm);color:var(--text);
+  }
+  .home-tile::before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:var(--tc);}
+  .home-tile::after{
+    content:"";position:absolute;right:-36px;top:-36px;width:120px;height:120px;border-radius:50%;pointer-events:none;
+    background:radial-gradient(circle,color-mix(in srgb,var(--tc) 24%,transparent),transparent 70%);transition:transform .45s var(--ease);
+  }
+  .home-tile:hover::after{transform:scale(1.5);}
+  .ht-ic{font-size:1.9rem;margin-bottom:6px;display:inline-block;transition:transform .35s var(--ease);}
+  .home-tile:hover .ht-ic{transform:scale(1.15) rotate(-8deg);}
+  .ht-name{font-family:'Fraunces',serif;font-weight:600;font-size:1.18rem;}
+  .ht-desc{font-size:.76rem;color:var(--muted);}
+  .ht-metric{margin-top:12px;font-size:.78rem;color:var(--muted);}
+  .ht-metric b{font-family:'IBM Plex Mono',monospace;font-size:1.18rem;color:var(--text);margin-right:5px;}
+  .ht-sub{font-size:.7rem;color:var(--muted-2);font-family:'IBM Plex Mono',monospace;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .ht-arrow{position:absolute;right:16px;bottom:14px;color:var(--muted-2);transition:transform .25s var(--ease),color .2s;}
+  .home-tile:hover .ht-arrow{transform:translateX(5px);color:var(--tc);}
+  .home-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:start;}
+  .home-cols .card-head h2{font-size:1.08rem;}
+  .home-item{
+    display:flex;align-items:center;gap:10px;width:100%;margin:6px 0 0;padding:9px 11px;text-align:left;cursor:pointer;
+    background:#fff;border:1px solid var(--border);border-radius:12px;font-size:.88rem;font-weight:500;color:var(--text);
+  }
+  .home-item:hover{border-color:var(--lilac-soft);transform:translateX(2px);}
+  .home-item .hi-txt{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .home-item small{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--muted-2);white-space:nowrap;max-width:40%;overflow:hidden;text-overflow:ellipsis;}
+  .home-item.done .hi-txt{text-decoration:line-through;color:var(--muted-2);}
+  .home-item input{width:17px;height:17px;accent-color:var(--lilac);flex:none;margin:0;}
+  .home-empty{text-align:center;color:var(--muted);font-size:.86rem;padding:22px 8px;line-height:1.6;}
+  .home-empty small{color:var(--muted-2);}
+  @media (max-width:900px){
+    .home-hero{grid-template-columns:1fr;padding:24px 22px;}
+    .home-greet{font-size:2.05rem;}
+    .home-cols{grid-template-columns:1fr;}
+  }
+  /* Oowtory */
+  .oow-main{padding:30px 40px 50px;min-height:60vh;}
+  .oow-yearhead,.oow-monthhead{display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+  .oow-bigic{font-size:3.4rem;line-height:1;animation:icPop .6s var(--ease) both;}
+  .oow-yt,.oow-mt{flex:1;min-width:220px;}
+  input.cell-input.oow-ytitle,input.cell-input.oow-mname-in{font-family:'Fraunces',serif;font-weight:700;font-size:2.2rem;padding:2px 6px;}
+  .oow-actions{display:flex;gap:6px;flex-wrap:wrap;}
+  .oow-actions button{padding:7px 12px;font-size:.8rem;}
+  .oow-actions button:disabled{opacity:.45;cursor:not-allowed;transform:none;}
+  .oow-ychips{display:flex;gap:6px;flex-wrap:wrap;margin-top:16px;}
+  .oow-ychip{padding:5px 12px;border-radius:999px;border:1px solid var(--border);background:#fff;color:var(--text);font-size:.8rem;font-weight:600;}
+  .oow-ychip:hover{border-color:var(--lilac-soft);}
+  .oow-ychip.on{background:var(--lilac-soft);border-color:var(--lilac-soft);}
+  .oow-ychip small{opacity:.6;font-weight:500;margin-left:4px;}
+  .oow-months{display:flex;flex-direction:column;gap:6px;margin-top:22px;}
+  .oow-mrow{
+    display:grid;grid-template-columns:36px minmax(120px,1fr) 150px minmax(120px,1.3fr) 64px;gap:12px;align-items:center;
+    padding:10px 14px;border-radius:14px;background:#fff;border:1px solid var(--border);text-align:left;color:var(--text);
+  }
+  .oow-mrow:hover{border-color:var(--lilac-soft);transform:translateX(3px);box-shadow:var(--shadow-sm);}
+  .oow-mrow.cur{border-color:var(--gold);box-shadow:0 0 0 2px rgba(207,154,62,.18);}
+  .oow-mic{font-size:1.4rem;text-align:center;}
+  .oow-mname{font-weight:700;font-size:1rem;text-decoration:underline;text-decoration-color:var(--border);text-underline-offset:4px;}
+  .oow-mname em{font-weight:400;color:var(--muted-2);text-decoration:none;}
+  .oow-mgreg{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--muted-2);}
+  .oow-heat{display:grid;grid-template-columns:repeat(31,1fr);gap:2px;}
+  .oow-heat i{height:12px;border-radius:3px;background:#f2e8da;}
+  .oow-heat i.on{background:linear-gradient(180deg,#e0b05c,var(--gold));}
+  .oow-mcount{font-family:'IBM Plex Mono',monospace;font-size:.74rem;color:var(--muted);text-align:right;}
+  .oow-import{margin:16px 0 4px;padding:14px;border:1px dashed var(--border);border-radius:14px;background:var(--surface-2);}
+  .oow-add{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:18px 0 6px;}
+  .oow-doc{max-width:760px;margin:24px auto 0;}
+  .oow-day{position:relative;margin:0 0 26px;padding-left:44px;border-radius:14px;}
+  .oow-dhead{display:flex;align-items:center;gap:10px;margin-left:-44px;}
+  .oow-dic{width:34px;text-align:center;font-size:1.3rem;flex:none;}
+  .oow-date{font-weight:800;color:#c8923a;font-size:1rem;}
+  .oow-edina{font-family:'IBM Plex Mono',monospace;font-size:.66rem;color:var(--muted-2);}
+  .oow-dacts{margin-left:auto;display:flex;gap:2px;opacity:0;transition:opacity .15s;}
+  .oow-day:hover .oow-dacts,.oow-day.editing .oow-dacts{opacity:1;}
+  @media (hover:none){ .oow-dacts{opacity:1;} }
+  .oow-body{cursor:text;border-radius:10px;padding:2px 6px;margin-left:-6px;transition:background .15s;}
+  .oow-body:hover{background:rgba(255,255,255,.7);}
+  .oow-emptyday{color:var(--muted-2);font-size:.86rem;font-style:italic;padding:6px;}
+  .oow-group{padding:7px 0;border-top:1px solid #ece3d6;}
+  .oow-group:first-child{border-top:none;padding-top:3px;}
+  .oow-line{font-size:.95rem;line-height:1.7;color:var(--text);}
+  .oow-k{font-weight:600;}
+  .oow-line i{color:#4d3d35;}
+  .oow-day.editing{background:#fff;border:1px solid var(--lilac-soft);box-shadow:var(--shadow-md);padding:12px 14px 14px 58px;}
+  .oow-day.editing .oow-dhead{margin-left:-44px;}
+  .oow-edit{display:flex;flex-direction:column;gap:8px;margin-top:8px;}
+  input.cell-input.oow-label-in{background:var(--surface-2);font-size:.86rem;}
+  .oow-keys{display:flex;flex-wrap:wrap;gap:5px;}
+  .oow-keys button.tchip{font-size:.7rem;padding:3px 9px;}
+  textarea.oow-text{min-height:0;font-family:'IBM Plex Mono',monospace;font-size:.86rem;line-height:1.7;background:#fffdf9;}
+  .oow-edit-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:.72rem;color:var(--muted-2);}
+  .oow-edit-foot button{padding:7px 16px;}
+  @media (max-width:760px){
+    .oow-main{padding:20px 16px 36px;}
+    .oow-mrow{grid-template-columns:30px 1fr 56px;}
+    .oow-mrow .oow-mgreg,.oow-mrow .oow-heat{display:none;}
+    .oow-day{padding-left:0;}
+    .oow-dhead{margin-left:0;}
+    .oow-day.editing{padding:12px;}
+    .oow-day.editing .oow-dhead{margin-left:0;}
+    input.cell-input.oow-ytitle,input.cell-input.oow-mname-in{font-size:1.6rem;}
+  }
+
+  /* Oowtory: haritaya bağlı anahtarlar */
+  .oow-k.linked{cursor:pointer;border-radius:5px;padding:0 2px;margin:0 -2px;transition:background .15s;}
+  .oow-k.linked:hover{background:color-mix(in srgb,var(--rc) 14%,transparent);}
+  .oow-kdot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--rc);margin:0 5px 2px 0;vertical-align:middle;}
+  input.oow-mapkey{width:auto;flex:0 1 200px;padding:3px 10px;font-size:.72rem;border-radius:999px;background:#fff;}
+  .flash{animation:flashRing 1.8s var(--ease);}
+  @keyframes flashRing{0%,60%{box-shadow:0 0 0 4px rgba(207,154,62,.55);}100%{box-shadow:0 0 0 0 rgba(207,154,62,0);}}
+
+  /* kısayollar penceresi */
+  .brand-left{display:flex;align-items:center;gap:10px;}
+  .help-btn{width:36px;height:36px;border-radius:12px;padding:0;font-size:1rem;background:rgba(255,255,255,.75);border:1px solid var(--border);box-shadow:var(--shadow-sm);}
+  .help-btn:hover{transform:translateY(-1px) rotate(-6deg);border-color:var(--lilac-soft);}
+  .help-modal{position:fixed;inset:0;z-index:150;display:flex;align-items:flex-start;justify-content:center;padding:6vh 16px;background:rgba(61,47,40,.28);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);overflow-y:auto;animation:fadeIn .2s var(--ease);}
+  .help-modal[hidden]{display:none;}
+  .help-box{width:min(980px,100%);background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:22px 26px 26px;box-shadow:0 30px 70px -30px rgba(40,25,10,.6);animation:fadeUp .3s var(--ease);}
+  .help-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+  .help-head h2{font-family:'Fraunces',serif;font-weight:600;font-size:1.4rem;margin:0;}
+  .help-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px;}
+  .help-grid section{background:#fff;border:1px solid var(--border);border-radius:16px;padding:12px 14px;}
+  .help-grid section.wide{grid-column:1 / -1;}
+  .help-grid h3{margin:0 0 8px;font-size:.92rem;}
+  .help-grid dl{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;margin:0;font-size:.8rem;align-items:baseline;}
+  .help-grid section.wide dl{grid-template-columns:auto 1fr auto 1fr;}
+  .help-grid dt{font-weight:600;color:var(--text);white-space:nowrap;}
+  .help-grid dd{margin:0;color:var(--muted);}
+  kbd{display:inline-block;min-width:20px;padding:1px 6px;border:1px solid var(--border);border-bottom-width:2px;border-radius:6px;background:var(--surface-2);font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--text);text-align:center;}
+  .help-grid code{font-family:'IBM Plex Mono',monospace;font-size:.74rem;background:#f4ece0;padding:1px 5px;border-radius:5px;color:var(--text);}
+  @media (max-width:760px){ .help-grid section.wide dl{grid-template-columns:auto 1fr;} }
+
+  /* PDF çıktısı */
+  #printArea{display:none;}
+  @media print{
+    body.printing{background:#fff !important;padding:0 !important;margin:0 !important;}
+    body.printing::before,body.printing::after{display:none !important;}
+    body.printing > *:not(#printArea){display:none !important;}
+    body.printing #printArea{display:block !important;}
+    #printArea *{animation:none !important;}
+    .pm{font-family:'Manrope',system-ui,sans-serif;color:#111;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .pm + .pm{break-before:page;}
+    .pm-ic{font-size:42pt;line-height:1;margin:0 0 6mm;}
+    .pm-title{font-family:'Manrope',sans-serif;font-weight:800;font-size:28pt;margin:0 0 12mm;letter-spacing:-.01em;}
+    .pd{display:grid;grid-template-columns:11mm 1fr;margin:0 0 9mm;break-inside:avoid;}
+    .pd-ic{font-size:15pt;line-height:1.2;}
+    .pd-date{color:#c8923a;font-weight:700;font-size:12pt;margin-bottom:1.5mm;}
+    .pd-group{padding:1.8mm 0;border-top:.6pt solid #e2e2e2;}
+    .pd-group:nth-child(2){border-top:none;padding-top:0;}
+    .pd .oow-line{font-size:10.5pt;line-height:1.55;color:#111;}
+    .pd .oow-k{font-weight:400;}
+    .pd .oow-line i{color:#111;}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none !important;transition:none !important;scroll-behavior:auto !important;}
+  }
 </style>
 </head>
 <body>
 <div class="wrap">
 
   <header class="brand">
-    <div class="brand-name"><span class="brand-mark"></span>Leiden</div>
+    <span class="brand-left"><button class="brand-name" id="brandHome" title="Ana Sayfa"><span class="brand-mark"></span>Leiden</button><button class="help-btn" id="helpBtn" title="Kısayollar (?)">⌨️</button></span>
     <nav class="modnav">
-      <button class="modbtn" data-module="lamerite">La Merite</button>
-      <button class="modbtn" data-module="thistle">Thistle</button>
-      <button class="modbtn" data-module="nivose">Nivose</button>
-      <button class="modbtn" data-module="harita">Edina Haritası</button>
-      <button class="modbtn" data-module="academy">Academy</button>
-      <button class="modbtn" data-module="notlar">Notlar</button>
-      <button class="modbtn" data-module="veri">Veri</button>
+      <button class="modbtn" data-module="home"><span class="mi">🏠</span><span class="ml">Ana Sayfa</span></button>
+      <button class="modbtn" data-module="lamerite"><span class="mi">🏛️</span><span class="ml">La Merite</span></button>
+      <button class="modbtn" data-module="thistle"><span class="mi">💰</span><span class="ml">Thistle</span></button>
+      <button class="modbtn" data-module="nivose"><span class="mi">🗓️</span><span class="ml">Nivose</span></button>
+      <button class="modbtn" data-module="harita"><span class="mi">🗺️</span><span class="ml">Edina Haritası</span></button>
+      <button class="modbtn" data-module="academy"><span class="mi">🎓</span><span class="ml">Academy</span></button>
+      <button class="modbtn" data-module="oowtory"><span class="mi">📜</span><span class="ml">Oowtory</span></button>
+      <button class="modbtn" data-module="notlar"><span class="mi">📝</span><span class="ml">Notlar</span></button>
+      <button class="modbtn" data-module="veri"><span class="mi">☁️</span><span class="ml">Veri</span></button>
     </nav>
     <span class="sync-status sync-pill"></span>
   </header>
 
-  <div class="module" data-module="lamerite">
-  <p class="eyebrow">La Merite (MR) · İki Sütunlu Hazine Mimarisi</p>
-  <h1>La Merite</h1>
+  <div id="helpModal" class="help-modal" hidden>
+    <div class="help-box" role="dialog" aria-modal="true" aria-label="Kısayollar">
+      <div class="help-head">
+        <h2>⌨️ Kısayollar ve yazım biçimleri</h2>
+        <button class="del-btn" id="helpClose" title="Kapat (Esc)">✕</button>
+      </div>
+      <div class="help-grid">
+        <section>
+          <h3>🌐 Genel</h3>
+          <dl>
+            <dt><kbd>?</kbd></dt><dd>Bu pencereyi aç / kapat</dd>
+            <dt><kbd>Esc</kbd></dt><dd>Pencereyi, menüyü ya da düzenlemeyi kapat</dd>
+            <dt>Leiden logosu</dt><dd>Ana Sayfa'ya dön</dd>
+            <dt><kbd>Enter</kbd></dt><dd>Çoğu "ekle" alanında ekler (plan, hesap, harcama, Perce, Parce…)</dd>
+          </dl>
+        </section>
+        <section>
+          <h3>🏛️ La Merite</h3>
+          <dl>
+            <dt>Haftalık giriş</dt><dd>Her satır bir gün: <b>Cumartesi → Cuma</b></dd>
+            <dt><code>P 3 CL 2</code></dt><dd>Kod + saat çiftleri</dd>
+            <dt>Kodlar</dt><dd><code>P</code> ×4 · <code>WM</code> ×4 · <code>S</code> ×3 · <code>CL</code> ×2 · <code>MPC</code> ×2 · <code>E</code> ×1</dd>
+            <dt>Sayılar</dt><dd><code>12.000</code>, <code>41,25</code> gibi Türkçe yazım geçerli</dd>
+          </dl>
+        </section>
+        <section>
+          <h3>🗓️ Nivose</h3>
+          <dl>
+            <dt>☆ / ★</dt><dd>Planı önemli işaretle</dd>
+            <dt>↷</dt><dd>Planı ertesi güne ertele</dd>
+            <dt>Bugüne</dt><dd>Geciken planı bugüne taşı</dd>
+            <dt>Takvim günü</dt><dd>Tıkla → o gün Günlük görünümde açılır</dd>
+          </dl>
+        </section>
+        <section>
+          <h3>💰 Thistle</h3>
+          <dl>
+            <dt>Hızlı kategori</dt><dd>Tıkla → kategori dolar, imleç tutara geçer</dd>
+            <dt>✓</dt><dd>Sabit gideri seçili ay için ödendi işaretle</dd>
+            <dt><kbd>Esc</kbd></dt><dd>"+ Birim ekle" satırını kapat</dd>
+            <dt>Tutarlar</dt><dd>Tablodaki değerlere tıklayıp doğrudan düzenle</dd>
+          </dl>
+        </section>
+        <section>
+          <h3>🗺️ Edina Haritası</h3>
+          <dl>
+            <dt>⋯</dt><dd>Blok rengi, etiketler, "Akademi" işareti</dd>
+            <dt>↑ ↓ · ‹ ›</dt><dd>Unirce / Parce · Perce / Proje sıralaması</dd>
+            <dt>▾</dt><dd>Unirce ya da şirketi daralt / genişlet</dd>
+            <dt>Etiket çubuğu</dt><dd>Etikete tıkla → haritayı filtrele</dd>
+          </dl>
+        </section>
+        <section>
+          <h3>🎓 Academy</h3>
+          <dl>
+            <dt>Durum etiketi</dt><dd>Tıkla → Okunacak → Okunuyor → Okundu</dd>
+            <dt>▾</dt><dd>Ayrıntılar: yazar, bağlantı, notlar, indir, sil</dd>
+            <dt>PDF / DOCX</dt><dd>Dosyayı aç (PDF yeni sekmede, DOCX iner)</dd>
+            <dt>★ (kitap)</dt><dd>Puanla; aynı yıldıza tekrar tıkla → puanı sil</dd>
+          </dl>
+        </section>
+        <section class="wide">
+          <h3>📜 Oowtory</h3>
+          <dl>
+            <dt><code>Anahtar : Değer</code></dt><dd>Her satır bir kayıt, örn. <code>Hilda : Athai’s Home</code></dd>
+            <dt><code>*metin*</code></dt><dd><i>İtalik</i></dd>
+            <dt><code>---</code></dt><dd>Grup ayırıcı çizgi</dd>
+            <dt><kbd>Ctrl</kbd>+<kbd>Enter</kbd> · <kbd>Esc</kbd></dt><dd>Düzenlemeyi bitir</dd>
+            <dt>Anahtar butonları</dt><dd>Tek tıkla satır başına ekle; <b>◆</b> haritada karşılığı olanlar</dd>
+            <dt>🗺️ Haritadan ekle</dt><dd>Unirce, Perce, Parce, şirket ve proje adlarından seç</dd>
+            <dt>Renkli nokta</dt><dd>Haritaya bağlı anahtar; tıkla → Edina Haritası'nda o blok</dd>
+            <dt>İçe aktarma</dt><dd><code>01/04/2026</code> ya da <code>🌼 01/04/2026 - Gün adı</code> yeni gün başlatır</dd>
+          </dl>
+        </section>
+        <section class="wide">
+          <h3>📝 Notlar</h3>
+          <dl>
+            <dt><kbd>/</kbd></dt><dd>Blok menüsü (↑ ↓ seç, <kbd>Enter</kbd> uygula)</dd>
+            <dt><code>#</code> <code>##</code> <code>###</code> + boşluk</dt><dd>Başlık 1 · 2 · 3</dd>
+            <dt><code>-</code> · <code>1.</code> · <code>[]</code> + boşluk</dt><dd>Madde · numaralı liste · yapılacak</dd>
+            <dt><code>&gt;</code> · <code>!</code> · <code>```</code> + boşluk</dt><dd>Alıntı · bilgi kutusu · kod</dd>
+            <dt><code>---</code></dt><dd>Ayırıcı</dd>
+            <dt><kbd>Ctrl</kbd>+<kbd>B</kbd> / <kbd>I</kbd> / <kbd>U</kbd></dt><dd>Kalın / italik / altı çizili</dd>
+            <dt><kbd>Enter</kbd> · <kbd>Shift</kbd>+<kbd>Enter</kbd></dt><dd>Yeni blok · aynı blokta yeni satır</dd>
+            <dt><kbd>Backspace</kbd> (başta)</dt><dd>Bloğu düz metne çevir, sonra öncekiyle birleştir</dd>
+            <dt><kbd>↑</kbd> <kbd>↓</kbd></dt><dd>Bloklar arasında gezin</dd>
+            <dt>⋮⋮ · +</dt><dd>Sürükle → sırala, tıkla → sil · altına blok ekle</dd>
+            <dt><kbd>Ctrl</kbd>+<kbd>\</kbd></dt><dd>Sayfa panelini aç / kapat</dd>
+            <dt><kbd>Ctrl</kbd>+tık</dt><dd>Metindeki bağlantıyı aç</dd>
+            <dt>Çok satırlı yapıştırma</dt><dd>Markdown olarak bloklara dönüşür</dd>
+          </dl>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== ANA SAYFA ===== -->
+  <div class="module" data-module="home" id="mod-home">
+    <section class="home-hero">
+      <div class="home-hero-text">
+        <p class="eyebrow" id="homeDate"></p>
+        <h1 class="home-greet" id="homeGreet" title="Adını değiştirmek için tıkla">Merhaba</h1>
+        <p class="home-quote" id="homeQuote"></p>
+      </div>
+      <div class="home-hero-stats" id="homeHeroStats"></div>
+    </section>
+    <div class="home-grid" id="homeTiles"></div>
+    <div class="home-cols">
+      <div class="card">
+        <div class="card-head"><h2>☀️ Bugün</h2><button class="btn-ghost icon-btn" data-go="nivose">Nivose →</button></div>
+        <div id="homeToday"></div>
+      </div>
+      <div class="card">
+        <div class="card-head"><h2>📝 Son Notlar</h2><button class="btn-ghost icon-btn" data-go="notlar">Notlar →</button></div>
+        <div id="homeNotes"></div>
+      </div>
+      <div class="card">
+        <div class="card-head"><h2>👓 Okunuyor</h2><button class="btn-ghost icon-btn" data-go="academy">Academy →</button></div>
+        <div id="homeReading"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="module" data-module="lamerite">  <p class="eyebrow">La Merite (MR) · İki Sütunlu Hazine Mimarisi</p>
+  <h1><span class="h1-ic">🏛️</span>La Merite</h1>
   <p class="sub">Emek (Üretim Hacmi) ve Sermaye (Likit Para) ayrı sütunlarda birikir; ikisi birleşerek Hazineyi (H<sub>MR</sub>) oluşturur. Haftalar Cumartesi başlar, Cuma biter.</p>
 
   <!-- TREASURY HEADER -->
@@ -807,18 +1215,18 @@
 
   <!-- QUICK STATS -->
   <div class="stats">
-    <div class="stat"><div class="n" id="statDays">0</div><div class="l">Kayıtlı Gün</div></div>
-    <div class="stat"><div class="n" id="statAvg">0</div><div class="l">Ortalama Günlük EMR</div></div>
-    <div class="stat"><div class="n" id="statBest">0</div><div class="l">En Yüksek Günlük EMR</div></div>
-    <div class="stat"><div class="n" id="statWeekEmr">0</div><div class="l">Bu Haftaki EMR</div></div>
-    <div class="stat"><div class="n" id="statEdina">—</div><div class="l">Bugünün Edina Tarihi</div></div>
+    <div class="stat"><div class="n" id="statDays">0</div><div class="l">📆 Kayıtlı Gün</div></div>
+    <div class="stat"><div class="n" id="statAvg">0</div><div class="l">⚖️ Ortalama Günlük EMR</div></div>
+    <div class="stat"><div class="n" id="statBest">0</div><div class="l">🏆 En Yüksek Günlük EMR</div></div>
+    <div class="stat"><div class="n" id="statWeekEmr">0</div><div class="l">⚡ Bu Haftaki EMR</div><div class="stat-sub" id="statWeekCmr"></div></div>
+    <div class="stat"><div class="n" id="statEdina">—</div><div class="l">🌙 Bugünün Edina Tarihi</div></div>
   </div>
 
   <nav class="tabs" id="tabs">
-    <button class="tab" data-tab="giris">Giriş</button>
-    <button class="tab" data-tab="takvim">Takvim</button>
-    <button class="tab" data-tab="ozet">Haftalık Özet</button>
-    <button class="tab" data-tab="tarihce">Günlük Tarihçe</button>
+    <button class="tab" data-tab="giris">✍️ Giriş</button>
+    <button class="tab" data-tab="takvim">📅 Takvim</button>
+    <button class="tab" data-tab="ozet">📊 Haftalık Özet</button>
+    <button class="tab" data-tab="tarihce">📜 Günlük Tarihçe</button>
   </nav>
 
   <section class="tab-panel" data-tab="giris">
@@ -915,6 +1323,8 @@
           <th>Hafta</th>
           <th>Gün Sayısı</th>
           <th>Haftalık E<sub>MR</sub></th>
+          <th>Hafta Sonu C<sub>MR</sub></th>
+          <th>C<sub>MR</sub> Değişimi</th>
           <th>Hafta Sonu H<sub>MR</sub></th>
           <th>Haftalık Büyüme</th>
         </tr>
@@ -955,7 +1365,7 @@
   <!-- ===== THISTLE ===== -->
   <div class="module" data-module="thistle" id="mod-thistle">
     <p class="eyebrow">Thistle · Maliye</p>
-    <h1>Thistle</h1>
+    <h1><span class="h1-ic">💰</span>Thistle</h1>
     <p class="sub">Bankalardaki varlıklar, dövizler, diğer varlıklar, harcamalar ve aylık sabit giderler. Tüm değerler TL'ye çevrilerek toplanır.</p>
 
     <div class="th-hero">
@@ -973,16 +1383,16 @@
     </div>
 
     <div class="stats three">
-      <div class="stat"><div class="n" id="thSpend">0</div><div class="l">Bu Ay Harcama</div><div class="stat-sub" id="thSpendDelta"></div></div>
-      <div class="stat"><div class="n" id="thFixed">0</div><div class="l">Kalan Sabit Gider (bu ay)</div><div class="stat-sub" id="thFixedSub"></div></div>
-      <div class="stat"><div class="n" id="thNext">—</div><div class="l">Sonraki Ödeme</div><div class="stat-sub" id="thNextSub"></div></div>
+      <div class="stat"><div class="n" id="thSpend">0</div><div class="l">🧾 Bu Ay Harcama</div><div class="stat-sub" id="thSpendDelta"></div></div>
+      <div class="stat"><div class="n" id="thFixed">0</div><div class="l">🔁 Kalan Sabit Gider (bu ay)</div><div class="stat-sub" id="thFixedSub"></div></div>
+      <div class="stat"><div class="n" id="thNext">—</div><div class="l">⏰ Sonraki Ödeme</div><div class="stat-sub" id="thNextSub"></div></div>
     </div>
 
     <nav class="tabs">
-      <button class="stab" data-sub="varlik">Varlıklar</button>
-      <button class="stab" data-sub="harcama">Harcamalar</button>
-      <button class="stab" data-sub="sabit">Sabit Giderler</button>
-      <button class="stab" data-sub="kur">Kurlar</button>
+      <button class="stab" data-sub="varlik">🏦 Varlıklar</button>
+      <button class="stab" data-sub="harcama">🧾 Harcamalar</button>
+      <button class="stab" data-sub="sabit">🔁 Sabit Giderler</button>
+      <button class="stab" data-sub="kur">💱 Kurlar</button>
     </nav>
 
     <section class="spanel" data-sub="varlik">
@@ -1068,19 +1478,19 @@
   <!-- ===== NIVOSE ===== -->
   <div class="module" data-module="nivose" id="mod-nivose">
     <p class="eyebrow">Nivose · Planlama</p>
-    <h1>Nivose</h1>
+    <h1><span class="h1-ic">🗓️</span>Nivose</h1>
     <p class="sub">Edina Haritasına ve Linden Union şirketlerine bağlı günlük planlar ve aylık hedefler. Haftalar Cumartesi başlar.</p>
 
     <div class="stats four">
-      <div class="stat"><div class="n" id="nvStatToday">0/0</div><div class="l">Bugün Tamamlanan</div></div>
-      <div class="stat"><div class="n" id="nvStatWeek">—</div><div class="l">Bu Hafta</div></div>
-      <div class="stat"><div class="n" id="nvStatStreak">0</div><div class="l">Seri (tam gün)</div></div>
-      <div class="stat"><div class="n" id="nvStatOverdue">0</div><div class="l">Geciken Plan</div></div>
+      <div class="stat"><div class="n" id="nvStatToday">0/0</div><div class="l">✅ Bugün Tamamlanan</div></div>
+      <div class="stat"><div class="n" id="nvStatWeek">—</div><div class="l">📈 Bu Hafta</div></div>
+      <div class="stat"><div class="n" id="nvStatStreak">0</div><div class="l">🔥 Seri (tam gün)</div></div>
+      <div class="stat"><div class="n" id="nvStatOverdue">0</div><div class="l">⏳ Geciken Plan</div></div>
     </div>
 
     <nav class="tabs">
-      <button class="stab" data-sub="gun">Günlük</button>
-      <button class="stab" data-sub="ay">Aylık</button>
+      <button class="stab" data-sub="gun">☀️ Günlük</button>
+      <button class="stab" data-sub="ay">🌙 Aylık</button>
     </nav>
 
     <section class="spanel" data-sub="gun">
@@ -1175,7 +1585,7 @@
   <!-- ===== EDINA HARITASI ===== -->
   <div class="module" data-module="harita" id="mod-harita">
     <p class="eyebrow">Edina Haritası</p>
-    <h1>Edina Haritası</h1>
+    <h1><span class="h1-ic">🗺️</span>Edina Haritası</h1>
     <p class="sub">Unirce → Perce → Parce. Nivose'deki planlar bu üç seviyeden herhangi birine bağlanabilir. Ad ve açıklamaları doğrudan kartın üzerinden düzenleyebilirsin.</p>
 
     <div class="card tagbar" id="tagCard">
@@ -1188,8 +1598,8 @@
     </div>
 
     <nav class="tabs">
-      <button class="stab" data-sub="unirce">Unirce Haritası</button>
-      <button class="stab" data-sub="linden">Linden Union Şirketleri</button>
+      <button class="stab" data-sub="unirce">🌌 Unirce Haritası</button>
+      <button class="stab" data-sub="linden">🏢 Linden Union Şirketleri</button>
     </nav>
 
     <section class="spanel" data-sub="linden">
@@ -1228,19 +1638,19 @@
   <!-- ===== ACADEMY ===== -->
   <div class="module" data-module="academy" id="mod-academy">
     <p class="eyebrow">Academy · Makaleler, Okumalar, Kitaplar</p>
-    <h1>Academy</h1>
+    <h1><span class="h1-ic">🎓</span>Academy</h1>
     <p class="sub">Edina Haritasındaki akademilere bağlı makaleler ve okumalar. Dosyalar GitHub'daki private veri reposunda <b>Essais/</b> klasöründe saklanır.</p>
 
     <div class="stats four">
-      <div class="stat"><div class="n" id="acStatTotal">0</div><div class="l">Makale &amp; Okuma</div></div>
-      <div class="stat"><div class="n" id="acStatRead">0</div><div class="l">Okundu</div></div>
-      <div class="stat"><div class="n" id="acStatReading">0</div><div class="l">Şu An Okunan</div></div>
-      <div class="stat"><div class="n" id="acStatBooks">0</div><div class="l">Bu Yıl Okunan Kitap</div></div>
+      <div class="stat"><div class="n" id="acStatTotal">0</div><div class="l">📄 Makale &amp; Okuma</div></div>
+      <div class="stat"><div class="n" id="acStatRead">0</div><div class="l">✅ Okundu</div></div>
+      <div class="stat"><div class="n" id="acStatReading">0</div><div class="l">👓 Şu An Okunan</div></div>
+      <div class="stat"><div class="n" id="acStatBooks">0</div><div class="l">📚 Bu Yıl Okunan Kitap</div></div>
     </div>
 
     <nav class="tabs">
-      <button class="stab" data-sub="akademi">Akademiler</button>
-      <button class="stab" data-sub="kitap">Kitaplar</button>
+      <button class="stab" data-sub="akademi">🎓 Akademiler</button>
+      <button class="stab" data-sub="kitap">📚 Kitaplar</button>
     </nav>
 
     <section class="spanel" data-sub="akademi">
@@ -1291,13 +1701,20 @@
     </section>
   </div>
 
-  <!-- ===== NOTLAR ===== -->
-  <div class="module" data-module="notlar" id="mod-notlar">
+  <!-- ===== OOWTORY ===== -->
+  <div class="module" data-module="oowtory" id="mod-oowtory">
+    <div class="card oow-main" id="oowMain"></div>
+  </div>
+
+  <!-- ===== NOTLAR ===== -->  <div class="module" data-module="notlar" id="mod-notlar">
     <div class="notes-layout">
       <aside class="card notes-side">
         <div class="notes-side-head">
           <span class="pop-label" style="margin:0;">Notlar</span>
-          <button class="btn-ghost icon-btn" id="ntNew" title="Yeni sayfa">＋ Sayfa</button>
+          <span style="display:flex;gap:4px;">
+            <button class="btn-ghost icon-btn" id="ntNew" title="Yeni sayfa">＋ Sayfa</button>
+            <button class="btn-ghost icon-btn" id="ntSideClose" title="Paneli kapat (Ctrl+\)">«</button>
+          </span>
         </div>
         <input type="text" id="ntSearch" placeholder="Notlarda ara…">
         <div id="ntTree"></div>
@@ -1314,7 +1731,7 @@
   <!-- ===== VERI ===== -->
   <div class="module" data-module="veri" id="mod-veri">
     <p class="eyebrow">Veri · Kayıt &amp; Senkron</p>
-    <h1>Veri</h1>
+    <h1><span class="h1-ic">☁️</span>Veri</h1>
     <p class="sub">Tüm Leiden verisi (La Merite, Thistle, Nivose, Edina Haritası) tek bir JSON dosyasıdır. Dosya olarak indirebilir ya da doğrudan GitHub reposuna kaydedebilirsin.</p>
 
     <div class="grid2">
@@ -1366,6 +1783,8 @@
 
   <div id="optPop" hidden></div>
   <div id="ntSlash" hidden></div>
+  <div id="toasts"></div>
+  <div id="printArea"></div>
 
   <footer>Leiden ·veriler bu tarayıcıda ve (bağlıysa) GitHub reposunda saklanır</footer>
 </div>
@@ -1502,12 +1921,20 @@ function computeWeekly(series){
   const order = [];
   for(const item of series){
     const wk = saturdayOf(item.date);
-    if(!groups[wk]){ groups[wk] = {key:wk, days:[], weekEMR:0, endHMR:0, label:weekRangeLabel(wk)}; order.push(wk); }
+    if(!groups[wk]){ groups[wk] = {key:wk, days:[], weekEMR:0, endHMR:0, endCMR:0, label:weekRangeLabel(wk)}; order.push(wk); }
     groups[wk].days.push(item);
     groups[wk].weekEMR += item.dayEMR;
     groups[wk].endHMR = item.hmr; // last one wins since series is chronological
+    groups[wk].endCMR = item.cmr;
   }
   return order.map(k=>groups[k]);
+}
+
+function cmrDeltaHtml(cur, prev){
+  if(prev === null || prev === undefined) return '<span class="g-flat">—</span>';
+  const d = cur - prev;
+  if(Math.abs(d) < 0.05) return '<span class="g-flat">±0</span>';
+  return '<span class="'+(d>0?'g-pos':'g-neg')+'">'+(d>0?'▲ +':'▼ ')+fmt(d,1)+'</span>';
 }
 
 function growthPct(newV, oldV){
@@ -1663,6 +2090,8 @@ function renderCalendar(){
   const monthName = new Date(calYear, calMonth, 1).toLocaleDateString('tr-TR',{month:'long',year:'numeric'});
   document.getElementById('calTitle').innerHTML = monthName + '<span>Edina ' + edinaMonthOf(calYear, calMonth+1) + '. ay</span>';
 
+  const weekly = {};
+  computeWeekly(computeSeries()).forEach(w=>{ weekly[w.key] = w; });
   let html = DAY_NAMES.map(n=>'<div class="cal-dow">'+n+'</div>').join('') + '<div class="cal-dow">Hafta</div>';
   for(let sat = start; sat <= end; sat = addDays(sat,7)){
     let weekTotal = 0;
@@ -1682,7 +2111,9 @@ function renderCalendar(){
         '<div class="cal-emr'+(e?'':' none')+'">'+(e?fmt(emr,1):'·')+'</div>'+
       '</div>';
     }
-    html += '<div class="cal-week"><b>'+(weekTotal>0?fmt(weekTotal,1):'—')+'</b><span>EMR</span></div>';
+    const wk = weekly[sat];
+    html += '<div class="cal-week"><b>'+(weekTotal>0?fmt(weekTotal,1):'—')+'</b><span>EMR</span>'+
+      '<b class="cal-cmr">'+(wk && wk.endCMR ? fmt(wk.endCMR,1) : '—')+'</b><span>C<sub>MR</sub></span></div>';
   }
   const grid = document.getElementById('calGrid');
   grid.innerHTML = html;
@@ -1726,6 +2157,10 @@ function render(){
   document.getElementById('statBest').textContent = fmt(best,1);
   const thisWeek = weekly.find(w=>w.key===saturdayOf(todayStr()));
   document.getElementById('statWeekEmr').textContent = fmt(thisWeek?thisWeek.weekEMR:0,1);
+  const twIdx = thisWeek ? weekly.indexOf(thisWeek) : -1;
+  const curCmr = last ? last.cmr : 0;
+  const prevCmr = twIdx > 0 ? weekly[twIdx-1].endCMR : (twIdx < 0 && weekly.length ? weekly[weekly.length-1].endCMR : null);
+  document.getElementById('statWeekCmr').innerHTML = 'C<sub>MR</sub> '+fmt(curCmr,1)+' · '+cmrDeltaHtml(curCmr, prevCmr)+' geçen haftaya göre';
   document.getElementById('statEdina').textContent = edinaDateStr(todayStr());
 
   // daily table (desc)
@@ -1783,6 +2218,8 @@ function render(){
         '<td class="date-cell">'+w.label+'</td>'+
         '<td>'+w.days.length+'</td>'+
         '<td>'+fmt(w.weekEMR,1)+'</td>'+
+        '<td>'+fmt(w.endCMR,1)+'</td>'+
+        '<td>'+cmrDeltaHtml(w.endCMR, prevW ? prevW.endCMR : null)+'</td>'+
         '<td>'+fmt(w.endHMR,1)+'</td>'+
         '<td class="'+b.cls+'">'+b.text+'</td>'+
       '</tr>';
@@ -1884,6 +2321,7 @@ document.getElementById('saveBtn').addEventListener('click', ()=>{
 
   const okBox = document.getElementById('okBox');
   okBox.textContent = weekRangeLabel(sat) + ' haftası kaydedildi.';
+  toast(weekRangeLabel(sat) + ' haftası kaydedildi', 'ok');
   okBox.style.display = 'block';
 });
 
@@ -1963,6 +2401,7 @@ const MOD_KEY = 'leidenModule';
 function showModule(name){
   document.querySelectorAll('.modbtn').forEach(b=>b.classList.toggle('active', b.dataset.module===name));
   document.querySelectorAll('.module').forEach(m=>m.classList.toggle('active', m.dataset.module===name));
+  if(name==='home' && typeof renderHome==='function') renderHome();
   try{ localStorage.setItem(MOD_KEY, name); }catch(e){}
 }
 
@@ -1992,6 +2431,7 @@ function syncReady(){ return !!(SYNC.owner && SYNC.repo && SYNC.token && SYNC.pa
 function timeStr(){ return new Date().toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'}); }
 function setSyncStatus(msg, kind){
   document.querySelectorAll('.sync-status').forEach(el=>{ el.textContent = msg; el.dataset.kind = kind || ''; });
+  if(kind==='err' || (kind==='ok' && !/^GitHub'a kaydedildi/.test(msg))) toast(msg, kind);
 }
 function scheduleSync(){
   if(syncSuppress || !SYNC.auto || !syncReady()) return;
@@ -2001,10 +2441,10 @@ function scheduleSync(){
 }
 
 function buildBackup(){
-  return {app:'Leiden', version:5, savedAt:new Date().toISOString(), entries:DATA.entries, thistle:TH, nivose:NIV, map:MAP, academy:ACAD, notes:NOTES};
+  return {app:'Leiden', version:6, savedAt:new Date().toISOString(), entries:DATA.entries, thistle:TH, nivose:NIV, map:MAP, academy:ACAD, notes:NOTES, oowtory:OOW};
 }
 function applyBackup(obj){
-  if(!obj || typeof obj !== 'object' || !(obj.entries || obj.thistle || obj.nivose || obj.map || obj.academy || obj.notes)) throw new Error('geçersiz format');
+  if(!obj || typeof obj !== 'object' || !(obj.entries || obj.thistle || obj.nivose || obj.map || obj.academy || obj.notes || obj.oowtory)) throw new Error('geçersiz format');
   syncSuppress = true;
   try{
     if(obj.entries){ DATA = {entries:obj.entries}; saveData(); }
@@ -2013,6 +2453,7 @@ function applyBackup(obj){
     if(obj.map){ MAP = obj.map; migrateMAP(); saveMAP(); }
     if(obj.academy){ ACAD = obj.academy; migrateACAD(); saveACAD(); }
     if(obj.notes){ NOTES = obj.notes; migrateNOTES(); saveNOTES(); }
+    if(obj.oowtory){ OOW = obj.oowtory; migrateOOW(); saveOOW(); }
   } finally { syncSuppress = false; }
   render();
   loadWeekIntoForm();
@@ -4280,7 +4721,7 @@ function renderNoteMain(){
     .filter(x=>x.id!==p.id && !ntDescendants(p.id).includes(x.id))
     .map(x=>'<option value="'+x.id+'"'+(x.id===p.parent?' selected':'')+'>'+esc(ntPath(x).map(y=>y.title||'Başlıksız').join(' › '))+'</option>').join('');
   main.innerHTML =
-    '<div class="nt-crumbs">'+path.map((x,i)=>i<path.length-1 ? '<button class="nt-crumb" data-page="'+x.id+'">'+esc(x.icon||'📄')+' '+esc(x.title||'Başlıksız')+'</button><span>/</span>' : '').join('')+'</div>'+
+    '<div class="nt-crumbs"><button class="nt-side-open" id="ntSideOpen" title="Paneli aç (Ctrl+\\)">☰</button>'+path.map((x,i)=>i<path.length-1 ? '<button class="nt-crumb" data-page="'+x.id+'">'+esc(x.icon||'📄')+' '+esc(x.title||'Başlıksız')+'</button><span>/</span>' : '').join('')+'</div>'+
     '<div class="nt-head">'+
       '<button class="nt-icon" id="ntIcon" title="Simge seç">'+esc(p.icon||'📄')+'</button>'+
       '<div class="nt-title" id="ntTitle" contenteditable="true" spellcheck="true" data-ph="Başlıksız">'+esc(p.title)+'</div>'+
@@ -4320,7 +4761,11 @@ function renderNotesTree(){
         '<button class="nt-caret" tabindex="-1">'+(kids.length ? (open?'▾':'▸') : '')+'</button>'+
         '<span class="nt-ic">'+esc(p.icon||'📄')+'</span>'+
         '<span class="nt-label">'+esc(p.title||'Başlıksız')+'</span>'+
-        '<button class="nt-plus" title="Alt sayfa ekle" tabindex="-1">+</button>'+
+        '<span class="nt-row-acts">'+
+          '<button class="nt-move" data-dir="-1" title="Yukarı taşı" tabindex="-1">↑</button>'+
+          '<button class="nt-move" data-dir="1" title="Aşağı taşı" tabindex="-1">↓</button>'+
+          '<button class="nt-plus" title="Alt sayfa ekle" tabindex="-1">+</button>'+
+        '</span>'+
       '</div>'+(kids.length && open ? html(p.id, depth+1) : '');
   }).join('');
   tree.innerHTML = html(null, 0) || '<div class="empty" style="padding:10px 0;">Henüz sayfa yok.</div>';
@@ -4466,7 +4911,35 @@ function setupNotes(){
     const p = ntPage(row.dataset.id);
     if(e.target.classList.contains('nt-caret')){ p.open = p.open === false; saveNOTES(); renderNotesTree(); return; }
     if(e.target.classList.contains('nt-plus')) return newPage(p.id);
+    if(e.target.classList.contains('nt-move')){
+      // aynı seviyedeki kardeşiyle yer değiştir
+      const sibs = ntChildren(p.parent||null);
+      const i = sibs.indexOf(p), j = i + Number(e.target.dataset.dir);
+      if(j < 0 || j >= sibs.length) return;
+      sibs.forEach((s,k)=>{ s.order = k; });
+      [sibs[i].order, sibs[j].order] = [sibs[j].order, sibs[i].order];
+      saveNOTES();
+      renderNotesTree();
+      if(p.parent && ntSel===p.parent) renderNoteMain();
+      return;
+    }
     openPage(p.id);
+  });
+
+  // yan panel: aç / kapat (Ctrl+\)
+  const SIDE_KEY = 'leidenNoteSide';
+  const setSide = open=>{
+    root.classList.toggle('side-closed', !open);
+    try{ localStorage.setItem(SIDE_KEY, open ? '1' : '0'); }catch(e){}
+  };
+  setSide((()=>{ try{ return localStorage.getItem(SIDE_KEY) !== '0'; }catch(e){ return true; } })());
+  document.getElementById('ntSideClose').addEventListener('click', ()=>setSide(false));
+  main.addEventListener('click', e=>{ if(e.target.closest('#ntSideOpen')) setSide(true); });
+  document.addEventListener('keydown', e=>{
+    if((e.ctrlKey || e.metaKey) && e.key==='\\' && root.classList.contains('active')){
+      e.preventDefault();
+      setSide(root.classList.contains('side-closed'));
+    }
   });
   document.getElementById('ntNew').addEventListener('click', ()=>newPage(null));
   document.getElementById('ntSearch').addEventListener('input', e=>{ ntQuery = e.target.value; renderNotesTree(); });
@@ -4718,6 +5191,727 @@ function setupNotes(){
   root.dataset.ready = '1';
 }
 
+// ===== Ana Sayfa, bildirimler ve efektler =====
+const NAME_KEY = 'leidenName';
+const REDUCED_MOTION = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const HOME_QUOTES = [
+  'Edina est le nom de la compassion née de la révolution.',
+  'Her adım iz bırakır.',
+  'İlerleme her zaman bir şey eklemekle olmaz. Bazen ilerleme, bir şeyin büyümesine izin vermemektir.',
+  'Denemek ve görmek, hiç denememekten daima daha iyidir.',
+  'Hiç kimse bir diğerinden mutlak surette üstün değildir.',
+  'Hayat sizi beklemez, siz de onu beklemeyin.',
+  'Pratiğe geçmezsen konuşmanın anlamı yoktur.'
+];
+
+function toast(msg, kind){
+  const box = document.getElementById('toasts');
+  if(!box) return;
+  const t = document.createElement('div');
+  t.className = 'toast '+(kind||'');
+  t.textContent = msg;
+  box.appendChild(t);
+  requestAnimationFrame(()=>requestAnimationFrame(()=>t.classList.add('in')));
+  setTimeout(()=>{ t.classList.remove('in'); setTimeout(()=>t.remove(), 400); }, 2800);
+}
+
+function confetti(el){
+  if(REDUCED_MOTION || !el) return;
+  const r = el.getBoundingClientRect();
+  const x = r.left + r.width/2, y = r.top + r.height/2;
+  const colors = ['#9573b8','#cf9a3e','#4f9470','#5c9cc0','#d27f9f','#e08a5a'];
+  for(let i=0;i<24;i++){
+    const s = document.createElement('span');
+    const ang = Math.random()*Math.PI*2, dist = 40 + Math.random()*80;
+    s.className = 'confetti';
+    s.style.left = x+'px';
+    s.style.top = y+'px';
+    s.style.background = colors[i % colors.length];
+    s.style.setProperty('--dx', (Math.cos(ang)*dist).toFixed(0)+'px');
+    s.style.setProperty('--dy', (Math.sin(ang)*dist - 50).toFixed(0)+'px');
+    s.style.setProperty('--r', (Math.random()*720 - 360).toFixed(0)+'deg');
+    document.body.appendChild(s);
+    setTimeout(()=>s.remove(), 1000);
+  }
+}
+
+// Sayıları sıfırdan hedefe doğru sayarak gösterir
+function countUp(el, target, digits, suffix){
+  suffix = suffix || '';
+  if(REDUCED_MOTION || !isFinite(target)){ el.textContent = fmt(target, digits)+suffix; return; }
+  const start = performance.now(), dur = 750;
+  const step = now=>{
+    const k = Math.min(1, (now-start)/dur);
+    const eased = 1 - Math.pow(1-k, 3);
+    el.textContent = fmt(target*eased, digits)+suffix;
+    if(k < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+
+function homeGreeting(){
+  const h = new Date().getHours();
+  if(h >= 5 && h < 12) return 'Günaydın ☀️';
+  if(h >= 12 && h < 18) return 'İyi günler 🌤️';
+  if(h >= 18 && h < 23) return 'İyi akşamlar 🌙';
+  return 'İyi geceler ✨';
+}
+
+function renderHome(){
+  const today = todayStr();
+  const name = (()=>{ try{ return localStorage.getItem(NAME_KEY) || ''; }catch(e){ return ''; } })();
+  const now = new Date();
+  document.getElementById('homeDate').textContent =
+    now.toLocaleDateString('tr-TR',{weekday:'long', day:'numeric', month:'long', year:'numeric'})+' · Edina '+edinaDateStr(today);
+  const g = homeGreeting();
+  document.getElementById('homeGreet').textContent = name ? g.replace(/ (\S+)$/, ', '+name+' $1') : g;
+  const doy = Math.floor((now - new Date(now.getFullYear(),0,0)) / 86400000);
+  document.getElementById('homeQuote').textContent = '“'+HOME_QUOTES[doy % HOME_QUOTES.length]+'”';
+
+  // veriler
+  const series = computeSeries();
+  const last = series[series.length-1];
+  const hmr = last ? last.hmr : 0;
+  const weekSat = saturdayOf(today);
+  const weekEmr = series.filter(s=>s.date>=weekSat).reduce((a,s)=>a+s.dayEMR,0);
+  const total = TH.holders.reduce((s,h)=>s+holderTry(h),0);
+  const monthSpend = TH.expenses.filter(e=>e.date.startsWith(today.slice(0,7))).reduce((s,e)=>s+e.amount,0);
+  const todays = dayPlansOf(today);
+  const tDone = doneCount(todays);
+  const overdue = overduePlans().length;
+  const perceN = MAP.unirces.reduce((s,u)=>s+u.perces.length,0);
+  const parceN = MAP.unirces.reduce((s,u)=>s+u.perces.reduce((a,p)=>a+p.parces.length,0),0);
+  const acRead = ACAD.entries.filter(e=>e.status==='okundu').length;
+  const reading = ACAD.entries.filter(e=>e.status==='okunuyor');
+  const booksReading = ACAD.books.filter(b=>b.status==='okunuyor');
+  const lastNote = NOTES.pages.slice().sort((a,b)=>(b.updated||'').localeCompare(a.updated||''))[0];
+
+  // hero istatistikleri
+  const hero = document.getElementById('homeHeroStats');
+  hero.innerHTML =
+    '<div class="hh-stat"><span class="hh-ic">🏛️</span><div><b id="hhHmr">0</b><span>Hazine (H<sub>MR</sub>)</span></div></div>'+
+    '<div class="hh-stat"><span class="hh-ic">💰</span><div><b id="hhTotal">0</b><span>Toplam varlık</span></div></div>'+
+    '<div class="hh-stat"><span class="hh-ic">✅</span><div><b>'+tDone+' / '+todays.length+'</b><span>Bugünün planları'+(overdue ? ' · '+overdue+' geciken' : '')+'</span></div></div>';
+  countUp(document.getElementById('hhHmr'), hmr, 1);
+  countUp(document.getElementById('hhTotal'), total, 0, ' ₺');
+
+  // modül kartları
+  const syncText = !syncReady() ? 'GitHub bağlı değil' : (SYNC.auto ? 'Otomatik senkron açık' : 'Elle senkron');
+  const tiles = [
+    {go:'lamerite', ic:'🏛️', name:'La Merite', desc:'Emek, sermaye ve Hazine', color:'#9573b8', metric:fmt(weekEmr,1), unit:'EMR bu hafta', sub:'H_MR '+fmt(hmr,1)},
+    {go:'thistle',  ic:'💰', name:'Thistle',   desc:'Varlıklar, harcamalar, giderler', color:'#cf9a3e', metric:fmt(total,0)+' ₺', unit:'toplam', sub:'Bu ay '+fmt(monthSpend,0)+' ₺ harcama'},
+    {go:'nivose',   ic:'🗓️', name:'Nivose',    desc:'Günlük planlar ve aylık hedefler', color:'#4f9470', metric:tDone+'/'+todays.length, unit:'bugün', sub:overdue ? overdue+' geciken plan' : 'Geciken plan yok'},
+    {go:'harita',   ic:'🗺️', name:'Edina Haritası', desc:'Unirce → Perce → Parce', color:'#5c9cc0', metric:String(MAP.unirces.length), unit:'Unirce', sub:perceN+' Perce · '+parceN+' Parce · '+MAP.companies.length+' şirket'},
+    {go:'academy',  ic:'🎓', name:'Academy',   desc:'Makaleler, okumalar, kitaplar', color:'#d27f9f', metric:acRead+'/'+ACAD.entries.length, unit:'okundu', sub:(reading.length+booksReading.length)+' şu an okunuyor'},
+    {go:'oowtory',  ic:'📜', name:'Oowtory', desc:'Günlük kayıtlar ve adlandırılmış aylar', color:'#c8923a', metric:String(oowDaysOf(today.slice(0,7)+'-').length), unit:'gün bu ay', sub:(oowMonthInfo(today.slice(0,7)).icon||'')+' '+(oowMonthInfo(today.slice(0,7)).name||'İsimsiz ay')+(OOW.days[today] ? ' · bugün yazıldı' : ' · bugün henüz yok')},
+    {go:'notlar',   ic:'📝', name:'Notlar',    desc:'Sayfalar ve fikirler', color:'#e08a5a', metric:String(NOTES.pages.length), unit:'sayfa', sub:lastNote ? 'Son: '+(lastNote.title||'Başlıksız') : 'Henüz not yok'},
+    {go:'veri',     ic:'☁️', name:'Veri',      desc:'Yedek ve GitHub senkronu', color:'#6b7a99', metric:syncReady() ? '●' : '○', unit:syncReady() ? 'bağlı' : 'yerel', sub:syncText}
+  ];
+  document.getElementById('homeTiles').innerHTML = tiles.map(t=>
+    '<button class="home-tile" data-go="'+t.go+'" style="--tc:'+t.color+'">'+
+      '<span class="ht-ic">'+t.ic+'</span>'+
+      '<span class="ht-name">'+esc(t.name)+'</span>'+
+      '<span class="ht-desc">'+esc(t.desc)+'</span>'+
+      '<span class="ht-metric"><b>'+esc(t.metric)+'</b>'+esc(t.unit)+'</span>'+
+      '<span class="ht-sub">'+esc(t.sub)+'</span>'+
+      '<span class="ht-arrow">→</span>'+
+    '</button>').join('');
+
+  // bugün
+  document.getElementById('homeToday').innerHTML = todays.length
+    ? sortPlans(todays).slice(0,7).map(p=>{
+        const r = resolveLink(p.link);
+        return '<label class="home-item'+(p.done?' done':'')+'" data-plan="'+p.id+'">'+
+          '<input type="checkbox" class="home-pl-done"'+(p.done?' checked':'')+'>'+
+          (p.star ? '<span>⭐</span>' : '')+
+          '<span class="hi-txt">'+esc(p.text)+'</span>'+
+          '<small>'+(p.time ? esc(p.time) : (r ? esc(r.label) : ''))+'</small></label>';
+      }).join('')
+    : '<div class="home-empty">Bugün için plan yok ✨<br><small>Nivose\'den ekleyebilirsin.</small></div>';
+
+  // son notlar
+  const recent = NOTES.pages.slice().sort((a,b)=>(b.updated||'').localeCompare(a.updated||'')).slice(0,5);
+  document.getElementById('homeNotes').innerHTML = recent.length
+    ? recent.map(p=>'<button class="home-item" data-note="'+p.id+'"><span>'+esc(p.icon||'📄')+'</span><span class="hi-txt">'+esc(p.title||'Başlıksız')+'</span>'+
+        '<small>'+new Date(p.updated).toLocaleDateString('tr-TR',{day:'numeric',month:'short'})+'</small></button>').join('')
+    : '<div class="home-empty">Henüz not yok 📝</div>';
+
+  // okunanlar
+  const readItems = booksReading.map(b=>{
+    const pct = b.pages && b.page ? Math.round(b.page/b.pages*100) : null;
+    return '<button class="home-item" data-go="academy"><span>📖</span><span class="hi-txt">'+esc(b.title)+'</span><small>'+(pct!==null ? '%'+pct : esc(b.author||''))+'</small></button>';
+  }).concat(reading.slice(0,5).map(e=>
+    '<button class="home-item" data-go="academy"><span>'+(e.type==='okuma'?'🔖':'📄')+'</span><span class="hi-txt">'+esc(e.title)+'</span><small>'+esc(e.folder||'')+'</small></button>'));
+  document.getElementById('homeReading').innerHTML = readItems.length
+    ? readItems.slice(0,6).join('')
+    : '<div class="home-empty">Şu an okunan bir şey yok 👓<br><small>Academy\'de bir kaydı "Okunuyor" yap.</small></div>';
+}
+
+function setupHelp(){
+  const modal = document.getElementById('helpModal');
+  const toggle = open=>{ modal.hidden = open === undefined ? !modal.hidden : !open; };
+  document.getElementById('helpBtn').addEventListener('click', ()=>toggle(true));
+  document.getElementById('helpClose').addEventListener('click', ()=>toggle(false));
+  modal.addEventListener('click', e=>{ if(e.target === modal) toggle(false); });
+  document.addEventListener('keydown', e=>{
+    const tgt = e.target;
+    const typing = tgt.closest && tgt.closest('input, textarea, select, [contenteditable="true"]');
+    if(e.key === 'Escape' && !modal.hidden){ e.preventDefault(); toggle(false); return; }
+    if(e.key === '?' && !typing && !e.ctrlKey && !e.metaKey && !e.altKey){ e.preventDefault(); toggle(); }
+  });
+}
+
+function setupHome(){
+  setupHelp();
+  const root = document.getElementById('mod-home');
+  root.addEventListener('click', e=>{
+    const note = e.target.closest('[data-note]');
+    if(note){ ntSelect(note.dataset.note); showModule('notlar'); renderNotes(); renderNoteMain(); return; }
+    const go = e.target.closest('[data-go]');
+    if(go){ showModule(go.dataset.go); window.scrollTo({top:0, behavior:REDUCED_MOTION ? 'auto' : 'smooth'}); return; }
+    if(e.target.id==='homeGreet'){
+      const cur = (()=>{ try{ return localStorage.getItem(NAME_KEY) || ''; }catch(err){ return ''; } })();
+      const v = prompt('Seni nasıl çağırayım?', cur);
+      if(v === null) return;
+      try{ localStorage.setItem(NAME_KEY, v.trim()); }catch(err){}
+      renderHome();
+    }
+  });
+  root.addEventListener('change', e=>{
+    if(!e.target.classList.contains('home-pl-done')) return;
+    const p = NIV.plans.find(x=>x.id===e.target.closest('[data-plan]').dataset.plan);
+    if(!p) return;
+    p.done = e.target.checked;
+    if(p.done){ confetti(e.target); toast('Plan tamamlandı: '+p.text, 'ok'); }
+    saveNIV();
+    renderLeiden();
+  });
+  document.getElementById('brandHome').addEventListener('click', ()=>showModule('home'));
+
+  // Tamamlanma anlarında konfeti (yakalama aşamasında, yeniden çizimden önce)
+  document.addEventListener('change', e=>{
+    const t = e.target;
+    if(t.classList.contains('pl-done') && t.checked) confetti(t);
+    if(t.classList.contains('bk-status') && t.value==='okundu'){ confetti(t); toast('Kitap okundu olarak işaretlendi 📚', 'ok'); }
+  }, true);
+  document.addEventListener('click', e=>{
+    const t = e.target;
+    if(t.classList.contains('fx-check') && !t.classList.contains('on')) confetti(t);
+    if(t.classList.contains('ac-status') && t.textContent==='Okunuyor'){ confetti(t); toast('Okundu olarak işaretlendi ✅', 'ok'); }
+  }, true);
+}
+
+// ===== Oowtory: yıllık defter, adlandırılmış aylar, günlük kayıtlar =====
+// Gün metni: her satır "Anahtar : Değer"; *italik*; "---" grup ayırıcı
+const OOW_KEY = 'leidenOowtory_v1';
+const OOW_SEED_2026 = {
+  '2026-01':['Barbara','🍀'], '2026-02':['Vivian','💜'], '2026-03':['Sanéme','🍎'], '2026-04':['Toutché','🌼'],
+  '2026-05':['Robespierre','🌟'], '2026-06':['Vivienne','💫'], '2026-07':['Fantastique','🇫🇷'], '2026-08':['Gracieland','💙'],
+  '2026-09':['Lara','🌟'], '2026-10':['Fuhai','🐟']
+};
+const OOW_ICONS = ['🍀','💜','🍎','🌼','🌟','💫','🇫🇷','💙','🐟','🌸','🌷','🌻','🍂','🍁','❄️','🌊','🔥','🌙','☀️','⭐','🌹','🦋','🐚','🍓','🍋','🫧','🎄','🕊️','🌿','🍇','🎐','🪐','🎭','🗝️','📜','💎'];
+const TR_MONTHS = ['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
+
+let OOW = loadJson(OOW_KEY, (()=>{
+  const months = {};
+  Object.entries(OOW_SEED_2026).forEach(([k,[name,icon]])=>{ months[k] = {name, icon}; });
+  return {years:{'2026':{title:'Oowtory - 2026', icon:'📜'}}, months, days:{}};
+})());
+function migrateOOW(){
+  OOW.years = OOW.years || {};
+  OOW.months = OOW.months || {};
+  OOW.days = OOW.days || {};
+}
+migrateOOW();
+function saveOOW(){ saveJson(OOW_KEY, OOW); }
+
+let oowYear = todayStr().slice(0,4);
+let oowMonth = null;     // null: yıl görünümü
+let oowEdit = null;      // düzenlenen gün
+let oowSaveTimer = null;
+
+function oowYearInfo(y){ return OOW.years[y] || {title:'Oowtory - '+y, icon:'📜'}; }
+function oowMonthInfo(m){ return OOW.months[m] || {name:'', icon:'📄'}; }
+function oowDaysOf(prefix){ return Object.keys(OOW.days).filter(d=>d.startsWith(prefix)).sort(); }
+function oowGregLabel(m){ const [y,mm] = m.split('-').map(Number); return TR_MONTHS[mm-1]+' '+y; }
+function oowDateLabel(d){ return d.slice(8)+'/'+d.slice(5,7)+'/'+d.slice(0,4); }
+
+function oowInline(s){ return esc(s).replace(/\*([^*]+)\*/g, '<i>$1</i>'); }
+function oowParse(text){
+  const groups = [[]];
+  String(text||'').split('\n').forEach(line=>{
+    const l = line.trim();
+    if(!l) return;
+    if(/^(-{3,}|—{2,})$/.test(l)){ if(groups[groups.length-1].length) groups.push([]); return; }
+    const m = /^([^:]{1,40}?)\s*:\s*(.*)$/.exec(l);
+    groups[groups.length-1].push(m ? {k:m[1].trim(), v:m[2]} : {raw:l});
+  });
+  return groups.filter(g=>g.length);
+}
+// Edina Haritası + Linden Union isim dizini: anahtarları haritadaki bloklara bağlar
+function mapNameIndex(){
+  const idx = new Map();
+  const put = (name, info)=>{ const k = acNorm(name); if(k && !idx.has(k)) idx.set(k, Object.assign({name}, info)); };
+  MAP.unirces.forEach(u=>{
+    put(u.name, {ref:'u:'+u.id, kind:'Unirce', path:u.name, color:u.color});
+    u.perces.forEach(p=>{
+      put(p.name, {ref:'p:'+p.id, kind:'Perce', path:u.name+' › '+p.name, color:p.color||u.color});
+      p.parces.forEach(x=>put(x.name, {ref:'x:'+x.id, kind:'Parce', path:u.name+' › '+p.name+' › '+x.name, color:x.color||p.color||u.color}));
+    });
+  });
+  MAP.companies.forEach(c=>{
+    put(c.name, {ref:'c:'+c.id, kind:'Şirket', path:'Linden Union › '+c.name, color:c.color});
+    c.projects.forEach(j=>put(j.name, {ref:'j:'+j.id, kind:'Proje', path:'Linden Union › '+c.name+' › '+j.name, color:j.color||c.color}));
+  });
+  return idx;
+}
+// "Busena" gibi kısa anahtarlar "Busena Academy" ile de eşleşir
+function mapRefFor(key, idx){
+  const k = acNorm(key);
+  if(!k) return null;
+  if(idx.has(k)) return idx.get(k);
+  for(const [name, info] of idx){ if(name.startsWith(k+' ')) return info; }
+  return null;
+}
+function oowLineHtml(it, idx){
+  if(it.raw !== undefined) return '<div class="oow-line">'+oowInline(it.raw)+'</div>';
+  const ref = idx ? mapRefFor(it.k, idx) : null;
+  const key = ref
+    ? '<span class="oow-k linked" data-ref="'+ref.ref+'" style="--rc:'+esc(ref.color||'#9573b8')+'" title="'+esc(ref.kind+' · '+ref.path)+'"><span class="oow-kdot"></span>'+esc(it.k)+'</span>'
+    : '<span class="oow-k">'+esc(it.k)+'</span>';
+  return '<div class="oow-line">'+key+' : '+oowInline(it.v)+'</div>';
+}
+function openMapRef(ref){
+  const t = ref[0], id = ref.slice(2);
+  const r = findLink(ref);
+  if(!r) return;
+  const root = r.u || r.c;
+  if(root.collapsed){ delete root.collapsed; saveMAP(); }
+  showModule('harita');
+  const tab = document.querySelector('#mod-harita .stab[data-sub="'+(r.c ? 'linden' : 'unirce')+'"]');
+  if(tab) tab.click();
+  if(tagFilter){ tagFilter = null; }
+  renderLeiden();
+  const sel = {u:'.unirce[data-u="'+id+'"]', p:'.perce[data-p="'+id+'"]', x:'.parce[data-x="'+id+'"]', c:'[data-c="'+id+'"]', j:'[data-j="'+id+'"]'}[t];
+  const el = document.querySelector(sel);
+  if(el){
+    el.scrollIntoView({block:'center', behavior:REDUCED_MOTION ? 'auto' : 'smooth'});
+    el.classList.add('flash');
+    setTimeout(()=>el.classList.remove('flash'), 1800);
+  }
+}
+function oowTopKeys(){
+  const cnt = {};
+  Object.values(OOW.days).forEach(d=>oowParse(d.text).flat().forEach(it=>{ if(it.k) cnt[it.k] = (cnt[it.k]||0)+1; }));
+  const keys = Object.entries(cnt).sort((a,b)=>b[1]-a[1]).map(x=>x[0]).slice(0,16);
+  ['Daily','Hilda','Lara','Busena','Baudelaire','Lynette','UpDance','UpMovie'].forEach(k=>{ if(keys.length < 16 && !keys.includes(k)) keys.push(k); });
+  return keys;
+}
+
+// ---- Render ----
+function oowDayHtml(d, icon){
+  const day = OOW.days[d];
+  const editing = oowEdit === d;
+  const head =
+    '<header class="oow-dhead">'+
+      '<span class="oow-dic">'+esc(icon)+'</span>'+
+      '<span class="oow-date">'+oowDateLabel(d)+(day.label ? ' - '+esc(day.label) : '')+'</span>'+
+      '<span class="oow-edina">Edina '+edinaDateStr(d)+'</span>'+
+      '<span class="oow-dacts">'+
+        (editing ? '' : '<button class="mv-btn oow-edit-btn" title="Düzenle">✎</button>')+
+        '<button class="del-btn oow-del" title="Günü sil">✕</button>'+
+      '</span>'+
+    '</header>';
+  if(editing){
+    const rows = Math.max(6, (day.text||'').split('\n').length + 2);
+    return '<article class="oow-day editing" data-date="'+d+'">'+head+
+      '<div class="oow-edit">'+
+        '<input class="cell-input oow-label-in" value="'+esc(day.label||'')+'" placeholder="Gün adı (isteğe bağlı), örn. Schwarz Day">'+
+        '<div class="oow-keys">'+oowTopKeys().map(k=>{
+          const ref = mapRefFor(k, oowIdx);
+          return '<button class="tchip oow-key" data-k="'+esc(k)+'" style="--tc:'+esc(ref ? ref.color : hashColor(k))+'"'+(ref ? ' title="'+esc(ref.kind+' · '+ref.path)+'"' : '')+'>'+(ref ? '◆ ' : '')+esc(k)+'</button>';
+        }).join('')+
+        '<input class="oow-mapkey" list="oowMapList" placeholder="🗺️ Haritadan ekle…" title="Edina Haritası ve Linden Union isimleri">'+
+        '</div>'+
+        '<datalist id="oowMapList">'+[...oowIdx.values()].map(v=>'<option value="'+esc(v.name)+'" label="'+esc(v.kind+' · '+v.path)+'"></option>').join('')+'</datalist>'+
+        '<textarea class="oow-text" rows="'+rows+'" spellcheck="true" placeholder="Daily : *Bugünün başlığı*&#10;Hilda : Athai’s Home&#10;---&#10;Lara : Amar">'+esc(day.text||'')+'</textarea>'+
+        '<div class="oow-edit-foot"><span>Her satır <b>Anahtar : Değer</b> · <b>*italik*</b> · <b>---</b> ayırıcı · <b>Ctrl+Enter</b> bitir</span>'+
+        '<button class="btn-primary oow-done">Bitti</button></div>'+
+      '</div></article>';
+  }
+  const groups = oowParse(day.text);
+  return '<article class="oow-day" data-date="'+d+'">'+head+
+    (groups.length
+      ? '<div class="oow-body">'+groups.map(g=>'<div class="oow-group">'+g.map(it=>oowLineHtml(it, oowIdx)).join('')+'</div>').join('')+'</div>'
+      : '<div class="oow-body oow-emptyday">Boş gün — düzenlemek için tıkla</div>')+
+  '</article>';
+}
+
+function renderOowYear(main){
+  const info = oowYearInfo(oowYear);
+  const days = oowDaysOf(oowYear+'-');
+  let rows = '';
+  for(let i=1;i<=12;i++){
+    const m = oowYear+'-'+String(i).padStart(2,'0');
+    const mi = oowMonthInfo(m);
+    const ds = oowDaysOf(m+'-');
+    const len = new Date(Number(oowYear), i, 0).getDate();
+    const set = new Set(ds.map(d=>Number(d.slice(8))));
+    let heat = '';
+    for(let k=1;k<=len;k++) heat += '<i'+(set.has(k)?' class="on"':'')+'></i>';
+    rows += '<button class="oow-mrow'+(m===todayStr().slice(0,7)?' cur':'')+'" data-m="'+m+'">'+
+      '<span class="oow-mic">'+esc(mi.icon||'📄')+'</span>'+
+      '<span class="oow-mname">'+(mi.name ? esc(mi.name) : '<em>İsimsiz ay</em>')+'</span>'+
+      '<span class="oow-mgreg">'+TR_MONTHS[i-1]+' · Edina '+edinaMonthOf(Number(oowYear), i)+'</span>'+
+      '<span class="oow-heat">'+heat+'</span>'+
+      '<span class="oow-mcount">'+(ds.length ? ds.length+' gün' : '—')+'</span>'+
+    '</button>';
+  }
+  main.innerHTML =
+    '<div class="oow-yearhead">'+
+      '<span class="oow-bigic">'+esc(info.icon||'📜')+'</span>'+
+      '<div class="oow-yt">'+
+        '<input class="cell-input oow-ytitle" value="'+esc(info.title)+'">'+
+        '<div class="day-sub">'+days.length+' gün kaydı · '+Object.keys(OOW.months).filter(k=>k.startsWith(oowYear)&&OOW.months[k].name).length+' adlandırılmış ay</div>'+
+      '</div>'+
+      '<div class="oow-actions">'+
+        '<button class="btn-ghost icon-btn" id="oowYPrev">‹ '+(Number(oowYear)-1)+'</button>'+
+        '<button class="btn-ghost icon-btn" id="oowYNext">'+(Number(oowYear)+1)+' ›</button>'+
+        '<button class="btn-ghost icon-btn" id="oowArchiveImport" title="Oowtory arşivi ya da Leiden yedeği (.json)">📦 Arşivi içe aktar</button>'+
+        '<button class="btn-primary icon-btn" id="oowYearPdf"'+(days.length?'':' disabled')+'>⇩ Yılı PDF</button>'+
+      '</div>'+
+    '</div>'+
+    (()=>{
+      const cnt = {};
+      Object.keys(OOW.days).forEach(d=>{ const y = d.slice(0,4); cnt[y] = (cnt[y]||0)+1; });
+      const ys = Object.keys(cnt);
+      if(!ys.includes(oowYear)) ys.push(oowYear);
+      if(ys.length < 2) return '';
+      return '<div class="oow-ychips">'+ys.sort().map(y=>'<button class="oow-ychip'+(y===oowYear?' on':'')+'" data-y="'+y+'">'+esc(oowYearInfo(y).icon||'📜')+' '+y+(cnt[y]?'<small>'+cnt[y]+'</small>':'')+'</button>').join('')+'</div>';
+    })()+
+    '<div class="oow-months">'+rows+'</div>';
+}
+
+let oowIdx = new Map();
+function renderOowMonth(main){
+  oowIdx = mapNameIndex();
+  const m = oowMonth;
+  const mi = oowMonthInfo(m);
+  const yi = oowYearInfo(m.slice(0,4));
+  const ds = oowDaysOf(m+'-');
+  const [y, mm] = m.split('-').map(Number);
+  const today = todayStr();
+  const lastOfMonth = ymd(new Date(y, mm, 0));
+  const nextFree = ds.length ? addDays(ds[ds.length-1], 1) : m+'-01';
+  const defDate = today.startsWith(m) ? today : (nextFree <= lastOfMonth ? nextFree : lastOfMonth);
+  main.innerHTML =
+    '<div class="nt-crumbs"><button class="nt-crumb" id="oowToYear">'+esc(yi.icon||'📜')+' '+esc(yi.title)+'</button><span>/</span></div>'+
+    '<div class="oow-monthhead">'+
+      '<button class="nt-icon" id="oowMonIc" title="Emoji seç">'+esc(mi.icon||'📄')+'</button>'+
+      '<div class="oow-mt">'+
+        '<input class="cell-input oow-mname-in" value="'+esc(mi.name||'')+'" placeholder="Bu aya bir isim ver">'+
+        '<div class="day-sub">'+oowGregLabel(m)+' · Edina '+edinaMonthOf(y, mm)+'. ay · '+ds.length+' gün kaydı</div>'+
+      '</div>'+
+      '<div class="oow-actions">'+
+        '<button class="btn-ghost icon-btn" id="oowMPrev" title="Önceki ay">‹</button>'+
+        '<button class="btn-ghost icon-btn" id="oowMNext" title="Sonraki ay">›</button>'+
+        '<button class="btn-ghost icon-btn" id="oowImportToggle">⇪ İçe aktar</button>'+
+        '<button class="btn-primary icon-btn" id="oowMonthPdf"'+(ds.length?'':' disabled')+'>⇩ PDF</button>'+
+      '</div>'+
+    '</div>'+
+    '<div class="nt-icons" id="oowIconPick" hidden>'+OOW_ICONS.map(i=>'<button data-ic="'+i+'">'+i+'</button>').join('')+'</div>'+
+    '<div class="oow-import" id="oowImport" hidden>'+
+      '<p class="hint" style="margin:0 0 8px;">Notion PDF\'inden kopyaladığın metni yapıştır ya da bir .txt dosyası seç. Tarih satırları (<b>01/04/2026</b> ya da <b>🌼 01/04/2026 - Gün adı</b>) yeni gün başlatır; diğer satırlar o güne eklenir. Var olan günlerin sonuna eklenir.</p>'+
+      '<textarea id="oowImportText" rows="6" placeholder="🌼 01/04/2026&#10;Daily : The March Miracle&#10;Begonia : New Canals"></textarea>'+
+      '<div class="actions" style="margin-top:8px;"><button class="btn-primary" id="oowImportRun">İçe aktar</button><button class="btn-ghost" id="oowImportFile">📄 .txt seç</button></div>'+
+    '</div>'+
+    '<div class="oow-add">'+
+      '<input type="date" id="oowAddDate" class="date-sm" value="'+defDate+'" min="'+m+'-01" max="'+ymd(new Date(y, mm, 0))+'">'+
+      '<button class="btn-primary" id="oowAddBtn">＋ Gün ekle</button>'+
+      (today.startsWith(m) && !OOW.days[today] ? '<button class="btn-ghost" id="oowToday">☀️ Bugünü yaz</button>' : '')+
+    '</div>'+
+    '<div class="oow-doc">'+
+      (ds.length ? ds.map(d=>oowDayHtml(d, mi.icon||'📄')).join('') : '<div class="empty">Bu ayda henüz kayıt yok. Yukarıdan bir gün ekle.</div>')+
+    '</div>';
+}
+
+function renderOowtory(){
+  const main = document.getElementById('oowMain');
+  if(!main || main.contains(document.activeElement)) return;
+  if(oowMonth) renderOowMonth(main); else renderOowYear(main);
+}
+function oowRerender(focusDate){
+  const main = document.getElementById('oowMain');
+  if(oowMonth) renderOowMonth(main); else renderOowYear(main);
+  if(focusDate){
+    const ta = main.querySelector('.oow-day[data-date="'+focusDate+'"] .oow-text');
+    if(ta){ ta.focus(); ta.setSelectionRange(ta.value.length, ta.value.length); ta.closest('.oow-day').scrollIntoView({block:'center', behavior:REDUCED_MOTION ? 'auto' : 'smooth'}); }
+  }
+}
+
+// ---- Metinden içe aktarma ----
+function oowImportText(text){
+  const names = new Set(Object.values(OOW.months).map(m=>acNorm(m.name)).filter(Boolean));
+  const parsed = [];
+  let cur = null;
+  String(text||'').replace(/\r/g,'').split('\n').forEach(raw=>{
+    const l = raw.trim();
+    if(!l) return;
+    const dm = /(\d{1,2})[\/.](\d{1,2})[\/.](\d{4})(?:\s*[-–]\s*(.+?))?\s*$/.exec(l);
+    if(dm && l.indexOf(dm[0]) <= 4){
+      cur = {date:dm[3]+'-'+dm[2].padStart(2,'0')+'-'+dm[1].padStart(2,'0'), label:(dm[4]||'').trim(), lines:[]};
+      parsed.push(cur);
+      return;
+    }
+    if(!cur) return;
+    const footer = /^(.+?)\s+\d+$/.exec(l);
+    if(footer && names.has(acNorm(footer[1]))) return;
+    if(/^(-{3,}|—{2,})$/.test(l)){ cur.lines.push('---'); return; }
+    const prev = cur.lines[cur.lines.length-1];
+    const isEntry = /^[^:]{1,40}:\s/.test(l) || /^\/\//.test(l);
+    if(!isEntry && prev && prev !== '---' && (prev.length > 55 || /,\s*$/.test(prev))) cur.lines[cur.lines.length-1] = prev+' '+l;
+    else cur.lines.push(l);
+  });
+  parsed.forEach(p=>{
+    const ex = OOW.days[p.date];
+    const text = p.lines.join('\n');
+    if(ex){
+      ex.text = (ex.text ? ex.text+'\n---\n' : '') + text;
+      if(!ex.label && p.label) ex.label = p.label;
+    } else OOW.days[p.date] = {text, label:p.label};
+  });
+  return parsed;
+}
+
+// Oowtory arşiv JSON'u ({years, months, days}) ya da tam Leiden yedeği
+function oowImportArchive(obj){
+  const src = obj && obj.oowtory && obj.oowtory.days ? obj.oowtory : obj;
+  if(!src || typeof src.days !== 'object') return null;
+  const isDate = k=>/^\d{4}-\d{2}-\d{2}$/.test(k);
+  const incoming = Object.keys(src.days).filter(isDate);
+  const clash = incoming.filter(d=>{ const ex = OOW.days[d]; return ex && ex.text.trim() && ex.text.trim() !== String(src.days[d].text||'').trim(); });
+  const overwrite = clash.length > 0 && confirm(clash.length+' gün zaten kayıtlı ve farklı.\n\nTamam → arşivdeki metinle değiştir\nİptal → mevcut kayıtları koru');
+  const res = {added:0, replaced:0, kept:0, months:0};
+  incoming.forEach(d=>{
+    const v = src.days[d] || {};
+    const day = {text:String(v.text||''), label:String(v.label||'')};
+    const ex = OOW.days[d];
+    if(!ex || !ex.text.trim()){ OOW.days[d] = Object.assign({}, ex, day, {label: day.label || (ex && ex.label) || ''}); res.added++; }
+    else if(ex.text.trim() === day.text.trim()){ if(!ex.label && day.label) ex.label = day.label; }
+    else if(overwrite){ OOW.days[d] = day; res.replaced++; }
+    else res.kept++;
+  });
+  Object.entries(src.months||{}).forEach(([m, v])=>{
+    if(!/^\d{4}-\d{2}$/.test(m) || !v) return;
+    const cur = OOW.months[m] || {};
+    const next = {name: cur.name || String(v.name||''), icon: cur.icon || String(v.icon||'')};
+    if(next.name !== cur.name || next.icon !== cur.icon){ OOW.months[m] = Object.assign({}, cur, next); res.months++; }
+  });
+  Object.entries(src.years||{}).forEach(([y, v])=>{
+    if(/^\d{4}$/.test(y) && v && !OOW.years[y]) OOW.years[y] = {title:String(v.title||('Oowtory - '+y)), icon:String(v.icon||'📜')};
+  });
+  return res;
+}
+
+// ---- PDF (tarayıcının yazdır → PDF olarak kaydet) ----
+function oowPrint(months, footer, docTitle){
+  const area = document.getElementById('printArea');
+  if(area.parentElement !== document.body) document.body.appendChild(area);
+  area.innerHTML = months.map(m=>{
+    const mi = oowMonthInfo(m);
+    const icon = mi.icon || '📄';
+    return '<section class="pm">'+
+      '<div class="pm-ic">'+esc(icon)+'</div>'+
+      '<h1 class="pm-title">'+esc(mi.name || oowGregLabel(m))+'</h1>'+
+      oowDaysOf(m+'-').map(d=>{
+        const day = OOW.days[d];
+        return '<div class="pd">'+
+          '<div class="pd-ic">'+esc(icon)+'</div>'+
+          '<div class="pd-main">'+
+            '<div class="pd-date">'+oowDateLabel(d)+(day.label ? ' - '+esc(day.label) : '')+'</div>'+
+            oowParse(day.text).map(g=>'<div class="pd-group">'+g.map(it=>oowLineHtml(it)).join('')+'</div>').join('')+
+          '</div></div>';
+      }).join('')+
+    '</section>';
+  }).join('');
+  const cssStr = s=>'"'+String(s).replace(/\\/g,'\\\\').replace(/"/g,'\\"')+'"';
+  let st = document.getElementById('oowPageStyle');
+  if(!st){ st = document.createElement('style'); st.id = 'oowPageStyle'; document.head.appendChild(st); }
+  st.textContent = '@page{size:A4;margin:18mm 20mm 20mm;'+
+    '@bottom-left{content:'+cssStr(footer)+';font:9px Manrope,sans-serif;color:#8a8a8a;}'+
+    '@bottom-right{content:counter(page);font:9px Manrope,sans-serif;color:#8a8a8a;}}';
+  const oldTitle = document.title;
+  document.title = docTitle;
+  document.body.classList.add('printing');
+  const done = ()=>{
+    document.body.classList.remove('printing');
+    document.title = oldTitle;
+    area.innerHTML = '';
+    window.removeEventListener('afterprint', done);
+  };
+  window.addEventListener('afterprint', done);
+  setTimeout(()=>window.print(), 50);
+}
+
+function oowInsertKey(ta, key){
+  const pos = ta.selectionStart, v = ta.value;
+  const atLineStart = pos === 0 || v[pos-1] === '\n';
+  const ins = (atLineStart ? '' : '\n') + key + ' : ';
+  ta.value = v.slice(0,pos) + ins + v.slice(ta.selectionEnd);
+  ta.focus();
+  ta.setSelectionRange(pos+ins.length, pos+ins.length);
+  ta.dispatchEvent(new Event('input', {bubbles:true}));
+}
+
+function setupOowtory(){
+  const main = document.getElementById('oowMain');
+  const commit = ()=>{ saveOOW(); };
+  const scheduleSave = ()=>{ clearTimeout(oowSaveTimer); oowSaveTimer = setTimeout(()=>{ oowSaveTimer = null; saveOOW(); }, 500); };
+  const finishEdit = ()=>{
+    const d = oowEdit;
+    oowEdit = null;
+    if(d && OOW.days[d] && !OOW.days[d].text.trim() && !OOW.days[d].label) delete OOW.days[d];
+    clearTimeout(oowSaveTimer); saveOOW();
+    oowRerender();
+  };
+  const openDay = d=>{
+    if(!OOW.days[d]) OOW.days[d] = {text:'', label:''};
+    if(oowEdit && oowEdit !== d){ const p = OOW.days[oowEdit]; if(p && !p.text.trim() && !p.label) delete OOW.days[oowEdit]; }
+    oowEdit = d;
+    saveOOW();
+    oowRerender(d);
+  };
+
+  main.addEventListener('click', e=>{
+    const t = e.target;
+    const linked = t.closest('.oow-k.linked');
+    if(linked && !t.closest('.editing')){ e.stopPropagation(); openMapRef(linked.dataset.ref); return; }
+    const row = t.closest('.oow-mrow');
+    if(row){ oowMonth = row.dataset.m; oowEdit = null; oowRerender(); window.scrollTo({top:0}); return; }
+    const ychip = t.closest('.oow-ychip');
+    if(ychip){ oowYear = ychip.dataset.y; return oowRerender(); }
+    if(t.id==='oowYPrev'){ oowYear = String(Number(oowYear)-1); return oowRerender(); }
+    if(t.id==='oowYNext'){ oowYear = String(Number(oowYear)+1); return oowRerender(); }
+    if(t.id==='oowToYear'){ finishEdit(); oowYear = oowMonth.slice(0,4); oowMonth = null; return oowRerender(); }
+    if(t.id==='oowMPrev' || t.id==='oowMNext'){ finishEdit(); oowMonth = addMonths(oowMonth, t.id==='oowMPrev' ? -1 : 1); oowYear = oowMonth.slice(0,4); return oowRerender(); }
+    if(t.id==='oowMonIc'){ const p = document.getElementById('oowIconPick'); p.hidden = !p.hidden; return; }
+    if(t.closest('#oowIconPick button')){
+      OOW.months[oowMonth] = Object.assign(oowMonthInfo(oowMonth), {icon:t.closest('button').dataset.ic});
+      commit(); return oowRerender();
+    }
+    if(t.id==='oowImportToggle'){ const p = document.getElementById('oowImport'); p.hidden = !p.hidden; return; }
+    if(t.id==='oowImportRun'){
+      const txt = document.getElementById('oowImportText').value;
+      const res = oowImportText(txt);
+      if(!res.length){ toast('Metinde tarih satırı bulunamadı', 'err'); return; }
+      commit(); oowRerender();
+      toast(res.length+' gün içe aktarıldı', 'ok');
+      return;
+    }
+    if(t.id==='oowImportFile'){
+      const inp = document.createElement('input');
+      inp.type = 'file'; inp.accept = '.txt,.md,text/plain';
+      inp.addEventListener('change', async ()=>{
+        if(!inp.files[0]) return;
+        const res = oowImportText(await inp.files[0].text());
+        commit(); oowRerender();
+        toast(res.length ? res.length+' gün içe aktarıldı' : 'Dosyada tarih satırı bulunamadı', res.length ? 'ok' : 'err');
+      });
+      inp.click();
+      return;
+    }
+    if(t.id==='oowArchiveImport'){
+      const inp = document.createElement('input');
+      inp.type = 'file'; inp.accept = '.json,application/json';
+      inp.addEventListener('change', async ()=>{
+        if(!inp.files[0]) return;
+        let res = null;
+        try{ res = oowImportArchive(JSON.parse(await inp.files[0].text())); }catch(err){ res = null; }
+        if(!res){ toast('Geçerli bir Oowtory arşivi değil', 'err'); return; }
+        commit(); oowRerender();
+        toast(res.added+' gün eklendi'+(res.replaced ? ', '+res.replaced+' değişti' : '')+(res.kept ? ', '+res.kept+' korundu' : '')+' · '+res.months+' ay adı', 'ok');
+      });
+      inp.click();
+      return;
+    }
+    if(t.id==='oowAddBtn'){
+      const d = document.getElementById('oowAddDate').value;
+      if(!d) return;
+      if(!d.startsWith(oowMonth)){ oowMonth = d.slice(0,7); oowYear = d.slice(0,4); }
+      return openDay(d);
+    }
+    if(t.id==='oowToday') return openDay(todayStr());
+    if(t.id==='oowMonthPdf'){
+      finishEdit();
+      const mi = oowMonthInfo(oowMonth);
+      const name = mi.name || oowGregLabel(oowMonth);
+      return oowPrint([oowMonth], name, name);
+    }
+    if(t.id==='oowYearPdf'){
+      const months = [];
+      for(let i=1;i<=12;i++){ const m = oowYear+'-'+String(i).padStart(2,'0'); if(oowDaysOf(m+'-').length) months.push(m); }
+      const yi = oowYearInfo(oowYear);
+      return oowPrint(months, yi.title, yi.title);
+    }
+    const day = t.closest('.oow-day');
+    if(!day) return;
+    const d = day.dataset.date;
+    if(t.classList.contains('oow-del')){
+      if(!confirm(oowDateLabel(d)+' kaydı silinsin mi?')) return;
+      delete OOW.days[d];
+      if(oowEdit === d) oowEdit = null;
+      commit(); return oowRerender();
+    }
+    if(t.classList.contains('oow-done')) return finishEdit();
+    if(t.classList.contains('oow-key')){
+      const ta = day.querySelector('.oow-text');
+      oowInsertKey(ta, t.dataset.k);
+      return;
+    }
+    if(!day.classList.contains('editing') && (t.classList.contains('oow-edit-btn') || t.closest('.oow-body'))) return openDay(d);
+  });
+
+  // "Haritadan ekle": listeden bir isim seçilince anahtar olarak eklenir
+  const pickMapKey = inp=>{
+    const ref = oowIdx.get(acNorm(inp.value));
+    if(!ref) return;
+    oowInsertKey(inp.closest('.oow-day').querySelector('.oow-text'), ref.name);
+    inp.value = '';
+  };
+  main.addEventListener('change', e=>{ if(e.target.classList.contains('oow-mapkey')) pickMapKey(e.target); });
+
+  main.addEventListener('input', e=>{
+    const t = e.target;
+    if(t.classList.contains('oow-ytitle')){
+      OOW.years[oowYear] = Object.assign(oowYearInfo(oowYear), {title:t.value});
+      return scheduleSave();
+    }
+    if(t.classList.contains('oow-mname-in')){
+      OOW.months[oowMonth] = Object.assign(oowMonthInfo(oowMonth), {name:t.value.trim()});
+      return scheduleSave();
+    }
+    const day = t.closest('.oow-day');
+    if(!day) return;
+    const rec = OOW.days[day.dataset.date];
+    if(t.classList.contains('oow-text')){
+      rec.text = t.value;
+      t.rows = Math.max(6, t.value.split('\n').length + 2);
+      scheduleSave();
+    } else if(t.classList.contains('oow-label-in')){
+      rec.label = t.value.trim();
+      const lbl = day.querySelector('.oow-date');
+      if(lbl) lbl.textContent = oowDateLabel(day.dataset.date) + (rec.label ? ' - '+rec.label : '');
+      scheduleSave();
+    }
+  });
+  main.addEventListener('keydown', e=>{
+    if(e.target.classList.contains('oow-mapkey') && e.key==='Enter'){ e.preventDefault(); pickMapKey(e.target); return; }
+    if(e.target.classList.contains('oow-text') && e.key==='Enter' && (e.ctrlKey || e.metaKey)){ e.preventDefault(); finishEdit(); }
+    if(e.target.classList.contains('oow-text') && e.key==='Escape'){ e.preventDefault(); finishEdit(); }
+  });
+  window.addEventListener('beforeunload', ()=>{ if(oowSaveTimer){ clearTimeout(oowSaveTimer); saveOOW(); } });
+}
+
 function renderLeiden(){
   renderThistle();
   renderTagBar();
@@ -4726,6 +5920,8 @@ function renderLeiden(){
   renderNivose();
   renderAcademy();
   renderNotes();
+  renderOowtory();
+  if(document.getElementById('mod-home').classList.contains('active')) renderHome();
 }
 
 renderLegendAndAlphaTable();
@@ -4740,13 +5936,15 @@ setupTags();
 setupNivose();
 setupAcademy();
 setupNotes();
+setupOowtory();
+setupHome();
 setupVeri();
 renderLeiden();
 document.querySelectorAll('.modbtn').forEach(b=>b.addEventListener('click', ()=>showModule(b.dataset.module)));
 (function(){
   let saved = null;
   try{ saved = localStorage.getItem(MOD_KEY); }catch(e){}
-  showModule(document.querySelector('.modbtn[data-module="'+saved+'"]') ? saved : 'lamerite');
+  showModule(document.querySelector('.modbtn[data-module="'+saved+'"]') ? saved : 'home');
 })();
 if(syncReady() && SYNC.auto) pullFromGithub();
 </script>

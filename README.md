@@ -8,11 +8,13 @@ Leiden tek bir HTML dosyasıdır. Kurulum, sunucu veya derleme gerektirmez. Dosy
 
 | Modül | İçerik |
 |---|---|
+| **🏠 Ana Sayfa** | Selamlama ve Edina tarihi, günün sözü, modül kartlarında canlı özetler, bugünün planları, son notlar, okunanlar. |
 | **La Merite** | Emek (EMR) ve sermaye (C<sub>MR</sub>) takibi, Hazine (H<sub>MR</sub>). Haftalık giriş (Cumartesi → Cuma), takvim, haftalık özet, günlük tarihçe. |
 | **Thistle** | Maliye: bankalar ve hesaplar (aynı hesapta birden fazla para birimi), kurlar, harcamalar, aylık sabit giderler. |
 | **Nivose** | Günlük ve aylık planlar. Her plan Edina Haritasındaki bir öğeye bağlanabilir. |
 | **Edina Haritası** | Unirce → Perce → Parce hiyerarşisi ve Linden Union Şirketleri (Şirket → Proje). |
 | **Academy** | Akademilere bağlı makaleler ve okumalar (dosyalar private veri reposunda `Essais/` altında), okunan kitaplar. |
+| **📜 Oowtory** | Yıllık defter: adlandırılmış aylar, `Anahtar : Değer` biçiminde günlük kayıtlar, ay/yıl PDF çıktısı, metinden içe aktarma. |
 | **Notlar** | Notion tarzı iç içe sayfalar ve blok düzenleyici: `/` menüsü, Markdown kısayolları, sürükle-bırak, Markdown içe/dışa aktarma. |
 | **Veri** | JSON dışa / içe aktarma ve GitHub senkronu. |
 
@@ -89,14 +91,15 @@ Tüm veri tarayıcının `localStorage`'ında tutulur. İstersen ayrıca bir Git
 ```json
 {
   "app": "Leiden",
-  "version": 5,
+  "version": 6,
   "savedAt": "2026-10-15T12:00:00.000Z",
   "entries": { "2026-10-10": { "activities": { "P": 2, "CL": 1 }, "likit": null, "pkur": null } },
   "thistle": { "holders": [], "rates": {}, "expenses": [], "fixed": [] },
   "nivose":  { "plans": [] },
   "map":     { "unirces": [], "companies": [], "tags": [] },
   "academy": { "entries": [], "books": [] },
-  "notes":   { "pages": [] }
+  "notes":   { "pages": [] },
+  "oowtory": { "years": {}, "months": {}, "days": {} }
 }
 ```
 
@@ -118,7 +121,19 @@ leiden-data/
 - Klasör adı Edina Haritasındaki bir Perce ya da Parce adıyla eşleşirse o akademiye bağlanır. Adında "Academy" / "Akademi" geçen bloklar otomatik olarak akademi sayılır, diğerleri ⋯ menüsünden işaretlenebilir.
 - Dosya başına sınır 25 MB'tır.
 
-> ⚠️ `Essais` ve `Notlar` klasörlerini sayfanın bulunduğu **public** repoya yükleme. Kişisel içerik yalnızca private veri reposunda durmalı.
+### Kısayollar
+
+Uygulamada herhangi bir yerde **?** tuşuna basmak (ya da logonun yanındaki ⌨️ butonu) tüm modüllerin kısayollarını ve yazım biçimlerini gösteren pencereyi açar.
+
+### Oowtory
+
+Her gün bir metin alanıdır: her satır `Anahtar : Değer`, `*italik*` için yıldız, gruplar arasına `---`.
+Anahtar, Edina Haritası'ndaki bir Unirce / Perce / Parce ya da Linden Union'daki bir şirket / proje adıyla eşleşirse o bloğun renginde bir nokta alır; tıklanınca haritada o blok açılır.
+**PDF** butonu tarayıcının yazdırma penceresini açar; hedef olarak **PDF olarak kaydet** seçilir. Altlıkta ay adı ve sayfa numarası yer alır.
+**İçe aktar** ile Notion PDF'inden kopyalanan metin yapıştırılabilir; `01/04/2026` ya da `🌼 01/04/2026 - Gün adı` satırları yeni gün başlatır.
+**📦 Arşivi içe aktar** (yıl görünümü) `{years, months, days}` biçimindeki bir Oowtory arşivini ya da tam bir Leiden yedeğini birleştirir. Boş günler ve ay adları doldurulur. Farklı metne sahip mevcut günler için değiştirme / koruma sorulur. `Oowy/Oowtory-Arsiv.json`, 2023 Ocak – 2026 Ağustos arasındaki geçmiş dökümleri (44 ay, 1337 gün) bu biçimde içerir.
+
+> ⚠️ `Essais`, `Notlar`, `Oowy` ve `Oowy Archive` klasörlerini sayfanın bulunduğu **public** repoya yükleme. Kişisel içerik yalnızca private veri reposunda durmalı.
 
 ### Notlar kısayolları
 
