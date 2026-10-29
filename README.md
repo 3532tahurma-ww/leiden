@@ -11,7 +11,8 @@ Leiden tek bir HTML dosyasıdır. Kurulum, sunucu veya derleme gerektirmez. Dosy
 | **🏠 Ana Sayfa** | Selamlama ve Edina tarihi, günün sözü, modül kartlarında canlı özetler, bugünün planları, son notlar, okunanlar. |
 | **La Merite** | Emek (EMR) ve sermaye (C<sub>MR</sub>) takibi, Hazine (H<sub>MR</sub>). Haftalık giriş (Cumartesi → Cuma), takvim, haftalık özet, günlük tarihçe. |
 | **Thistle** | Maliye: bankalar ve hesaplar (aynı hesapta birden fazla para birimi), kurlar, harcamalar, aylık sabit giderler. |
-| **Nivose** | Günlük ve aylık planlar. Her plan Edina Haritasındaki bir öğeye bağlanabilir. |
+| **Nivose** | Günlük ve aylık planlar, Tamamlanmadı / Tamamlandı bölümleri ve tüm tamamlananların arşivi. Her plan Edina Haritasındaki bir öğeye bağlanabilir. |
+| **⚖️ Müzakere** | Parlamento, Konferans ve Kongre türünde müzakereler: taraflar ve beyanları, tartışmalar, alınan kararlar. Tek müzakere PDF / Markdown, liste PDF, tümü JSON olarak dışa aktarılır. |
 | **Edina Haritası** | Unirce → Perce → Parce hiyerarşisi ve Linden Union Şirketleri (Şirket → Proje). |
 | **Academy** | Akademilere bağlı makaleler ve okumalar (dosyalar private veri reposunda `Essais/` altında), okunan kitaplar. |
 | **📜 Oowtory** | Yıllık defter: adlandırılmış aylar, `Anahtar : Değer` biçiminde günlük kayıtlar, ay/yıl PDF çıktısı, metinden içe aktarma. |
@@ -50,7 +51,8 @@ Günlük E<sub>MR</sub> = Σ (saat × α).
 ## Kullanım
 
 - **Yerelde:** `index.html` dosyasını tarayıcıda aç.
-- **GitHub Pages ile:** Dosyayı public bir repoya `index.html` adıyla yükle. Repo **Settings → Pages → Deploy from a branch → `main` / root** ayarını yap. Sayfa `https://<kullanıcı>.github.io/<repo>/` adresinde açılır.
+- **GitHub Pages ile:** `index.html`, `sw.js`, `manifest.webmanifest` ve `icons/` klasörünü public bir repoya yükle. Repo **Settings → Pages → Deploy from a branch → `main` / root** ayarını yap. Sayfa `https://<kullanıcı>.github.io/<repo>/` adresinde açılır.
+- **iPhone'da uygulama olarak:** Sayfayı Safari'de aç → **Paylaş → Ana Ekrana Ekle**. Leiden tam ekran açılır, bir kez açıldıktan sonra çevrimdışı da çalışır. Service worker sayfayı her açılışta önce ağdan alır, yeni sürüm hemen gelir. GitHub senkronu hiçbir zaman önbelleğe alınmaz. (`file://` ile açıldığında service worker devre dışıdır.)
 
 ## Veri ve GitHub senkronu
 
@@ -96,6 +98,7 @@ Tüm veri tarayıcının `localStorage`'ında tutulur. İstersen ayrıca bir Git
   "entries": { "2026-10-10": { "activities": { "P": 2, "CL": 1 }, "likit": null, "pkur": null } },
   "thistle": { "holders": [], "rates": {}, "expenses": [], "fixed": [] },
   "nivose":  { "plans": [] },
+  "muzakere": { "items": [ { "type": "parlamento", "title": "", "date": "", "link": "", "parties": [], "debates": [], "decisions": [] } ] },
   "map":     { "unirces": [], "companies": [], "tags": [] },
   "academy": { "entries": [], "books": [] },
   "notes":   { "pages": [] },

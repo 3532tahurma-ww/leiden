@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Leiden</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#f6efe4">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Leiden">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -367,6 +375,56 @@
     .plan .acts{opacity:0;transition:opacity .12s ease;}
     .plan:hover .acts,.plan:focus-within .acts{opacity:1;}
   }
+  /* Müzakere */
+  #mod-muzakere .ac-tools select,#mod-muzakere .ac-tools input{font-size:.84rem;padding:8px 10px;}
+  #mod-muzakere .ac-tools .btn-primary{text-align:center;}
+  #mzFilters{margin-bottom:4px;}
+  .mz-dist{display:flex;height:8px;border-radius:999px;overflow:hidden;background:var(--surface-2);margin-bottom:10px;gap:2px;}
+  .mz-li{border-left:3px solid var(--tc) !important;}
+  .mz-li-ic{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;flex:none;background:color-mix(in srgb,var(--tc) 16%,#fff);}
+  .mz-empty{text-align:center;padding:48px 20px;}
+  .mz-empty-ic{font-size:3rem;margin-bottom:8px;opacity:.7;}
+  .mz-head{
+    margin-bottom:20px;border-top:4px solid var(--tc);
+    background:linear-gradient(135deg,color-mix(in srgb,var(--tc) 14%,#fff) 0%,#fff 60%);
+  }
+  .mz-head-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+  .mz-badge{width:54px;height:54px;border-radius:16px;display:grid;place-items:center;font-size:1.7rem;flex:none;background:#fff;border:1px solid color-mix(in srgb,var(--tc) 40%,#fff);box-shadow:0 8px 20px -14px var(--tc);}
+  .mz-head-meta{display:flex;align-items:center;gap:6px;flex-wrap:wrap;flex:1;min-width:0;}
+  .mz-head-acts{display:flex;align-items:center;gap:6px;}
+  .mz-head-acts .btn-ghost{padding:6px 11px;font-size:.78rem;}
+  input.mz-title{font-family:'Fraunces',serif;font-weight:600;font-size:1.6rem;margin:10px 0 6px;padding:4px 6px;background:transparent;}
+  .mz-flow{display:flex;align-items:center;gap:8px;margin:6px 0 12px;flex-wrap:wrap;}
+  .mz-step{display:flex;align-items:center;gap:8px;flex:1 1 120px;padding:10px 12px;background:#fff;border:1px solid var(--border);border-radius:14px;}
+  .mz-step-ic{font-size:1.2rem;}
+  .mz-step b{font-family:'Fraunces',serif;font-size:1.4rem;line-height:1;color:var(--tc);}
+  .mz-step small{font-family:'IBM Plex Mono',monospace;font-size:.66rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);}
+  .mz-arrow{color:var(--muted-2);font-size:1.1rem;flex:none;}
+  .mz-meter{margin-bottom:12px;}
+  .mz-meter .top{display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--muted);margin-bottom:4px;}
+  .mz-head-fields{display:flex;gap:8px;flex-wrap:wrap;}
+  .mz-head-fields select{width:auto;flex:0 1 220px;}
+  .mz-sec{margin-bottom:20px;}
+  .mz-item{position:relative;background:#fff;border:1px solid var(--border);border-radius:14px;margin-top:8px;padding:8px 10px;transition:border-color .12s ease, box-shadow .12s ease;}
+  .mz-item:focus-within{border-color:var(--lilac-soft);box-shadow:0 8px 20px -16px rgba(120,80,40,.6);}
+  .mz-row{display:flex;align-items:center;gap:8px;}
+  .mz-row .cell-input{flex:1 1 auto;min-width:0;font-size:.9rem;}
+  .mz-name{font-weight:700;}
+  .mz-text{min-height:0;margin-top:6px;font-family:'Manrope',sans-serif;font-size:.86rem;line-height:1.5;resize:vertical;background:var(--surface-2);}
+  .mz-parties{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin-top:4px;}
+  .mz-parties .mz-item{margin-top:0;}
+  .mz-avatar{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;flex:none;color:#fff;font-weight:800;font-size:.78rem;letter-spacing:.02em;}
+  .mz-timeline{position:relative;padding-left:30px;margin-top:4px;}
+  .mz-timeline::before{content:'';position:absolute;left:11px;top:10px;bottom:10px;width:2px;background:linear-gradient(var(--lilac-soft),var(--border));border-radius:2px;}
+  .mz-timeline .mz-dot{position:absolute;left:-30px;top:10px;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:#fff;border:2px solid var(--lilac);color:var(--lilac);font-family:'IBM Plex Mono',monospace;font-size:.66rem;font-weight:600;}
+  .mz-sec-decisions .mz-item{border-left:4px solid var(--mint);background:color-mix(in srgb,var(--mint) 5%,#fff);}
+  .mz-num{font-family:'IBM Plex Mono',monospace;font-size:.7rem;font-weight:600;color:#fff;background:var(--mint);border-radius:7px;padding:3px 7px;flex:none;}
+  @media (max-width:560px){ .mz-arrow{display:none;} .mz-head-acts{width:100%;} }
+  .pl-sec + .pl-sec{margin-top:14px;}
+  .pl-sec-head{display:flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding-bottom:4px;border-bottom:1px dashed var(--border);}
+  .pl-sec-head span{margin-left:auto;background:var(--surface-2);border-radius:999px;padding:1px 7px;letter-spacing:0;}
+  .pl-sec.closed .pl-sec-head{color:var(--mint);}
+  .pl-sec-empty{color:var(--muted-2);font-size:.8rem;padding:8px 2px 0;}
   .mcal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;}
   .mcal-dow{font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted-2);text-align:center;padding:2px 0;}
   .mcal-day{
@@ -1037,6 +1095,14 @@
     .pd .oow-line{font-size:10.5pt;line-height:1.55;color:#111;}
     .pd .oow-k{font-weight:400;}
     .pd .oow-line i{color:#111;}
+    .pz-type{display:inline-block;font-size:10pt;font-weight:700;color:var(--tc);border:1pt solid var(--tc);border-radius:20pt;padding:1.2mm 3.5mm;margin-bottom:5mm;}
+    .pz .pm-title{margin-bottom:3mm;}
+    .pz-meta{font-size:9.5pt;color:#666;margin-bottom:9mm;}
+    .pz-h{font-size:13pt;font-weight:800;color:var(--tc);border-bottom:.8pt solid var(--tc);padding-bottom:1.5mm;margin:8mm 0 4mm;}
+    .pz-block{margin:0 0 4mm;break-inside:avoid;}
+    .pz-block b{font-size:11pt;}
+    .pz-block p{margin:1mm 0 0;font-size:10.5pt;line-height:1.55;}
+    .pz-dec{margin:0;padding-left:6mm;font-size:10.5pt;line-height:1.6;}
   }
 
   @media (prefers-reduced-motion:reduce){
@@ -1054,6 +1120,7 @@
       <button class="modbtn" data-module="lamerite"><span class="mi">🏛️</span><span class="ml">La Merite</span></button>
       <button class="modbtn" data-module="thistle"><span class="mi">💰</span><span class="ml">Thistle</span></button>
       <button class="modbtn" data-module="nivose"><span class="mi">🗓️</span><span class="ml">Nivose</span></button>
+      <button class="modbtn" data-module="muzakere"><span class="mi">⚖️</span><span class="ml">Müzakere</span></button>
       <button class="modbtn" data-module="harita"><span class="mi">🗺️</span><span class="ml">Edina Haritası</span></button>
       <button class="modbtn" data-module="academy"><span class="mi">🎓</span><span class="ml">Academy</span></button>
       <button class="modbtn" data-module="oowtory"><span class="mi">📜</span><span class="ml">Oowtory</span></button>
@@ -1095,6 +1162,15 @@
             <dt>↷</dt><dd>Planı ertesi güne ertele</dd>
             <dt>Bugüne</dt><dd>Geciken planı bugüne taşı</dd>
             <dt>Takvim günü</dt><dd>Tıkla → o gün Günlük görünümde açılır</dd>
+            <dt>✅ Tamamlanan</dt><dd>Tüm tamamlanan planlar ve hedefler, tarihe göre</dd>
+          </dl>
+        </section>
+        <section>
+          <h3>⚖️ Müzakere</h3>
+          <dl>
+            <dt>Tür etiketi</dt><dd>Tıkla → Parlamento / Konferans / Kongre filtrele</dd>
+            <dt><kbd>Enter</kbd></dt><dd>Taraf, tartışma ya da karar ekler</dd>
+            <dt>Alanlar</dt><dd>Başlık, beyan, tartışma ve kararlar yerinde düzenlenir</dd>
           </dl>
         </section>
         <section>
@@ -1492,6 +1568,7 @@
     <nav class="tabs">
       <button class="stab" data-sub="gun">☀️ Günlük</button>
       <button class="stab" data-sub="ay">🌙 Aylık</button>
+      <button class="stab" data-sub="biten">✅ Tamamlanan</button>
     </nav>
 
     <section class="spanel" data-sub="gun">
@@ -1581,6 +1658,57 @@
         </div>
       </div>
     </section>
+
+    <section class="spanel" data-sub="biten">
+      <div class="card" style="margin-bottom:20px;">
+        <div class="composer" style="margin:0;">
+          <input type="text" id="nvDoneSearch" placeholder="Tamamlananlarda ara…">
+        </div>
+      </div>
+      <div class="grid2 nv-grid">
+        <div class="card">
+          <div class="card-head"><h2>☀️ Tamamlanan Günlük Planlar</h2><span class="ac-count" id="nvDoneDayCount">0</span></div>
+          <div id="nvDoneDays"></div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h2>🌙 Tamamlanan Aylık Hedefler</h2><span class="ac-count" id="nvDoneMonCount">0</span></div>
+          <div id="nvDoneMons"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ===== MÜZAKERE ===== -->
+  <div class="module" data-module="muzakere" id="mod-muzakere">
+    <p class="eyebrow">Müzakere · Parlamento, Konferans, Kongre</p>
+    <h1><span class="h1-ic">⚖️</span>Müzakere</h1>
+    <p class="sub">Her müzakerede taraflar ve beyanları, tartışmalar ve alınan kararlar. Müzakereler Edina Haritasındaki bir öğeye bağlanabilir.</p>
+
+    <div class="stats four">
+      <div class="stat"><div class="n" id="mzStatTotal">0</div><div class="l">⚖️ Toplam Müzakere</div></div>
+      <div class="stat"><div class="n" id="mzStatParlamento">0</div><div class="l">🏛️ Parlamento</div></div>
+      <div class="stat"><div class="n" id="mzStatKonferans">0</div><div class="l">🎙️ Konferans</div></div>
+      <div class="stat"><div class="n" id="mzStatKongre">0</div><div class="l">🏟️ Kongre</div></div>
+    </div>
+
+    <div class="ac-layout">
+      <aside class="card ac-side">
+        <div class="mz-dist" id="mzDist"></div>
+        <div class="ac-filters" id="mzFilters"></div>
+        <div class="pop-label">Müzakereler</div>
+        <div id="mzList"></div>
+        <div class="ac-tools">
+          <select id="mzNewType"></select>
+          <input type="text" id="mzNewTitle" placeholder="Müzakere adı (Enter)">
+          <button class="btn-primary" id="mzAdd">+ Yeni müzakere</button>
+        </div>
+        <div class="ac-tools">
+          <button class="btn-ghost" id="mzPdfAll">📄 Listeyi PDF olarak aktar</button>
+          <button class="btn-ghost" id="mzJsonAll">⬇ Tümünü JSON olarak indir</button>
+        </div>
+      </aside>
+      <div class="ac-main" id="mzMain"></div>
+    </div>
   </div>
 
   <!-- ===== EDINA HARITASI ===== -->
@@ -2442,15 +2570,16 @@ function scheduleSync(){
 }
 
 function buildBackup(){
-  return {app:'Leiden', version:6, savedAt:new Date().toISOString(), entries:DATA.entries, thistle:TH, nivose:NIV, map:MAP, academy:ACAD, notes:NOTES, oowtory:OOW};
+  return {app:'Leiden', version:6, savedAt:new Date().toISOString(), entries:DATA.entries, thistle:TH, nivose:NIV, muzakere:MUZ, map:MAP, academy:ACAD, notes:NOTES, oowtory:OOW};
 }
 function applyBackup(obj){
-  if(!obj || typeof obj !== 'object' || !(obj.entries || obj.thistle || obj.nivose || obj.map || obj.academy || obj.notes || obj.oowtory)) throw new Error('geçersiz format');
+  if(!obj || typeof obj !== 'object' || !(obj.entries || obj.thistle || obj.nivose || obj.muzakere || obj.map || obj.academy || obj.notes || obj.oowtory)) throw new Error('geçersiz format');
   syncSuppress = true;
   try{
     if(obj.entries){ DATA = {entries:obj.entries}; saveData(); }
     if(obj.thistle){ TH = obj.thistle; migrateTH(); saveTH(); }
     if(obj.nivose){ NIV = obj.nivose; if(!NIV.plans) NIV.plans = []; saveNIV(); }
+    if(obj.muzakere){ MUZ = obj.muzakere; migrateMUZ(); saveMUZ(); }
     if(obj.map){ MAP = obj.map; migrateMAP(); saveMAP(); }
     if(obj.academy){ ACAD = obj.academy; migrateACAD(); saveACAD(); }
     if(obj.notes){ NOTES = obj.notes; migrateNOTES(); saveNOTES(); }
@@ -3514,7 +3643,18 @@ function planRowHtml(p, opts){
   '</div>';
 }
 function planListHtml(plans, emptyText, opts){
-  return plans.length ? sortPlans(plans).map(p=>planRowHtml(p, opts)).join('') : '<div class="empty">'+emptyText+'</div>';
+  if(!plans.length) return '<div class="empty">'+emptyText+'</div>';
+  const sec = (cls, title, list, empty)=>'<div class="pl-sec '+cls+'"><div class="pl-sec-head">'+title+'<span>'+list.length+'</span></div>'+
+    (list.length ? sortPlans(list).map(p=>planRowHtml(p, opts)).join('') : '<div class="pl-sec-empty">'+empty+'</div>')+'</div>';
+  return sec('open', '⏳ Tamamlanmadı', plans.filter(p=>!p.done), 'Hepsi tamamlandı 🎉')+
+    sec('closed', '✅ Tamamlandı', plans.filter(p=>p.done), 'Henüz tamamlanan yok.');
+}
+let nvDoneQuery = '';
+function doneGroupsHtml(plans, labelOf, emptyText){
+  if(!plans.length) return '<div class="empty">'+emptyText+'</div>';
+  const keys = [...new Set(plans.map(p=>p.date))].sort().reverse();
+  return keys.map(k=>'<div class="pl-sec closed"><div class="pl-sec-head">'+labelOf(k)+'<span>'+plans.filter(p=>p.date===k).length+'</span></div>'+
+    sortPlans(plans.filter(p=>p.date===k)).map(p=>planRowHtml(p)).join('')+'</div>').join('');
 }
 
 function streakDays(){
@@ -3618,6 +3758,17 @@ function renderNivose(){
   document.getElementById('nvMonProgress').innerHTML = inMonth.length
     ? progressHtml('Toplam', doneCount(inMonth), inMonth.length, 'var(--lilac)') + groups.map(g=>progressHtml(g.label, g.done, g.total, g.color)).join('')
     : '<div class="empty">Bu ay için plan yok.</div>';
+
+  // completed
+  const q = nvDoneQuery.toLocaleLowerCase('tr');
+  const doneAll = NIV.plans.filter(p=>p.done && (!q || p.text.toLocaleLowerCase('tr').includes(q)));
+  const doneDays = doneAll.filter(p=>p.scope==='day'), doneMons = doneAll.filter(p=>p.scope==='month');
+  const emptyDone = q ? 'Eşleşen kayıt yok.' : 'Henüz tamamlanan yok.';
+  document.getElementById('nvDoneDayCount').textContent = doneDays.length;
+  document.getElementById('nvDoneMonCount').textContent = doneMons.length;
+  document.getElementById('nvDoneDays').innerHTML = doneGroupsHtml(doneDays, d=>
+    new Date(d+'T00:00:00').toLocaleDateString('tr-TR',{weekday:'short', day:'numeric', month:'long', year:'numeric'})+' · Edina '+edinaDateStr(d), emptyDone);
+  document.getElementById('nvDoneMons').innerHTML = doneGroupsHtml(doneMons, m=>monthLabelHtml(m).replace('<span>',' · ').replace('</span>',''), emptyDone);
 }
 
 function setupNivose(){
@@ -3696,6 +3847,7 @@ function setupNivose(){
     commit();
   });
 
+  document.getElementById('nvDoneSearch').addEventListener('input', e=>{ nvDoneQuery = e.target.value.trim(); renderNivose(); });
   document.getElementById('nvDayInput').addEventListener('change', e=>{ if(e.target.value){ nvDay = e.target.value; renderNivose(); } });
   document.getElementById('nvWeekPrev').addEventListener('click', ()=>{ nvDay = addDays(nvDay,-7); renderNivose(); });
   document.getElementById('nvWeekNext').addEventListener('click', ()=>{ nvDay = addDays(nvDay,7); renderNivose(); });
@@ -3703,6 +3855,243 @@ function setupNivose(){
   document.getElementById('nvMonPrev').addEventListener('click', ()=>{ nvMonth = addMonths(nvMonth,-1); renderNivose(); });
   document.getElementById('nvMonNext').addEventListener('click', ()=>{ nvMonth = addMonths(nvMonth,1); renderNivose(); });
   showSub = setupSubtabs(root);
+}
+
+// ===== Müzakere =====
+const MUZ_KEY = 'leidenMuzakere_v1';
+const MZ_TYPES = [
+  {id:'parlamento', label:'Parlamento', ic:'🏛️', color:'#9573b8'},
+  {id:'konferans',  label:'Konferans',  ic:'🎙️', color:'#5c9cc0'},
+  {id:'kongre',     label:'Kongre',     ic:'🏟️', color:'#cf9a3e'}
+];
+// Müzakere: {id, type, title, date, link, parties:[{id,name,statement}], debates:[{id,topic,text}], decisions:[{id,text}]}
+let MUZ = loadJson(MUZ_KEY, {items:[]});
+function migrateMUZ(){
+  if(!Array.isArray(MUZ.items)) MUZ.items = [];
+  MUZ.items.forEach(m=>{ ['parties','debates','decisions'].forEach(k=>{ if(!Array.isArray(m[k])) m[k] = []; }); });
+}
+migrateMUZ();
+function saveMUZ(){ saveJson(MUZ_KEY, MUZ); }
+let mzSel = null, mzFilter = 'all';
+const mzType = id=>MZ_TYPES.find(t=>t.id===id) || MZ_TYPES[0];
+
+function renderMuzakere(){
+  document.getElementById('mzStatTotal').textContent = MUZ.items.length;
+  MZ_TYPES.forEach(t=>{ document.getElementById('mzStat'+t.label).textContent = MUZ.items.filter(m=>m.type===t.id).length; });
+
+  const chip = (val, label, color, n)=>'<button class="tchip mz-f'+(mzFilter===val?' on':'')+'" data-v="'+val+'" style="--tc:'+color+'">'+label+' · '+n+'</button>';
+  document.getElementById('mzFilters').innerHTML = chip('all', 'Tümü', '#6b7a99', MUZ.items.length)+
+    MZ_TYPES.map(t=>chip(t.id, t.ic+' '+t.label, t.color, MUZ.items.filter(m=>m.type===t.id).length)).join('');
+
+  const newType = document.getElementById('mzNewType');
+  if(!newType.options.length) newType.innerHTML = MZ_TYPES.map(t=>'<option value="'+t.id+'">'+t.ic+' '+t.label+'</option>').join('');
+
+  const list = MUZ.items.filter(m=>mzFilter==='all' || m.type===mzFilter)
+    .sort((a,b)=>(b.date||'').localeCompare(a.date||'') || a.title.localeCompare(b.title,'tr'));
+  if(!list.some(m=>m.id===mzSel)) mzSel = list.length ? list[0].id : null;
+  const n = MUZ.items.length;
+  document.getElementById('mzDist').innerHTML = n ? MZ_TYPES.map(t=>{
+    const c = MUZ.items.filter(m=>m.type===t.id).length;
+    return c ? '<span style="flex:'+c+';background:'+t.color+'" title="'+t.label+': '+c+'"></span>' : '';
+  }).join('') : '';
+  document.getElementById('mzList').innerHTML = list.length ? list.map(m=>{
+    const t = mzType(m.type);
+    return '<button class="ac-item mz-li'+(m.id===mzSel?' sel':'')+'" data-id="'+m.id+'" style="--tc:'+t.color+'">'+
+      '<span class="mz-li-ic">'+t.ic+'</span>'+
+      '<span class="ac-item-name">'+esc(m.title)+'<small>'+t.label+(m.date ? ' · '+shortDayLabel(m.date) : '')+'</small></span>'+
+      '<span class="ac-count" title="Alınan karar">'+m.decisions.length+'</span>'+
+    '</button>';
+  }).join('') : '<div class="empty">Müzakere yok.</div>';
+
+  const m = MUZ.items.find(x=>x.id===mzSel);
+  const main = document.getElementById('mzMain');
+  if(!m){ main.innerHTML = '<div class="card mz-empty"><div class="mz-empty-ic">⚖️</div><b>Henüz seçili müzakere yok</b><p class="hint">Soldan bir müzakere seç ya da yeni bir tane ekle.</p></div>'; return; }
+  const t = mzType(m.type), r = resolveLink(m.link);
+  const linkSel = '<select data-h="link" title="Edina Haritası bağlantısı">'+linkOptionsHtml()+'</select>';
+  const section = (kind, title, hint, placeholder, items, body, empty)=>
+    '<div class="card mz-sec mz-sec-'+kind+'">'+
+      '<div class="card-head"><h2>'+title+'</h2><span class="ac-count">'+items.length+'</span></div>'+
+      '<p class="hint">'+hint+'</p>'+
+      '<div class="composer"><input type="text" class="mz-new" data-kind="'+kind+'" placeholder="'+placeholder+' (Enter)"><button class="btn-primary mz-add" data-kind="'+kind+'">Ekle</button></div>'+
+      (items.length ? body : '<div class="empty">'+empty+'</div>')+
+    '</div>';
+  const item = (kind, x, inner)=>'<div class="mz-item" data-kind="'+kind+'" data-id="'+x.id+'">'+inner+'</div>';
+  const del = '<button class="del-btn mz-del" title="Sil">✕</button>';
+  const stated = m.parties.filter(p=>(p.statement||'').trim()).length;
+  const step = (ic, nn, label)=>'<div class="mz-step"><span class="mz-step-ic">'+ic+'</span><b>'+nn+'</b><small>'+label+'</small></div>';
+
+  main.innerHTML =
+    '<div class="card mz-head" style="--tc:'+t.color+'">'+
+      '<div class="mz-head-top">'+
+        '<span class="mz-badge">'+t.ic+'</span>'+
+        '<div class="mz-head-meta">'+
+          '<span class="tchip">'+t.label+'</span>'+
+          (m.date ? '<span class="pl-time">'+shortDayLabel(m.date)+' · Edina '+edinaDateStr(m.date)+'</span>' : '')+
+          (r ? '<span class="tag"><span class="dot" style="background:'+esc(r.color)+'"></span>'+esc(r.label)+'</span>' : '')+
+        '</div>'+
+        '<div class="mz-head-acts">'+
+          '<button class="btn-ghost" id="mzPdf" title="PDF olarak dışa aktar">📄 PDF</button>'+
+          '<button class="btn-ghost" id="mzMd" title="Markdown olarak indir">⬇ .md</button>'+
+          '<button class="del-btn" id="mzDelete" title="Müzakereyi sil">✕</button>'+
+        '</div>'+
+      '</div>'+
+      '<input class="cell-input mz-title" data-h="title" value="'+esc(m.title)+'">'+
+      '<div class="mz-flow">'+
+        step('👥', m.parties.length, 'Taraf')+'<span class="mz-arrow">→</span>'+
+        step('💬', m.debates.length, 'Tartışma')+'<span class="mz-arrow">→</span>'+
+        step('📜', m.decisions.length, 'Karar')+
+      '</div>'+
+      (m.parties.length ? '<div class="mz-meter"><div class="top"><span>Beyanı yazılan taraf</span><span>'+stated+'/'+m.parties.length+'</span></div>'+
+        '<div class="progress"><div style="width:'+(stated/m.parties.length*100).toFixed(0)+'%;background:var(--tc)"></div></div></div>' : '')+
+      '<div class="mz-head-fields">'+
+        '<select data-h="type">'+MZ_TYPES.map(x=>'<option value="'+x.id+'"'+(x.id===m.type?' selected':'')+'>'+x.ic+' '+x.label+'</option>').join('')+'</select>'+
+        '<input type="date" class="date-sm" data-h="date" value="'+esc(m.date||'')+'">'+
+        linkSel+
+      '</div>'+
+    '</div>'+
+    section('parties', '👥 Taraflar ve Beyanları', 'Müzakereye katılan taraflar ve her birinin beyanı.', 'Taraf adı', m.parties,
+      '<div class="mz-parties">'+m.parties.map(x=>item('parties', x,
+        '<div class="mz-row"><span class="mz-avatar" style="background:'+mzColorOf(x.name)+'">'+esc(mzInitials(x.name))+'</span>'+
+        '<input class="cell-input mz-name" data-f="name" value="'+esc(x.name)+'">'+del+'</div>'+
+        '<textarea class="mz-text" data-f="statement" rows="4" placeholder="Beyan…">'+esc(x.statement||'')+'</textarea>')).join('')+'</div>', 'Henüz taraf eklenmedi.')+
+    section('debates', '💬 Tartışmalar', 'Gündem maddeleri ve tartışmanın seyri.', 'Tartışma konusu', m.debates,
+      '<div class="mz-timeline">'+m.debates.map((x,i)=>item('debates', x,
+        '<span class="mz-dot">'+(i+1)+'</span>'+
+        '<div class="mz-row"><input class="cell-input mz-name" data-f="topic" value="'+esc(x.topic)+'">'+del+'</div>'+
+        '<textarea class="mz-text" data-f="text" rows="3" placeholder="Öne sürülen görüşler, itirazlar, uzlaşma noktaları…">'+esc(x.text||'')+'</textarea>')).join('')+'</div>', 'Henüz tartışma eklenmedi.')+
+    section('decisions', '📜 Alınan Kararlar', 'Müzakere sonunda alınan kararlar.', 'Karar', m.decisions,
+      m.decisions.map((x,i)=>item('decisions', x,
+        '<div class="mz-row"><span class="mz-num">K'+(i+1)+'</span><input class="cell-input" data-f="text" value="'+esc(x.text)+'">'+del+'</div>')).join(''), 'Henüz karar alınmadı.');
+  main.querySelector('[data-h="link"]').value = findLink(m.link) ? m.link : '';
+}
+const MZ_AVATAR = ['#9573b8','#5c9cc0','#cf9a3e','#4f9470','#d27f9f','#e08a5a','#6b7a99','#b5676f'];
+function mzColorOf(s){ let h = 0; for(const c of String(s)) h = (h*31 + c.charCodeAt(0)) >>> 0; return MZ_AVATAR[h % MZ_AVATAR.length]; }
+function mzInitials(s){ return String(s).trim().split(/\s+/).slice(0,2).map(w=>w[0]||'').join('').toLocaleUpperCase('tr') || '?'; }
+
+function mzToMd(m){
+  const t = mzType(m.type), r = resolveLink(m.link);
+  const out = ['# '+m.title, '', '**Tür:** '+t.label+(m.date ? '  \n**Tarih:** '+m.date+' (Edina '+edinaDateStr(m.date)+')' : '')+(r ? '  \n**Bağlantı:** '+r.label : ''), ''];
+  out.push('## Taraflar ve Beyanları', '');
+  m.parties.forEach(p=>{ out.push('### '+p.name, '', (p.statement||'').trim() || '_Beyan yok._', ''); });
+  out.push('## Tartışmalar', '');
+  m.debates.forEach((d,i)=>{ out.push('### '+(i+1)+'. '+d.topic, '', (d.text||'').trim() || '_Not yok._', ''); });
+  out.push('## Alınan Kararlar', '');
+  m.decisions.forEach((d,i)=>out.push((i+1)+'. '+d.text));
+  return out.join('\n')+'\n';
+}
+function mzPrintHtml(m){
+  const t = mzType(m.type), r = resolveLink(m.link);
+  const para = s=>esc((s||'').trim()).replace(/\n/g,'<br>');
+  return '<section class="pm pz" style="--tc:'+t.color+'">'+
+    '<div class="pz-type">'+t.ic+' '+t.label+'</div>'+
+    '<h1 class="pm-title">'+esc(m.title)+'</h1>'+
+    '<div class="pz-meta">'+[m.date ? shortDayLabel(m.date)+' '+m.date.slice(0,4)+' · Edina '+edinaDateStr(m.date) : '', r ? r.label : '',
+      m.parties.length+' taraf · '+m.debates.length+' tartışma · '+m.decisions.length+' karar'].filter(Boolean).map(esc).join(' — ')+'</div>'+
+    '<h2 class="pz-h">Taraflar ve Beyanları</h2>'+
+    (m.parties.map(p=>'<div class="pz-block"><b>'+esc(p.name)+'</b><p>'+(para(p.statement) || '<i>Beyan yok.</i>')+'</p></div>').join('') || '<p><i>Taraf yok.</i></p>')+
+    '<h2 class="pz-h">Tartışmalar</h2>'+
+    (m.debates.map((d,i)=>'<div class="pz-block"><b>'+(i+1)+'. '+esc(d.topic)+'</b><p>'+(para(d.text) || '<i>Not yok.</i>')+'</p></div>').join('') || '<p><i>Tartışma yok.</i></p>')+
+    '<h2 class="pz-h">Alınan Kararlar</h2>'+
+    (m.decisions.length ? '<ol class="pz-dec">'+m.decisions.map(d=>'<li>'+esc(d.text)+'</li>').join('')+'</ol>' : '<p><i>Karar yok.</i></p>')+
+  '</section>';
+}
+function mzFileName(s){ return String(s||'muzakere').replace(/[\\/:*?"<>|]/g,'_'); }
+
+function setupMuzakere(){
+  const root = document.getElementById('mod-muzakere');
+  const cur = ()=>MUZ.items.find(x=>x.id===mzSel);
+  const firstField = {parties:'name', debates:'topic', decisions:'text'};
+
+  const addItem = kind=>{
+    const m = cur(), input = root.querySelector('.mz-new[data-kind="'+kind+'"]');
+    const text = input.value.trim();
+    if(!m || !text) return;
+    const item = {id:uid()};
+    item[firstField[kind]] = text;
+    m[kind].push(item);
+    saveMUZ(); renderMuzakere();
+    root.querySelector('.mz-new[data-kind="'+kind+'"]').focus();
+  };
+  const addMuz = ()=>{
+    const input = document.getElementById('mzNewTitle');
+    const title = input.value.trim();
+    if(!title) return;
+    const m = {id:uid(), type:document.getElementById('mzNewType').value, title, date:todayStr(), link:'', parties:[], debates:[], decisions:[]};
+    MUZ.items.push(m);
+    mzSel = m.id;
+    if(mzFilter!=='all' && mzFilter!==m.type) mzFilter = 'all';
+    input.value = '';
+    saveMUZ(); renderLeiden();
+  };
+  const download = (text, name, type)=>{
+    const url = URL.createObjectURL(new Blob([text], {type}));
+    const a = document.createElement('a');
+    a.href = url; a.download = name;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url), 30000);
+  };
+  document.getElementById('mzPdfAll').addEventListener('click', ()=>{
+    const list = MUZ.items.filter(m=>mzFilter==='all' || m.type===mzFilter)
+      .sort((a,b)=>(b.date||'').localeCompare(a.date||'') || a.title.localeCompare(b.title,'tr'));
+    if(!list.length) return toast('Aktarılacak müzakere yok.', 'err');
+    const title = mzFilter==='all' ? 'Müzakereler' : mzType(mzFilter).label+' Müzakereleri';
+    printDoc(list.map(mzPrintHtml).join(''), title, title);
+  });
+  document.getElementById('mzJsonAll').addEventListener('click', ()=>{
+    download(JSON.stringify({app:'Leiden', savedAt:new Date().toISOString(), muzakere:MUZ}, null, 2), 'leiden-muzakere-'+todayStr()+'.json', 'application/json');
+  });
+  document.getElementById('mzAdd').addEventListener('click', addMuz);
+  document.getElementById('mzNewTitle').addEventListener('keydown', e=>{ if(e.key==='Enter') addMuz(); });
+
+  root.addEventListener('click', e=>{
+    const t = e.target;
+    const f = t.closest('.mz-f');
+    if(f){ mzFilter = f.dataset.v; if(mzFilter!=='all') document.getElementById('mzNewType').value = mzFilter; renderMuzakere(); return; }
+    const it = t.closest('.ac-item');
+    if(it){ mzSel = it.dataset.id; renderMuzakere(); return; }
+    const add = t.closest('.mz-add');
+    if(add){ addItem(add.dataset.kind); return; }
+    const m = cur();
+    if(!m) return;
+    if(t.id==='mzPdf') return printDoc(mzPrintHtml(m), mzType(m.type).label+' · '+m.title, m.title);
+    if(t.id==='mzMd') return download(mzToMd(m), mzFileName(m.title)+'.md', 'text/markdown;charset=utf-8');
+    if(t.id==='mzDelete'){
+      if(!confirm('"'+m.title+'" müzakeresi silinsin mi?')) return;
+      MUZ.items = MUZ.items.filter(x=>x.id!==m.id);
+      saveMUZ(); renderLeiden();
+      return;
+    }
+    if(t.classList.contains('mz-del')){
+      const row = t.closest('.mz-item'), kind = row.dataset.kind;
+      const x = m[kind].find(y=>y.id===row.dataset.id);
+      if(!x || !confirm('"'+(x[firstField[kind]]||'')+'" silinsin mi?')) return;
+      m[kind] = m[kind].filter(y=>y.id!==x.id);
+      saveMUZ(); renderMuzakere();
+    }
+  });
+
+  root.addEventListener('keydown', e=>{
+    if(e.key==='Enter' && e.target.classList.contains('mz-new')) addItem(e.target.dataset.kind);
+  });
+
+  root.addEventListener('change', e=>{
+    const el = e.target, m = cur();
+    if(!m) return;
+    if(el.dataset.h){
+      const v = el.value.trim();
+      if(el.dataset.h==='title'){ if(v) m.title = v; }
+      else m[el.dataset.h] = v;
+      saveMUZ(); renderLeiden();
+      return;
+    }
+    const row = el.closest('.mz-item');
+    if(!row || !el.dataset.f) return;
+    const x = m[row.dataset.kind].find(y=>y.id===row.dataset.id);
+    if(!x) return;
+    if(el.tagName==='TEXTAREA') x[el.dataset.f] = el.value;
+    else x[el.dataset.f] = el.value.trim() || x[el.dataset.f];
+    saveMUZ();
+  });
 }
 
 // ===== Linden Union Şirketleri: Şirket → Proje =====
@@ -5302,6 +5691,7 @@ function renderHome(){
     {go:'lamerite', ic:'🏛️', name:'La Merite', desc:'Emek, sermaye ve Hazine', color:'#9573b8', metric:fmt(weekEmr,1), unit:'EMR bu hafta', sub:'H_MR '+fmt(hmr,1)},
     {go:'thistle',  ic:'💰', name:'Thistle',   desc:'Varlıklar, harcamalar, giderler', color:'#cf9a3e', metric:fmt(total,0)+' ₺', unit:'toplam', sub:'Bu ay '+fmt(monthSpend,0)+' ₺ harcama'},
     {go:'nivose',   ic:'🗓️', name:'Nivose',    desc:'Günlük planlar ve aylık hedefler', color:'#4f9470', metric:tDone+'/'+todays.length, unit:'bugün', sub:overdue ? overdue+' geciken plan' : 'Geciken plan yok'},
+    {go:'muzakere', ic:'⚖️', name:'Müzakere',  desc:'Parlamento, konferans, kongre', color:'#b5676f', metric:String(MUZ.items.length), unit:'müzakere', sub:MUZ.items.reduce((n,m)=>n+m.decisions.length,0)+' alınan karar'},
     {go:'harita',   ic:'🗺️', name:'Edina Haritası', desc:'Unirce → Perce → Parce', color:'#5c9cc0', metric:String(MAP.unirces.length), unit:'Unirce', sub:perceN+' Perce · '+parceN+' Parce · '+MAP.companies.length+' şirket'},
     {go:'academy',  ic:'🎓', name:'Academy',   desc:'Makaleler, okumalar, kitaplar', color:'#d27f9f', metric:acRead+'/'+ACAD.entries.length, unit:'okundu', sub:(reading.length+booksReading.length)+' şu an okunuyor'},
     {go:'oowtory',  ic:'📜', name:'Oowtory', desc:'Günlük kayıtlar ve adlandırılmış aylar', color:'#c8923a', metric:String(oowDaysOf(today.slice(0,7)+'-').length), unit:'gün bu ay', sub:(oowMonthInfo(today.slice(0,7)).icon||'')+' '+(oowMonthInfo(today.slice(0,7)).name||'İsimsiz ay')+(OOW.days[today] ? ' · bugün yazıldı' : ' · bugün henüz yok')},
@@ -5717,9 +6107,7 @@ function oowImportArchive(obj){
 
 // ---- PDF (tarayıcının yazdır → PDF olarak kaydet) ----
 function oowPrint(months, footer, docTitle){
-  const area = document.getElementById('printArea');
-  if(area.parentElement !== document.body) document.body.appendChild(area);
-  area.innerHTML = months.map(m=>{
+  printDoc(months.map(m=>{
     const mi = oowMonthInfo(m);
     const icon = mi.icon || '📄';
     return '<section class="pm">'+
@@ -5735,7 +6123,12 @@ function oowPrint(months, footer, docTitle){
           '</div></div>';
       }).join('')+
     '</section>';
-  }).join('');
+  }).join(''), footer, docTitle);
+}
+function printDoc(html, footer, docTitle){
+  const area = document.getElementById('printArea');
+  if(area.parentElement !== document.body) document.body.appendChild(area);
+  area.innerHTML = html;
   const cssStr = s=>'"'+String(s).replace(/\\/g,'\\\\').replace(/"/g,'\\"')+'"';
   let st = document.getElementById('oowPageStyle');
   if(!st){ st = document.createElement('style'); st.id = 'oowPageStyle'; document.head.appendChild(st); }
@@ -5921,6 +6314,7 @@ function renderLeiden(){
   renderMap();
   renderCompanies();
   renderNivose();
+  renderMuzakere();
   renderAcademy();
   renderNotes();
   renderOowtory();
@@ -5937,6 +6331,7 @@ setupMap();
 setupCompanies();
 setupTags();
 setupNivose();
+setupMuzakere();
 setupAcademy();
 setupNotes();
 setupOowtory();
@@ -5950,6 +6345,9 @@ document.querySelectorAll('.modbtn').forEach(b=>b.addEventListener('click', ()=>
   showModule(document.querySelector('.modbtn[data-module="'+saved+'"]') ? saved : 'home');
 })();
 if(syncReady() && SYNC.auto) pullFromGithub();
+if('serviceWorker' in navigator && location.protocol.startsWith('http')){
+  window.addEventListener('load', ()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+}
 </script>
 </body>
 </html>
