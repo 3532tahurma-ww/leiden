@@ -13,6 +13,7 @@ Leiden tek bir HTML dosyasıdır. Kurulum, sunucu veya derleme gerektirmez. Dosy
 | **Thistle** | Maliye: bankalar ve hesaplar (aynı hesapta birden fazla para birimi), kurlar, harcamalar, aylık sabit giderler. |
 | **Nivose** | Günlük ve aylık planlar, Tamamlanmadı / Tamamlandı bölümleri ve tüm tamamlananların arşivi. Her plan Edina Haritasındaki bir öğeye bağlanabilir. |
 | **⚖️ Müzakere** | Parlamento, Konferans ve Kongre türünde müzakereler: taraflar ve beyanları, tartışmalar, alınan kararlar. Tek müzakere PDF / Markdown, liste PDF, tümü JSON olarak dışa aktarılır. |
+| **🗳️ Edina Siyaseti** | Partiler (logo, kısaltma, renk, tüzük) ve mevcut iktidar: iktidar partisi ve hükümet adı. |
 | **Edina Haritası** | Unirce → Perce → Parce hiyerarşisi ve Linden Union Şirketleri (Şirket → Proje). |
 | **Academy** | Akademilere bağlı makaleler ve okumalar (dosyalar private veri reposunda `Essais/` altında), okunan kitaplar. |
 | **📜 Oowtory** | Yıllık defter: adlandırılmış aylar, `Anahtar : Değer` biçiminde günlük kayıtlar, ay/yıl PDF çıktısı, metinden içe aktarma. |
@@ -99,6 +100,7 @@ Tüm veri tarayıcının `localStorage`'ında tutulur. İstersen ayrıca bir Git
   "thistle": { "holders": [], "rates": {}, "expenses": [], "fixed": [] },
   "nivose":  { "plans": [] },
   "muzakere": { "items": [ { "type": "parlamento", "title": "", "date": "", "link": "", "parties": [], "debates": [], "decisions": [] } ] },
+  "siyaset": { "parties": [ { "name": "", "short": "", "color": "", "logo": "data:image/webp;base64,...", "charter": "" } ], "gov": { "party": "<parti id>", "name": "" } },
   "map":     { "unirces": [], "companies": [], "tags": [] },
   "academy": { "entries": [], "books": [] },
   "notes":   { "pages": [] },

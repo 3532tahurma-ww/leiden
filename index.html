@@ -419,6 +419,18 @@
   .mz-timeline .mz-dot{position:absolute;left:-30px;top:10px;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:#fff;border:2px solid var(--lilac);color:var(--lilac);font-family:'IBM Plex Mono',monospace;font-size:.66rem;font-weight:600;}
   .mz-sec-decisions .mz-item{border-left:4px solid var(--mint);background:color-mix(in srgb,var(--mint) 5%,#fff);}
   .mz-num{font-family:'IBM Plex Mono',monospace;font-size:.7rem;font-weight:600;color:#fff;background:var(--mint);border-radius:7px;padding:3px 7px;flex:none;}
+
+  /* ===== Edina Siyaseti ===== */
+  .sy-gov{margin-bottom:20px;border-top:4px solid var(--tc);background:linear-gradient(135deg,color-mix(in srgb,var(--tc) 14%,#fff) 0%,#fff 60%);}
+  .sy-gov-top{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:12px;}
+  .sy-gov-top b{font-family:'Fraunces',serif;font-size:1.4rem;display:block;}
+  .sy-gov-top small{color:var(--muted);}
+  .sy-logo{width:54px;height:54px;border-radius:14px;flex:none;display:grid;place-items:center;font-size:1.6rem;background:#fff center/cover no-repeat;border:1px solid var(--border);}
+  .sy-li-logo{width:28px;height:28px;border-radius:9px;font-size:.9rem;}
+  .sy-li{border-left:3px solid var(--tc) !important;}
+  .sy-head .avatar{width:72px;height:72px;border-radius:18px;font-size:1.4rem;}
+  .sy-head input.sy-short{font-family:'IBM Plex Mono',monospace;font-size:.82rem;max-width:200px;padding:4px 6px;background:transparent;}
+  .sy-charter{font-size:.9rem;min-height:320px;}
   @media (max-width:560px){ .mz-arrow{display:none;} .mz-head-acts{width:100%;} }
   .pl-sec + .pl-sec{margin-top:14px;}
   .pl-sec-head{display:flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding-bottom:4px;border-bottom:1px dashed var(--border);}
@@ -1121,6 +1133,7 @@
       <button class="modbtn" data-module="thistle"><span class="mi">💰</span><span class="ml">Thistle</span></button>
       <button class="modbtn" data-module="nivose"><span class="mi">🗓️</span><span class="ml">Nivose</span></button>
       <button class="modbtn" data-module="muzakere"><span class="mi">⚖️</span><span class="ml">Müzakere</span></button>
+      <button class="modbtn" data-module="siyaset"><span class="mi">🗳️</span><span class="ml">Edina Siyaseti</span></button>
       <button class="modbtn" data-module="harita"><span class="mi">🗺️</span><span class="ml">Edina Haritası</span></button>
       <button class="modbtn" data-module="academy"><span class="mi">🎓</span><span class="ml">Academy</span></button>
       <button class="modbtn" data-module="oowtory"><span class="mi">📜</span><span class="ml">Oowtory</span></button>
@@ -1171,6 +1184,14 @@
             <dt>Tür etiketi</dt><dd>Tıkla → Parlamento / Konferans / Kongre filtrele</dd>
             <dt><kbd>Enter</kbd></dt><dd>Taraf, tartışma ya da karar ekler</dd>
             <dt>Alanlar</dt><dd>Başlık, beyan, tartışma ve kararlar yerinde düzenlenir</dd>
+          </dl>
+        </section>
+        <section>
+          <h3>🗳️ Edina Siyaseti</h3>
+          <dl>
+            <dt><kbd>Enter</kbd></dt><dd>Yeni parti ekler</dd>
+            <dt>Logo</dt><dd>Tıkla → resim yükle, ✕ ile kaldır</dd>
+            <dt>Mevcut İktidar</dt><dd>İktidar partisini seç, hükümet adını yaz</dd>
           </dl>
         </section>
         <section>
@@ -1708,6 +1729,27 @@
         </div>
       </aside>
       <div class="ac-main" id="mzMain"></div>
+    </div>
+  </div>
+
+  <!-- ===== EDINA SIYASETI ===== -->
+  <div class="module" data-module="siyaset" id="mod-siyaset">
+    <p class="eyebrow">Edina Siyaseti · Partiler ve Hükümet</p>
+    <h1><span class="h1-ic">🗳️</span>Edina Siyaseti</h1>
+    <p class="sub">Partilerin logoları ve tüzükleri, mevcut iktidar partisi ve hükümet.</p>
+
+    <div class="card sy-gov" id="syGov"></div>
+
+    <div class="ac-layout">
+      <aside class="card ac-side">
+        <div class="pop-label">Partiler</div>
+        <div id="syList"></div>
+        <div class="ac-tools">
+          <input type="text" id="syNewName" placeholder="Parti adı (Enter)">
+          <button class="btn-primary" id="syAdd">+ Yeni parti</button>
+        </div>
+      </aside>
+      <div class="ac-main" id="syMain"></div>
     </div>
   </div>
 
@@ -2570,16 +2612,17 @@ function scheduleSync(){
 }
 
 function buildBackup(){
-  return {app:'Leiden', version:6, savedAt:new Date().toISOString(), entries:DATA.entries, thistle:TH, nivose:NIV, muzakere:MUZ, map:MAP, academy:ACAD, notes:NOTES, oowtory:OOW};
+  return {app:'Leiden', version:6, savedAt:new Date().toISOString(), entries:DATA.entries, thistle:TH, nivose:NIV, muzakere:MUZ, siyaset:POL, map:MAP, academy:ACAD, notes:NOTES, oowtory:OOW};
 }
 function applyBackup(obj){
-  if(!obj || typeof obj !== 'object' || !(obj.entries || obj.thistle || obj.nivose || obj.muzakere || obj.map || obj.academy || obj.notes || obj.oowtory)) throw new Error('geçersiz format');
+  if(!obj || typeof obj !== 'object' || !(obj.entries || obj.thistle || obj.nivose || obj.muzakere || obj.siyaset || obj.map || obj.academy || obj.notes || obj.oowtory)) throw new Error('geçersiz format');
   syncSuppress = true;
   try{
     if(obj.entries){ DATA = {entries:obj.entries}; saveData(); }
     if(obj.thistle){ TH = obj.thistle; migrateTH(); saveTH(); }
     if(obj.nivose){ NIV = obj.nivose; if(!NIV.plans) NIV.plans = []; saveNIV(); }
     if(obj.muzakere){ MUZ = obj.muzakere; migrateMUZ(); saveMUZ(); }
+    if(obj.siyaset){ POL = obj.siyaset; migratePOL(); savePOL(); }
     if(obj.map){ MAP = obj.map; migrateMAP(); saveMAP(); }
     if(obj.academy){ ACAD = obj.academy; migrateACAD(); saveACAD(); }
     if(obj.notes){ NOTES = obj.notes; migrateNOTES(); saveNOTES(); }
@@ -4091,6 +4134,120 @@ function setupMuzakere(){
     if(el.tagName==='TEXTAREA') x[el.dataset.f] = el.value;
     else x[el.dataset.f] = el.value.trim() || x[el.dataset.f];
     saveMUZ();
+  });
+}
+
+// ===== Edina Siyaseti =====
+const POL_KEY = 'leidenSiyaset_v1';
+// Parti: {id, name, short, color, logo, charter}; gov: {party, name}
+let POL = loadJson(POL_KEY, {parties:[], gov:{party:'', name:''}});
+function migratePOL(){
+  if(!Array.isArray(POL.parties)) POL.parties = [];
+  if(!POL.gov || typeof POL.gov !== 'object') POL.gov = {party:'', name:''};
+}
+migratePOL();
+function savePOL(){ saveJson(POL_KEY, POL); }
+let sySel = null;
+function syLogoHtml(p, cls){
+  return '<span class="sy-logo'+(cls ? ' '+cls : '')+'"'+(p && p.logo ? ' style="background-image:url(&quot;'+esc(p.logo)+'&quot;)"' : '')+'>'+(p && p.logo ? '' : '🏳️')+'</span>';
+}
+
+function renderSiyaset(){
+  const ruling = POL.parties.find(p=>p.id===POL.gov.party);
+  const gov = document.getElementById('syGov');
+  gov.style.setProperty('--tc', ruling ? ruling.color : '#6b7a99');
+  gov.innerHTML =
+    '<div class="sy-gov-top">'+syLogoHtml(ruling)+
+      '<div><small>Mevcut İktidar</small><b>'+esc(POL.gov.name || 'Hükümet adı yok')+'</b>'+
+      '<small>'+(ruling ? esc(ruling.name)+(ruling.short ? ' ('+esc(ruling.short)+')' : '') : 'İktidar partisi seçilmedi')+'</small></div>'+
+    '</div>'+
+    '<div class="frow">'+
+      '<div class="field" style="flex:1 1 200px;"><label for="syGovParty">İktidar partisi</label><select id="syGovParty" data-g="party">'+
+        '<option value="">— Seçilmedi —</option>'+
+        POL.parties.map(p=>'<option value="'+p.id+'"'+(p.id===POL.gov.party?' selected':'')+'>'+esc(p.name)+'</option>').join('')+
+      '</select></div>'+
+      '<div class="field" style="flex:2 1 220px;"><label for="syGovName">Hükümet adı</label><input type="text" id="syGovName" data-g="name" value="'+esc(POL.gov.name||'')+'" placeholder="örn. 3. Linden Hükümeti"></div>'+
+    '</div>';
+
+  const list = POL.parties.slice().sort((a,b)=>a.name.localeCompare(b.name,'tr'));
+  if(!list.some(p=>p.id===sySel)) sySel = list.length ? list[0].id : null;
+  document.getElementById('syList').innerHTML = list.length ? list.map(p=>
+    '<button class="ac-item sy-li'+(p.id===sySel?' sel':'')+'" data-id="'+p.id+'" style="--tc:'+esc(p.color)+'">'+
+      syLogoHtml(p, 'sy-li-logo')+
+      '<span class="ac-item-name">'+esc(p.name)+'<small>'+(p.id===POL.gov.party ? '👑 İktidar' : esc(p.short||''))+'</small></span>'+
+    '</button>').join('') : '<div class="empty">Parti yok.</div>';
+
+  const p = POL.parties.find(x=>x.id===sySel);
+  const main = document.getElementById('syMain');
+  if(!p){ main.innerHTML = '<div class="card mz-empty"><div class="mz-empty-ic">🗳️</div><b>Henüz seçili parti yok</b><p class="hint">Soldan bir parti seç ya da yeni bir tane ekle.</p></div>'; return; }
+  main.innerHTML =
+    '<div class="card mz-head sy-head" style="--tc:'+esc(p.color)+'">'+
+      '<div class="mz-head-top">'+
+        avatarHtml(p.logo, 'sy', 'Logo yükle')+
+        '<div class="mz-head-meta">'+(p.id===POL.gov.party ? '<span class="tchip">👑 İktidar partisi</span>' : '')+'</div>'+
+        '<div class="mz-head-acts">'+
+          '<input type="color" data-p="color" value="'+esc(p.color)+'" title="Renk">'+
+          '<button class="del-btn" id="syDelete" title="Partiyi sil">✕</button>'+
+        '</div>'+
+      '</div>'+
+      '<input class="cell-input mz-title" data-p="name" value="'+esc(p.name)+'">'+
+      '<input class="cell-input sy-short" data-p="short" value="'+esc(p.short||'')+'" placeholder="Kısaltma">'+
+    '</div>'+
+    '<div class="card">'+
+      '<div class="card-head"><h2>📜 Tüzük</h2></div>'+
+      '<textarea class="mz-text sy-charter" data-p="charter" placeholder="Parti tüzüğü…">'+esc(p.charter||'')+'</textarea>'+
+    '</div>';
+}
+
+function setupSiyaset(){
+  const root = document.getElementById('mod-siyaset');
+  const cur = ()=>POL.parties.find(x=>x.id===sySel);
+  const addParty = ()=>{
+    const input = document.getElementById('syNewName');
+    const name = input.value.trim();
+    if(!name) return;
+    const p = {id:uid(), name, short:'', color:MZ_AVATAR[POL.parties.length % MZ_AVATAR.length], logo:'', charter:''};
+    POL.parties.push(p);
+    sySel = p.id;
+    input.value = '';
+    savePOL(); renderLeiden();
+  };
+  document.getElementById('syAdd').addEventListener('click', addParty);
+  document.getElementById('syNewName').addEventListener('keydown', e=>{ if(e.key==='Enter') addParty(); });
+
+  root.addEventListener('click', e=>{
+    const t = e.target;
+    const it = t.closest('.ac-item');
+    if(it){ sySel = it.dataset.id; renderSiyaset(); return; }
+    const p = cur();
+    if(!p) return;
+    if(t.classList.contains('sy-img')){
+      pickImage().then(url=>{ if(!url) return; p.logo = url; savePOL(); renderLeiden(); });
+      return;
+    }
+    if(t.classList.contains('sy-img-clear')){ p.logo = ''; savePOL(); renderLeiden(); return; }
+    if(t.id==='syDelete'){
+      if(!confirm('"'+p.name+'" partisi silinsin mi?')) return;
+      POL.parties = POL.parties.filter(x=>x.id!==p.id);
+      if(POL.gov.party===p.id) POL.gov.party = '';
+      savePOL(); renderLeiden();
+    }
+  });
+
+  root.addEventListener('change', e=>{
+    const el = e.target;
+    if(el.dataset.g){
+      POL.gov[el.dataset.g] = el.value.trim();
+      savePOL(); renderLeiden();
+      return;
+    }
+    const p = cur();
+    if(!p || !el.dataset.p) return;
+    if(el.dataset.p==='charter'){ p.charter = el.value; savePOL(); return; }
+    const v = el.value.trim();
+    if(el.dataset.p==='name'){ if(v) p.name = v; }
+    else p[el.dataset.p] = v;
+    savePOL(); renderLeiden();
   });
 }
 
@@ -5692,6 +5849,7 @@ function renderHome(){
     {go:'thistle',  ic:'💰', name:'Thistle',   desc:'Varlıklar, harcamalar, giderler', color:'#cf9a3e', metric:fmt(total,0)+' ₺', unit:'toplam', sub:'Bu ay '+fmt(monthSpend,0)+' ₺ harcama'},
     {go:'nivose',   ic:'🗓️', name:'Nivose',    desc:'Günlük planlar ve aylık hedefler', color:'#4f9470', metric:tDone+'/'+todays.length, unit:'bugün', sub:overdue ? overdue+' geciken plan' : 'Geciken plan yok'},
     {go:'muzakere', ic:'⚖️', name:'Müzakere',  desc:'Parlamento, konferans, kongre', color:'#b5676f', metric:String(MUZ.items.length), unit:'müzakere', sub:MUZ.items.reduce((n,m)=>n+m.decisions.length,0)+' alınan karar'},
+    {go:'siyaset',  ic:'🗳️', name:'Edina Siyaseti', desc:'Partiler, tüzükler, hükümet', color:'#6f7fc0', metric:String(POL.parties.length), unit:'parti', sub:POL.gov.name || ((POL.parties.find(p=>p.id===POL.gov.party)||{}).name) || 'Hükümet belirtilmedi'},
     {go:'harita',   ic:'🗺️', name:'Edina Haritası', desc:'Unirce → Perce → Parce', color:'#5c9cc0', metric:String(MAP.unirces.length), unit:'Unirce', sub:perceN+' Perce · '+parceN+' Parce · '+MAP.companies.length+' şirket'},
     {go:'academy',  ic:'🎓', name:'Academy',   desc:'Makaleler, okumalar, kitaplar', color:'#d27f9f', metric:acRead+'/'+ACAD.entries.length, unit:'okundu', sub:(reading.length+booksReading.length)+' şu an okunuyor'},
     {go:'oowtory',  ic:'📜', name:'Oowtory', desc:'Günlük kayıtlar ve adlandırılmış aylar', color:'#c8923a', metric:String(oowDaysOf(today.slice(0,7)+'-').length), unit:'gün bu ay', sub:(oowMonthInfo(today.slice(0,7)).icon||'')+' '+(oowMonthInfo(today.slice(0,7)).name||'İsimsiz ay')+(OOW.days[today] ? ' · bugün yazıldı' : ' · bugün henüz yok')},
@@ -6315,6 +6473,7 @@ function renderLeiden(){
   renderCompanies();
   renderNivose();
   renderMuzakere();
+  renderSiyaset();
   renderAcademy();
   renderNotes();
   renderOowtory();
@@ -6332,6 +6491,7 @@ setupCompanies();
 setupTags();
 setupNivose();
 setupMuzakere();
+setupSiyaset();
 setupAcademy();
 setupNotes();
 setupOowtory();

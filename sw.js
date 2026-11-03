@@ -1,5 +1,5 @@
 // Leiden service worker: offline shell, network-first for the page so updates arrive immediately.
-const CACHE = 'leiden-v1';
+const CACHE = 'leiden-v2';
 const SHELL = ['./', './index.html', './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png', './icons/apple-touch-icon.png'];
 const FONT_HOSTS = ['fonts.googleapis.com', 'fonts.gstatic.com'];
 
