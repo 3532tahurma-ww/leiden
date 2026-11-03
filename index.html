@@ -421,6 +421,16 @@
   .mz-num{font-family:'IBM Plex Mono',monospace;font-size:.7rem;font-weight:600;color:#fff;background:var(--mint);border-radius:7px;padding:3px 7px;flex:none;}
 
   /* ===== Edina Siyaseti ===== */
+  .sy-chart-card{margin-bottom:20px;}
+  .sy-chart-wrap{display:grid;grid-template-columns:minmax(0,440px) 1fr;gap:20px;align-items:center;}
+  .sy-chart{width:100%;height:auto;display:block;touch-action:none;user-select:none;}
+  .sy-chart .sy-dot{cursor:grab;}
+  .sy-chart .sy-dot.drag{cursor:grabbing;}
+  .sy-chart .sy-dot.sel circle.ring{stroke:var(--text);stroke-width:2.5;}
+  .sy-axes{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .sy-axis{background:var(--surface-2);border:1px solid var(--border);border-left:4px solid var(--tc);border-radius:12px;padding:8px 10px;font-size:.8rem;line-height:1.45;color:var(--muted);}
+  .sy-axis b{display:block;color:var(--text);font-size:.86rem;}
+  @media (max-width:760px){ .sy-chart-wrap{grid-template-columns:1fr;} }
   .sy-gov{margin-bottom:20px;border-top:4px solid var(--tc);background:linear-gradient(135deg,color-mix(in srgb,var(--tc) 14%,#fff) 0%,#fff 60%);}
   .sy-gov-top{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:12px;}
   .sy-gov-top b{font-family:'Fraunces',serif;font-size:1.4rem;display:block;}
@@ -1737,6 +1747,20 @@
     <p class="eyebrow">Edina Siyaseti · Partiler ve Hükümet</p>
     <h1><span class="h1-ic">🗳️</span>Edina Siyaseti</h1>
     <p class="sub">Partilerin logoları ve tüzükleri, mevcut iktidar partisi ve hükümet.</p>
+
+    <div class="card sy-chart-card">
+      <div class="card-head"><h2>🧭 Polisolarity · Edina Egemenlik Haritası</h2></div>
+      <p class="hint">Partileri haritada sürükleyerek konumlandır ya da parti kartındaki X / Y alanlarını kullan (−10 … +10).</p>
+      <div class="sy-chart-wrap">
+        <svg class="sy-chart" id="syChart" viewBox="0 0 400 400"></svg>
+        <div class="sy-axes">
+          <div class="sy-axis" style="--tc:#9573b8"><b>+x Sovereign (Egemen)</b>Tam bağımsızlık, dış onaya kapalılık, kendi kurallarını koyma, içsel kaynaklara dayalı büyüme.</div>
+          <div class="sy-axis" style="--tc:#5c9cc0"><b>−x Adaptive (Adaptif)</b>Dış dünyaya açık, Smyrna piyasasını hackleyen, stratejik esnekliğe sahip, "ahtapot gibi her yere kol geren".</div>
+          <div class="sy-axis" style="--tc:#c9606f"><b>+y Assertive (Atılgan/Taarruzi)</b>İhracat, Persalizasyon, fikir enjeksiyonu, aktif güç gösterisi, "Giyotin" doktrini.</div>
+          <div class="sy-axis" style="--tc:#4f9470"><b>−y Stabilizing (İstikrar/İnşa)</b>İç kale güvenliği, teknolojik mükemmeliyet, entelektüel derinlik, kurumların kusursuz işleyişi.</div>
+        </div>
+      </div>
+    </div>
 
     <div class="card sy-gov" id="syGov"></div>
 
@@ -4139,11 +4163,14 @@ function setupMuzakere(){
 
 // ===== Edina Siyaseti =====
 const POL_KEY = 'leidenSiyaset_v1';
-// Parti: {id, name, short, color, logo, charter}; gov: {party, name}
+// Parti: {id, name, short, color, logo, charter, x, y}; x: −Adaptive … +Sovereign, y: −Stabilizing … +Assertive (−10 … 10)
+// gov: {party, name}
 let POL = loadJson(POL_KEY, {parties:[], gov:{party:'', name:''}});
+const syClamp = v=>Math.max(-10, Math.min(10, Math.round((parseFloat(v)||0)*2)/2));
 function migratePOL(){
   if(!Array.isArray(POL.parties)) POL.parties = [];
   if(!POL.gov || typeof POL.gov !== 'object') POL.gov = {party:'', name:''};
+  POL.parties.forEach(p=>{ p.x = syClamp(p.x); p.y = syClamp(p.y); });
 }
 migratePOL();
 function savePOL(){ saveJson(POL_KEY, POL); }
@@ -4152,7 +4179,39 @@ function syLogoHtml(p, cls){
   return '<span class="sy-logo'+(cls ? ' '+cls : '')+'"'+(p && p.logo ? ' style="background-image:url(&quot;'+esc(p.logo)+'&quot;)"' : '')+'>'+(p && p.logo ? '' : '🏳️')+'</span>';
 }
 
+// Harita: 400×400 viewBox, merkez 200, 1 birim = 16px
+const SY_C = 200, SY_U = 16;
+function renderSyChart(){
+  const grid = [];
+  for(let i=-10;i<=10;i+=2){
+    const v = SY_C+i*SY_U;
+    grid.push('<line x1="'+v+'" y1="40" x2="'+v+'" y2="360"/><line x1="40" y1="'+v+'" x2="360" y2="'+v+'"/>');
+  }
+  const quad = (x, y, color)=>'<rect x="'+x+'" y="'+y+'" width="160" height="160" fill="'+color+'" fill-opacity=".08"/>';
+  const dots = POL.parties.map(p=>{
+    const cx = SY_C+p.x*SY_U, cy = SY_C-p.y*SY_U;
+    return '<g class="sy-dot'+(p.id===sySel?' sel':'')+'" data-id="'+p.id+'" transform="translate('+cx+' '+cy+')">'+
+      '<title>'+esc(p.name)+' ('+p.x+', '+p.y+')</title>'+
+      '<circle class="ring" r="13" fill="'+esc(p.color)+'" stroke="#fff" stroke-width="2"/>'+
+      (p.logo ? '<clipPath id="syClip-'+p.id+'"><circle r="11"/></clipPath><image href="'+esc(p.logo)+'" x="-11" y="-11" width="22" height="22" clip-path="url(#syClip-'+p.id+')" preserveAspectRatio="xMidYMid slice"/>' : '')+
+      (p.id===POL.gov.party ? '<text y="-17" text-anchor="middle" font-size="11">👑</text>' : '')+
+      '<text y="26" text-anchor="middle" font-size="10" font-weight="700" fill="var(--text)" paint-order="stroke" stroke="#fff" stroke-width="3">'+esc(p.short || p.name)+'</text>'+
+    '</g>';
+  }).join('');
+  document.getElementById('syChart').innerHTML =
+    quad(40,40,'#c9606f')+quad(200,40,'#9573b8')+quad(40,200,'#5c9cc0')+quad(200,200,'#4f9470')+
+    '<g stroke="var(--border)" stroke-width="1">'+grid.join('')+'</g>'+
+    '<g stroke="var(--muted-2)" stroke-width="1.5"><line x1="40" y1="200" x2="360" y2="200"/><line x1="200" y1="40" x2="200" y2="360"/></g>'+
+    '<g font-size="10" font-weight="700" fill="var(--muted)" font-family="IBM Plex Mono, monospace">'+
+      '<text x="200" y="28" text-anchor="middle">+y ASSERTIVE</text>'+
+      '<text x="200" y="380" text-anchor="middle">−y STABILIZING</text>'+
+      '<text x="372" y="200" text-anchor="middle" transform="rotate(90 372 200)">+x SOVEREIGN</text>'+
+      '<text x="28" y="200" text-anchor="middle" transform="rotate(-90 28 200)">−x ADAPTIVE</text>'+
+    '</g>'+dots;
+}
+
 function renderSiyaset(){
+  renderSyChart();
   const ruling = POL.parties.find(p=>p.id===POL.gov.party);
   const gov = document.getElementById('syGov');
   gov.style.setProperty('--tc', ruling ? ruling.color : '#6b7a99');
@@ -4192,6 +4251,10 @@ function renderSiyaset(){
       '</div>'+
       '<input class="cell-input mz-title" data-p="name" value="'+esc(p.name)+'">'+
       '<input class="cell-input sy-short" data-p="short" value="'+esc(p.short||'')+'" placeholder="Kısaltma">'+
+      '<div class="mz-head-fields">'+
+        '<label class="hint">X (Adaptive ↔ Sovereign) <input type="number" class="date-sm" data-p="x" min="-10" max="10" step="0.5" value="'+p.x+'"></label>'+
+        '<label class="hint">Y (Stabilizing ↔ Assertive) <input type="number" class="date-sm" data-p="y" min="-10" max="10" step="0.5" value="'+p.y+'"></label>'+
+      '</div>'+
     '</div>'+
     '<div class="card">'+
       '<div class="card-head"><h2>📜 Tüzük</h2></div>'+
@@ -4206,7 +4269,7 @@ function setupSiyaset(){
     const input = document.getElementById('syNewName');
     const name = input.value.trim();
     if(!name) return;
-    const p = {id:uid(), name, short:'', color:MZ_AVATAR[POL.parties.length % MZ_AVATAR.length], logo:'', charter:''};
+    const p = {id:uid(), name, short:'', color:MZ_AVATAR[POL.parties.length % MZ_AVATAR.length], logo:'', charter:'', x:0, y:0};
     POL.parties.push(p);
     sySel = p.id;
     input.value = '';
@@ -4214,6 +4277,41 @@ function setupSiyaset(){
   };
   document.getElementById('syAdd').addEventListener('click', addParty);
   document.getElementById('syNewName').addEventListener('keydown', e=>{ if(e.key==='Enter') addParty(); });
+
+  // Haritada sürükle-bırak: tık = seç, sürükle = konumlandır
+  const chart = document.getElementById('syChart');
+  let drag = null;
+  const toCoord = e=>{
+    const pt = new DOMPoint(e.clientX, e.clientY).matrixTransform(chart.getScreenCTM().inverse());
+    return {x:syClamp((pt.x-SY_C)/SY_U), y:syClamp((SY_C-pt.y)/SY_U)};
+  };
+  chart.addEventListener('pointerdown', e=>{
+    const g = e.target.closest('.sy-dot');
+    if(!g) return;
+    const p = POL.parties.find(x=>x.id===g.dataset.id);
+    if(!p) return;
+    e.preventDefault();
+    chart.setPointerCapture(e.pointerId);
+    g.classList.add('drag');
+    drag = {p, g, moved:false};
+  });
+  chart.addEventListener('pointermove', e=>{
+    if(!drag) return;
+    const c = toCoord(e);
+    if(c.x===drag.p.x && c.y===drag.p.y) return;
+    drag.p.x = c.x; drag.p.y = c.y; drag.moved = true;
+    drag.g.setAttribute('transform', 'translate('+(SY_C+c.x*SY_U)+' '+(SY_C-c.y*SY_U)+')');
+  });
+  const endDrag = ()=>{
+    if(!drag) return;
+    const d = drag;
+    drag = null;
+    sySel = d.p.id;
+    if(d.moved) savePOL();
+    renderSiyaset();
+  };
+  chart.addEventListener('pointerup', endDrag);
+  chart.addEventListener('pointercancel', endDrag);
 
   root.addEventListener('click', e=>{
     const t = e.target;
@@ -4244,6 +4342,7 @@ function setupSiyaset(){
     const p = cur();
     if(!p || !el.dataset.p) return;
     if(el.dataset.p==='charter'){ p.charter = el.value; savePOL(); return; }
+    if(el.dataset.p==='x' || el.dataset.p==='y'){ p[el.dataset.p] = syClamp(el.value); savePOL(); renderSiyaset(); return; }
     const v = el.value.trim();
     if(el.dataset.p==='name'){ if(v) p.name = v; }
     else p[el.dataset.p] = v;
