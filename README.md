@@ -11,7 +11,7 @@ Leiden tek bir HTML dosyasıdır. Kurulum, sunucu veya derleme gerektirmez. Dosy
 | **🏠 Ana Sayfa** | Selamlama ve Edina tarihi, günün sözü, modül kartlarında canlı özetler, bugünün planları, son notlar, okunanlar. |
 | **La Merite** | Emek (EMR) ve sermaye (C<sub>MR</sub>) takibi, Hazine (H<sub>MR</sub>). Haftalık giriş (Cumartesi → Cuma), takvim, haftalık özet, günlük tarihçe. |
 | **Thistle** | Maliye: bankalar ve hesaplar (aynı hesapta birden fazla para birimi), kurlar, harcamalar, aylık sabit giderler. |
-| **Nivose** | Günlük ve aylık planlar, Tamamlanmadı / Tamamlandı bölümleri ve tüm tamamlananların arşivi. Her plan Edina Haritasındaki bir öğeye bağlanabilir. |
+| **Nivose** | Günlük ve aylık planlar, Tamamlanmadı / Tamamlandı bölümleri ve tüm tamamlananların arşivi. Her plan Edina Haritasındaki bir öğeye bağlanabilir. Önemli Günler sekmesi yıl dönümlerini geri sayımla listeler; ekleme, düzenleme ve silme yapılabilir. |
 | **⚖️ Müzakere** | Parlamento, Konferans ve Kongre türünde müzakereler: taraflar ve beyanları, tartışmalar, alınan kararlar. Tek müzakere PDF / Markdown, liste PDF, tümü JSON olarak dışa aktarılır. |
 | **🗳️ Edina Siyaseti** | Polisolarity haritası (x: Adaptive ↔ Sovereign, y: Stabilizing ↔ Assertive, −10 … +10, sürükle-bırak), partiler (logo, kısaltma, renk, tüzük, konum) ve mevcut iktidar: iktidar partisi ve hükümet adı. |
 | **Edina Haritası** | Unirce → Perce → Parce hiyerarşisi ve Linden Union Şirketleri (Şirket → Proje). |
@@ -94,11 +94,12 @@ Tüm veri tarayıcının `localStorage`'ında tutulur. İstersen ayrıca bir Git
 ```json
 {
   "app": "Leiden",
-  "version": 6,
+  "version": 7,
   "savedAt": "2026-10-15T12:00:00.000Z",
   "entries": { "2026-10-10": { "activities": { "P": 2, "CL": 1 }, "likit": null, "pkur": null } },
   "thistle": { "holders": [], "rates": {}, "expenses": [], "fixed": [] },
   "nivose":  { "plans": [] },
+  "importantDays": { "days": [ { "id": "", "date": "2020-08-03", "name": "" } ] },
   "muzakere": { "items": [ { "type": "parlamento", "title": "", "date": "", "link": "", "parties": [], "debates": [], "decisions": [] } ] },
   "siyaset": { "parties": [ { "name": "", "short": "", "color": "", "logo": "data:image/webp;base64,...", "charter": "", "x": 0, "y": 0 } ], "gov": { "party": "<parti id>", "name": "" } },
   "map":     { "unirces": [], "companies": [], "tags": [] },

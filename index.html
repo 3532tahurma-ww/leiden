@@ -442,6 +442,8 @@
   .sy-head input.sy-short{font-family:'IBM Plex Mono',monospace;font-size:.82rem;max-width:200px;padding:4px 6px;background:transparent;}
   .sy-charter{font-size:.9rem;min-height:320px;}
   @media (max-width:560px){ .mz-arrow{display:none;} .mz-head-acts{width:100%;} }
+  .plan.imp-row{flex-wrap:wrap;}
+  .plan .imp-name{flex:1 1 150px;}
   .pl-sec + .pl-sec{margin-top:14px;}
   .pl-sec-head{display:flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding-bottom:4px;border-bottom:1px dashed var(--border);}
   .pl-sec-head span{margin-left:auto;background:var(--surface-2);border-radius:999px;padding:1px 7px;letter-spacing:0;}
@@ -1600,6 +1602,7 @@
       <button class="stab" data-sub="gun">☀️ Günlük</button>
       <button class="stab" data-sub="ay">🌙 Aylık</button>
       <button class="stab" data-sub="biten">✅ Tamamlanan</button>
+      <button class="stab" data-sub="onemli">⭐ Önemli Günler</button>
     </nav>
 
     <section class="spanel" data-sub="gun">
@@ -1705,6 +1708,19 @@
           <div class="card-head"><h2>🌙 Tamamlanan Aylık Hedefler</h2><span class="ac-count" id="nvDoneMonCount">0</span></div>
           <div id="nvDoneMons"></div>
         </div>
+      </div>
+    </section>
+
+    <section class="spanel" data-sub="onemli">
+      <div class="card">
+        <div class="card-head"><h2>⭐ Önemli Günler</h2><span class="ac-count" id="impCount">0</span></div>
+        <p class="hint">Her yıl dönümü yaklaşma sırasına göre listelenir. Tarih ve adı satırda değiştirebilirsin.</p>
+        <div class="composer">
+          <input type="date" id="impDate" class="date-sm" title="Tarih">
+          <input type="text" id="impName" placeholder="Önemli gün adı (Enter)">
+          <button class="btn-primary" id="impAdd">Ekle</button>
+        </div>
+        <div id="impList"></div>
       </div>
     </section>
   </div>
@@ -2636,15 +2652,16 @@ function scheduleSync(){
 }
 
 function buildBackup(){
-  return {app:'Leiden', version:6, savedAt:new Date().toISOString(), entries:DATA.entries, thistle:TH, nivose:NIV, muzakere:MUZ, siyaset:POL, map:MAP, academy:ACAD, notes:NOTES, oowtory:OOW};
+  return {app:'Leiden', version:7, savedAt:new Date().toISOString(), entries:DATA.entries, thistle:TH, nivose:NIV, importantDays:IMP, muzakere:MUZ, siyaset:POL, map:MAP, academy:ACAD, notes:NOTES, oowtory:OOW};
 }
 function applyBackup(obj){
-  if(!obj || typeof obj !== 'object' || !(obj.entries || obj.thistle || obj.nivose || obj.muzakere || obj.siyaset || obj.map || obj.academy || obj.notes || obj.oowtory)) throw new Error('geçersiz format');
+  if(!obj || typeof obj !== 'object' || !(obj.entries || obj.thistle || obj.nivose || obj.importantDays || obj.muzakere || obj.siyaset || obj.map || obj.academy || obj.notes || obj.oowtory)) throw new Error('geçersiz format');
   syncSuppress = true;
   try{
     if(obj.entries){ DATA = {entries:obj.entries}; saveData(); }
     if(obj.thistle){ TH = obj.thistle; migrateTH(); saveTH(); }
     if(obj.nivose){ NIV = obj.nivose; if(!NIV.plans) NIV.plans = []; saveNIV(); }
+    if(obj.importantDays){ IMP = obj.importantDays; if(!IMP.days) IMP.days = []; saveIMP(); }
     if(obj.muzakere){ MUZ = obj.muzakere; migrateMUZ(); saveMUZ(); }
     if(obj.siyaset){ POL = obj.siyaset; migratePOL(); savePOL(); }
     if(obj.map){ MAP = obj.map; migrateMAP(); saveMAP(); }
@@ -3922,6 +3939,91 @@ function setupNivose(){
   document.getElementById('nvMonPrev').addEventListener('click', ()=>{ nvMonth = addMonths(nvMonth,-1); renderNivose(); });
   document.getElementById('nvMonNext').addEventListener('click', ()=>{ nvMonth = addMonths(nvMonth,1); renderNivose(); });
   showSub = setupSubtabs(root);
+}
+
+// ===== Önemli Günler (Nivose sekmesi) =====
+const IMP_KEY = 'leidenImportantDays_v1';
+const IMP_DEFAULTS = [
+  ['2020-08-03','Unity Günü'],
+  ['2021-10-27','Günlük Günü'],
+  ['2024-11-02','Amedo-Ni Günü'],
+  ['2021-11-23','Serino Günü'],
+  ['2021-11-27','Edina Kuruluş'],
+  ['2023-03-20','Stars in the Sky'],
+  ['2024-03-31','Amedo Günü'],
+  ['2024-07-20','Basın Günü'],
+  ['2024-08-13','Smyrna Günü'],
+  ['2024-11-18','Eighteen (Onsekiz) Devrimi'],
+  ['2025-04-29','Edinish Social Victory'],
+  ['2025-06-15','Seranova Devrimi'],
+  ['2026-01-09','Geri Dönüş Günü'],
+  ['2026-01-30','Vivian Devrimi'],
+  ['2026-03-15','Cumhuriyet Kuruluşu'],
+  ['2026-04-20','Merida Rönesansı'],
+  ['2026-05-28','Mayıs Devrimi'],
+  ['2026-06-20','Başlangıçlar Günü'],
+  ['2026-08-18','Carmen Günü']
+];
+let IMP = loadJson(IMP_KEY, {days:IMP_DEFAULTS.map(([date,name])=>({id:uid(), date, name}))});
+function saveIMP(){ saveJson(IMP_KEY, IMP); }
+function impNext(date){
+  const today = todayStr();
+  if(date >= today) return date;
+  const [, m, d] = date.split('-').map(Number);
+  const year = Number(today.slice(0,4));
+  const thisYear = ymd(new Date(year, m-1, d));
+  return thisYear >= today ? thisYear : ymd(new Date(year+1, m-1, d));
+}
+function renderImportantDays(){
+  const todayMs = new Date(todayStr()+'T00:00:00').getTime();
+  const days = IMP.days.map(x=>Object.assign({}, x, {next:impNext(x.date)}))
+    .sort((a,b)=>a.next.localeCompare(b.next) || a.date.localeCompare(b.date));
+  document.getElementById('impCount').textContent = days.length;
+  document.getElementById('impList').innerHTML = days.length ? days.map(x=>{
+    const left = Math.round((new Date(x.next+'T00:00:00').getTime() - todayMs)/86400000);
+    const age = Number(x.next.slice(0,4)) - Number(x.date.slice(0,4));
+    const when = left===0 ? 'Bugün 🎉' : left===1 ? 'Yarın' : left+' gün kaldı';
+    return '<div class="plan imp-row'+(left===0?' star':'')+'" data-imp="'+esc(x.id)+'">'+
+      '<input type="date" class="date-sm imp-date" value="'+esc(x.date)+'" title="Tarih">'+
+      '<input class="cell-input pl-text imp-name" value="'+esc(x.name)+'" title="'+esc(x.name)+'">'+
+      '<span class="pl-time">'+(age>0 ? age+'. yıl · ' : '')+when+'</span>'+
+      '<span class="acts"><button class="del-btn imp-del" title="Sil">✕</button></span>'+
+    '</div>';
+  }).join('') : '<div class="empty">Henüz önemli gün yok. Yukarıdan ekleyebilirsin.</div>';
+}
+function setupImportantDays(){
+  const list = document.getElementById('impList');
+  const dateEl = document.getElementById('impDate'), nameEl = document.getElementById('impName');
+  const commit = ()=>{ saveIMP(); renderImportantDays(); };
+  const dayOf = el=>{ const row = el.closest('[data-imp]'); return row ? IMP.days.find(x=>x.id===row.dataset.imp) : null; };
+
+  list.addEventListener('change', e=>{
+    const x = dayOf(e.target);
+    if(!x) return;
+    if(e.target.classList.contains('imp-date')) x.date = e.target.value || x.date;
+    else if(e.target.classList.contains('imp-name')) x.name = e.target.value.trim() || x.name;
+    else return;
+    commit();
+  });
+  list.addEventListener('click', e=>{
+    if(!e.target.classList.contains('imp-del')) return;
+    const x = dayOf(e.target);
+    if(!x || !confirm('"'+x.name+'" silinsin mi?')) return;
+    IMP.days = IMP.days.filter(d=>d.id!==x.id);
+    commit();
+  });
+
+  const add = ()=>{
+    const date = dateEl.value, name = nameEl.value.trim();
+    if(!date){ dateEl.focus(); return; }
+    if(!name){ nameEl.focus(); return; }
+    IMP.days.push({id:uid(), date, name});
+    dateEl.value = nameEl.value = '';
+    commit();
+    dateEl.focus();
+  };
+  document.getElementById('impAdd').addEventListener('click', add);
+  nameEl.addEventListener('keydown', e=>{ if(e.key==='Enter') add(); });
 }
 
 // ===== Müzakere =====
@@ -6571,6 +6673,7 @@ function renderLeiden(){
   renderMap();
   renderCompanies();
   renderNivose();
+  renderImportantDays();
   renderMuzakere();
   renderSiyaset();
   renderAcademy();
@@ -6589,6 +6692,7 @@ setupMap();
 setupCompanies();
 setupTags();
 setupNivose();
+setupImportantDays();
 setupMuzakere();
 setupSiyaset();
 setupAcademy();
