@@ -12,9 +12,9 @@ Leiden tek bir HTML dosyasıdır. Kurulum, sunucu veya derleme gerektirmez. Dosy
 | **La Merite** | Emek (EMR) ve sermaye (C<sub>MR</sub>) takibi, Hazine (H<sub>MR</sub>). Haftalık giriş (Cumartesi → Cuma), takvim, haftalık özet, günlük tarihçe. |
 | **Thistle** | Maliye: bankalar ve hesaplar (aynı hesapta birden fazla para birimi), kurlar, harcamalar, aylık sabit giderler. |
 | **Nivose** | Günlük ve aylık planlar, Tamamlanmadı / Tamamlandı bölümleri ve tüm tamamlananların arşivi. Her plan Edina Haritasındaki bir öğeye bağlanabilir. Önemli Günler sekmesi yıl dönümlerini geri sayımla listeler; ekleme, düzenleme ve silme yapılabilir. |
-| **⚖️ Müzakere** | Parlamento, Konferans ve Kongre türünde müzakereler: taraflar ve beyanları, tartışmalar, alınan kararlar. Tek müzakere PDF / Markdown, liste PDF, tümü JSON olarak dışa aktarılır. |
+| **🏛️ Parlamento** | Parlamento Başkanı, 7 Unirce vekili ve 7 bakan. Vekillerin partisi seçilir; bakanlar iktidar partisindendir. |
 | **🗳️ Edina Siyaseti** | Polisolarity haritası (x: Adaptive ↔ Sovereign, y: Stabilizing ↔ Assertive, −10 … +10, sürükle-bırak), partiler (logo, kısaltma, renk, tüzük, konum) ve mevcut iktidar: iktidar partisi ve hükümet adı. |
-| **Edina Haritası** | Unirce → Perce → Parce hiyerarşisi ve Linden Union Şirketleri (Şirket → Proje). |
+| **Edina Haritası** | 7 bölgeli Edina haritası (Fransa; başkent Paris, Leiden bölgesinde), Unirce → Perce → Parce hiyerarşisi ve Linden Union Şirketleri (Şirket → Proje). |
 | **Academy** | Akademilere bağlı makaleler ve okumalar (dosyalar private veri reposunda `Essais/` altında), okunan kitaplar. |
 | **📜 Oowtory** | Yıllık defter: adlandırılmış aylar, `Anahtar : Değer` biçiminde günlük kayıtlar, ay/yıl PDF çıktısı, metinden içe aktarma. |
 | **Notlar** | Notion tarzı iç içe sayfalar ve blok düzenleyici: `/` menüsü, Markdown kısayolları, sürükle-bırak, Markdown içe/dışa aktarma. |
@@ -94,13 +94,14 @@ Tüm veri tarayıcının `localStorage`'ında tutulur. İstersen ayrıca bir Git
 ```json
 {
   "app": "Leiden",
-  "version": 7,
+  "version": 8,
   "savedAt": "2026-10-15T12:00:00.000Z",
   "entries": { "2026-10-10": { "activities": { "P": 2, "CL": 1 }, "likit": null, "pkur": null } },
   "thistle": { "holders": [], "rates": {}, "expenses": [], "fixed": [] },
   "nivose":  { "plans": [] },
   "importantDays": { "days": [ { "id": "", "date": "2020-08-03", "name": "" } ] },
   "muzakere": { "items": [ { "type": "parlamento", "title": "", "date": "", "link": "", "parties": [], "debates": [], "decisions": [] } ] },
+  "parlamento": { "seats": { "baskan": { "name": "", "party": "<parti id>" }, "vekil-leiden": { "name": "", "party": "<parti id>" }, "disisleri": { "name": "", "party": "" } } },
   "siyaset": { "parties": [ { "name": "", "short": "", "color": "", "logo": "data:image/webp;base64,...", "charter": "", "x": 0, "y": 0 } ], "gov": { "party": "<parti id>", "name": "" } },
   "map":     { "unirces": [], "companies": [], "tags": [] },
   "academy": { "entries": [], "books": [] },

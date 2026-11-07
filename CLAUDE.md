@@ -1,6 +1,6 @@
 # Leiden
 
-Personal management app (La Merite, Thistle, Nivose, Müzakere, Edina Haritası, Academy, Oowtory, Notlar, Veri) in a single `index.html`. UI text is Turkish.
+Personal management app (La Merite, Thistle, Nivose, Parlamento, Edina Haritası, Academy, Oowtory, Notlar, Veri) in a single `index.html`. UI text is Turkish.
 
 ## Run
 - Open `index.html` in a browser. No build, no server, no dependencies, no tests/linter.
